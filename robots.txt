@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://marydelberghe.github.io/healthy-is-the-new-sexy/sitemap.xml
