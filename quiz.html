@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Hormonal — Healthy is the new sexy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1A1A18;
+    --sage: #8B9E7A;
+    --sage-light: #D4E0C8;
+    --sage-dark: #4A6340;
+    --text-muted: #7A7A72;
+    --border: rgba(26,26,24,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+  .container { width: 100%; max-width: 560px; }
+  .logo {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .screen { display: none; animation: fadeIn 0.4s ease; }
+  .screen.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage-dark);
+    background: var(--sage-light);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 1.25rem;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+  h1 em { font-style: italic; color: var(--sage-dark); }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .proof-row { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .proof-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+  .proof-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .form-group input {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    background: white;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus { border-color: var(--sage); }
+  .btn-primary {
+    width: 100%;
+    background: var(--sage-dark);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #3a5030; }
+  .disclaimer { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 0.75rem; line-height: 1.6; }
+
+  .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 2.5rem; }
+  .progress-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; }
+  .progress-fill { height: 3px; background: var(--sage-dark); border-radius: 2px; transition: width 0.4s ease; }
+  .progress-label { font-size: 12px; color: var(--text-muted); white-space: nowrap; font-weight: 500; }
+  .q-category {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.75rem;
+  }
+  .q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--dark);
+    margin-bottom: 2rem;
+  }
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
+  .opt {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--dark);
+    background: white;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.4;
+  }
+  .opt:hover { border-color: var(--sage); background: var(--sage-light); }
+  .opt.selected { border-color: var(--sage-dark); background: var(--sage-light); color: var(--sage-dark); font-weight: 500; }
+  .opt-dot {
+    width: 18px; height: 18px; min-width: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .opt.selected .opt-dot { border-color: var(--sage-dark); background: var(--sage-dark); }
+  .opt.selected .opt-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; }
+  .btn-back { font-size: 13px; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 8px 0; font-family: 'DM Sans', sans-serif; }
+  .btn-back:hover { color: var(--dark); }
+  .btn-next {
+    background: var(--dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .btn-next.ready { opacity: 1; pointer-events: all; }
+  .btn-next.ready:hover { background: #2E2E2A; }
+
+  .teaser-headline { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; line-height: 1.2; margin-bottom: 0.75rem; }
+  .teaser-headline em { font-style: italic; color: var(--sage-dark); }
+  .teaser-sub { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
+  .profile-reveal { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+  .profile-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 0.5rem; }
+  .profile-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; color: var(--dark); margin-bottom: 0.75rem; }
+  .profile-symptoms { font-size: 13px; color: var(--text-muted); line-height: 1.9; }
+  .locked-section { background: var(--cream); border: 1.5px dashed var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
+  .locked-title { font-size: 14px; font-weight: 500; color: var(--dark); margin-bottom: 0.4rem; }
+  .locked-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .email-confirm { background: var(--sage-light); border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.5rem; font-size: 13px; color: var(--sage-dark); line-height: 1.6; }
+  .cta-section { background: var(--dark); border-radius: 14px; padding: 2rem; text-align: center; color: var(--cream); }
+  .cta-eyebrow { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 0.75rem; }
+  .cta-title { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; line-height: 1.2; margin-bottom: 0.75rem; }
+  .cta-title em { font-style: italic; color: var(--sage-light); }
+  .cta-text { font-size: 13px; color: rgba(245,240,232,0.7); line-height: 1.7; margin-bottom: 1.5rem; }
+  .btn-cta { background: var(--sage); color: white; border: none; border-radius: 8px; padding: 14px 32px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: background 0.2s; display: inline-block; text-decoration: none; }
+  .btn-cta:hover { background: var(--sage-dark); }
+  .social-proof-mini { font-size: 11px; color: rgba(245,240,232,0.5); margin-top: 0.75rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">Healthy is the new sexy</div>
+
+  <div id="s-email" class="screen active">
+    <div class="hero-tag">Quiz diagnostic hormonal</div>
+    <h1>Est-ce que tu souffres<br>d'un <em>dérèglement</em><br>hormonal&nbsp;?</h1>
+    <p class="hero-sub">En 3 minutes, découvre si tu souffres d'un dérèglement hormonal — et lequel. Résultat personnalisé envoyé dans ta boîte mail.</p>
+    <div class="proof-row">
+      <div class="proof-item"><div class="proof-dot"></div>3 minutes</div>
+      <div class="proof-item"><div class="proof-dot"></div>20 questions</div>
+      <div class="proof-item"><div class="proof-dot"></div>8 profils analysés</div>
+    </div>
+    <div class="form-group">
+      <label>Ton prénom</label>
+      <input id="inp-prenom" type="text" placeholder="Sophie" />
+    </div>
+    <div class="form-group">
+      <label>Ton email</label>
+      <input id="inp-email" type="email" placeholder="sophie@email.com" />
+    </div>
+    <button class="btn-primary" onclick="startQuiz()">Découvrir mon profil hormonal →</button>
+    <p class="disclaimer">Résultat complet + protocole personnalisé envoyés par email. Zéro spam.</p>
+  </div>
+
+  <div id="s-quiz" class="screen">
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+      <div class="progress-label" id="prog-label">1 / 20</div>
+    </div>
+    <div class="q-category" id="q-cat"></div>
+    <div class="q-text" id="q-text"></div>
+    <div class="options" id="q-opts"></div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="prevQ()">← Précédent</button>
+      <button class="btn-next" id="btn-next" onclick="nextQ()">Suivant</button>
+    </div>
+  </div>
+
+  <div id="s-result" class="screen">
+    <div style="margin-bottom:2rem">
+      <div class="hero-tag">Analyse complète</div>
+      <div class="teaser-headline">Ton profil<br>hormonal <em>révélé</em></div>
+      <p class="teaser-sub">Voici ce que révèle ton quiz. Ton rapport détaillé avec le protocole naturel t'a été envoyé.</p>
+    </div>
+    <div class="profile-reveal" id="profile-reveal"></div>
+    <div class="locked-section">
+      <div style="font-size:22px;margin-bottom:0.5rem">🔒</div>
+      <div class="locked-title">Rapport complet + Protocole personnalisé</div>
+      <div class="locked-text">Les causes précises, les aliments à privilégier, les compléments recommandés et le plan d'action semaine par semaine — envoyés par email.</div>
+    </div>
+    <div class="email-confirm" id="email-confirm"></div>
+    <div class="cta-section">
+      <div class="cta-eyebrow">Programme 6 semaines</div>
+      <div class="cta-title">Prête à <em>vraiment</em><br>te sentir mieux&nbsp;?</div>
+      <p class="cta-text">Plus de 200 femmes ont rééquilibré leurs hormones naturellement avec Healthy is the new sexy. En 6 semaines, sans médicaments.</p>
+      <a href="https://healthyisthenewsexy.com" class="btn-cta">Découvrir le programme</a>
+      <div class="social-proof-mini">490€ · Paiement en 3x disponible</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const MAILERLITE_API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNTViODk5ZGMwNDhlYzU0YzhiYmVkNzBjODk0ZjMxOTNmZWM0YmNmYTFiYTViYzU4OTlkM2JiMmI2MDU0YTBiMGU0MTFiN2E2OWJlNmQ5ZGEiLCJpYXQiOjE3NzYxODI0ODkuNDc1MTEyLCJuYmYiOjE3NzYxODI0ODkuNDc1MTE0LCJleHAiOjQ5MzE4NTYwODkuNDY2MDMyLCJzdWIiOiI0NzMyODgiLCJzY29wZXMiOltdfQ.MGE8UnSG2QMTnvi8M3ySEg8rwMDDpLg9IzZjETupzHu3fhxOV9mNwUpRRkYsP1geUrKJoECMfVLpeppi46Uli0vdsnGyicL4ZoFblG5jbrXZ8AjOCl6t9DARNFLlxxdidAmFzc1YlnJkLF_BfYG90io-_3m9xlOOUMPdKQGHmVzRlpIANcux3A15SgSpWlqZ4Dx5llajrP2tl9LjlKDAC584VFJ4SGhUwsD2OdaYVrNVKH4hqPsM17vpfgnmG_JEaipugoySIl4cND9T0FMpjDVWWXil_dq5ueoMF4DmuHVpW7z1Jd96TMKHMcYqVAXMZdOknnkXHSx1Qlcbq6MzgyNd-3JAqUC-6Q8IOH-RWac6vqnv8U-S0E70EmLQzxc827GvPD52GCETzl_YCXuQHw6hGBffBwwDSTyCD1ptD2pKzh-vwHIvYVTiDwv2V7WF-umW6dIsH8nHB9E7dNE5mQd5l66DAXPLjnQSYFeHDW6yy3E3VhRxz1SVKmKVLL30Uu3GOrMO3DxRP7vyqm7JnkbcOgLwQUgLpo_pFRmZTDYrtJXQz79WVkehE0Vchk0F8H9_HnEXcPUDMjHZ_6ZtBIvVVsDhgJHCuZ2axL6G-4oZmcGZmPDzuA312m3ecWms3VpMDDlrm8RrSC7T5AxesAlTz1q2Ndwcjgr43iD55_Y';
+const GROUP_IDS = {
+  E2high:    '184738491423262264',
+  prog_low:  '184738493975496144',
+  testo_high:'184738496366249463',
+  cort_high: '184738498996078353',
+  cort_low:  '184738501585011764',
+  hypo:      '184738504094254093',
+  sopk:      '184738507082696181',
+  E2low:     '184738509589841693'
+};
+
+const questions = [
+  {
+    cat:"Énergie",
+    text:"Tu te réveilles fatiguée même après une nuit de sommeil complète ?",
+    opts:["Jamais, je me réveille en forme","Parfois, selon les périodes","Souvent, je traîne le matin","Presque tous les matins, peu importe combien j'ai dormi"],
+    scores:{E2low:[0,1,2,3],cort_low:[0,1,2,3],hypo:[0,1,2,3]}
+  },
+  {
+    cat:"Énergie",
+    text:"Tu as des coups de barre dans la journée, surtout l'après-midi ?",
+    opts:["Rarement","Parfois","Souvent, j'ai besoin de café ou de sucre","Tous les jours, vers 14h-16h je suis à plat"],
+    scores:{cort_low:[0,1,2,3],hypo:[0,0,1,2],cort_high:[0,0,1,2]}
+  },
+  {
+    cat:"Digestion et poids",
+    text:"Tu te sens ballonnée, ventre gonflé, notamment autour de tes règles ou après les repas ?",
+    opts:["Jamais","Parfois","Souvent","Presque tous les jours, c'est épuisant"],
+    scores:{E2high:[0,1,2,3],prog_low:[0,1,2,3]}
+  },
+  {
+    cat:"Digestion et poids",
+    text:"Tu as du mal à perdre du poids malgré une alimentation correcte et de l'activité physique ?",
+    opts:["Non, pas de problème","Un peu, mais ça reste gérable","Oui, c'est frustrant","Oui, peu importe mes efforts rien ne bouge"],
+    scores:{hypo:[0,1,2,3],cort_high:[0,1,2,3],E2high:[0,0,1,2]}
+  },
+  {
+    cat:"Digestion et poids",
+    text:"Tu stockes de la graisse principalement sur le ventre, même si le reste de ton corps n'a pas changé ?",
+    opts:["Non","Un peu","Oui","Oui, mon ventre a changé alors que je n'ai pas pris de poids ailleurs"],
+    scores:{cort_high:[0,1,2,3],E2high:[0,0,1,2],sopk:[0,0,1,2]}
+  },
+  {
+    cat:"Peau et cheveux",
+    text:"Tu souffres d'acné, notamment autour du menton, de la mâchoire ou du bas du visage ?",
+    opts:["Jamais","Parfois un bouton","Oui, régulièrement, surtout avant mes règles","Oui, c'est chronique et ça m'impacte"],
+    scores:{testo_high:[0,1,2,3],E2high:[0,0,1,2],sopk:[0,0,1,2]}
+  },
+  {
+    cat:"Peau et cheveux",
+    text:"Tes cheveux tombent plus que d'habitude, sont devenus plus fins ou plus cassants ?",
+    opts:["Non","Un peu","Oui, j'en perds beaucoup","Oui beaucoup, ça m'inquiète"],
+    scores:{hypo:[0,1,2,3],testo_high:[0,0,1,2],cort_high:[0,0,1,2]}
+  },
+  {
+    cat:"Cycle menstruel",
+    text:"Tes règles sont douloureuses, avec des crampes ou des douleurs intenses dans le bas-ventre ?",
+    opts:["Non, indolores","Légèrement douloureuses","Douloureuses, je prends des antidouleurs","Très douloureuses, elles m'immobilisent"],
+    scores:{prog_low:[0,1,2,3],E2high:[0,1,2,3]}
+  },
+  {
+    cat:"Cycle menstruel",
+    text:"Tu ressens des symptômes intenses 7 à 10 jours avant tes règles — irritabilité, gonflement, larmes, douleurs aux seins, envies de sucre, anxiété ?",
+    opts:["Non, je ne remarque rien de particulier","Quelques symptômes légers","Oui, c'est notable et ça impacte mon quotidien","Oui, cette période est très difficile à vivre"],
+    scores:{prog_low:[0,1,2,3],E2high:[0,0,1,2]}
+  },
+  {
+    cat:"Cycle menstruel",
+    text:"Tes cycles sont irréguliers — ils varient de plusieurs jours d'un mois à l'autre, que ce soit trop courts (moins de 24 jours) ou trop longs (plus de 35 jours) — et ce de façon répétée ?",
+    opts:["Non, mes cycles sont réguliers et stables","Légères variations occasionnelles","Souvent irréguliers sur plusieurs mois de suite","Très irréguliers ou imprévisibles"],
+    scores:{sopk:[0,1,2,3],hypo:[0,0,1,2],E2low:[0,0,1,2]}
+  },
+  {
+    cat:"Hormones et pilosité",
+    text:"Tu remarques plus de poils sur le visage, le ventre, la poitrine ou le dos qu'avant ?",
+    opts:["Non, pas de changement","Un peu plus, mais rien d'inquiétant","Oui clairement plus","Oui, c'est vraiment gênant"],
+    scores:{testo_high:[0,1,2,3],sopk:[0,0,1,2]}
+  },
+  {
+    cat:"Stress et système nerveux",
+    text:"Tu te sens dépassée par le stress, même pour des situations du quotidien qui devraient être gérables ?",
+    opts:["Rarement","Parfois","Souvent","Tout le temps, je suis à bout"],
+    scores:{cort_high:[0,1,2,3],prog_low:[0,0,1,2]}
+  },
+  {
+    cat:"Stress et système nerveux",
+    text:"Tu as des envies intenses et incontrôlables de sucre ou de sel, surtout en soirée ou en période de stress ?",
+    opts:["Rarement","Parfois","Souvent","Tous les jours, je craque régulièrement"],
+    scores:{cort_high:[0,1,2,3],cort_low:[0,0,1,2],E2high:[0,0,1,2]}
+  },
+  {
+    cat:"Stress et système nerveux",
+    text:"Le soir, ton corps est épuisé mais ton esprit continue de tourner — tu n'arrives pas à décrocher ou à t'endormir ?",
+    opts:["Rarement","Parfois","Souvent","Presque toutes les nuits"],
+    scores:{cort_high:[0,1,2,3],prog_low:[0,1,2,2]}
+  },
+  {
+    cat:"Humeur et mental",
+    text:"Tu souffres de sautes d'humeur, d'irritabilité ou d'une anxiété qui semble disproportionnée par rapport à la situation ?",
+    opts:["Rarement","Parfois","Souvent","Presque toujours, les gens autour de moi le remarquent"],
+    scores:{prog_low:[0,1,2,3],E2high:[0,0,1,2],cort_high:[0,1,2,3]}
+  },
+  {
+    cat:"Humeur et mental",
+    text:"Tu te sens déprimée, sans élan, sans envie — avec une libido quasi absente ?",
+    opts:["Rarement","Parfois","Souvent","Presque toujours, je ne me reconnais plus"],
+    scores:{E2low:[0,1,2,3],testo_low:[0,1,2,3],cort_low:[0,0,1,2],hypo:[0,0,1,2]}
+  },
+  {
+    cat:"Humeur et mental",
+    text:"Tu as le brouillard mental — du mal à te concentrer, à mémoriser, à trouver tes mots ?",
+    opts:["Rarement","Parfois","Souvent","Presque toujours, ça affecte mon travail ou ma vie quotidienne"],
+    scores:{hypo:[0,1,2,3],E2low:[0,1,2,3],cort_low:[0,0,1,2]}
+  },
+  {
+    cat:"Corps et inflammation",
+    text:"Tu fais de la rétention d'eau — mains, chevilles, ventre ou visage gonflés, notamment avant tes règles ?",
+    opts:["Jamais","Parfois","Souvent","Presque toujours, je peux prendre 1 à 2 kg d'un coup"],
+    scores:{E2high:[0,1,2,3],prog_low:[0,1,2,3]}
+  },
+  {
+    cat:"Corps et inflammation",
+    text:"Tu ressens des bouffées de chaleur, des sueurs nocturnes ou une sécheresse vaginale inhabituelle ?",
+    opts:["Jamais","Parfois","Oui souvent","Oui, c'est présent et gênant au quotidien"],
+    scores:{E2low:[0,1,2,3],sopk:[0,0,1,1]}
+  },
+  {
+    cat:"Ton profil",
+    text:"Quel âge as-tu ?",
+    opts:["Moins de 25 ans","25 à 35 ans","35 à 45 ans","Plus de 45 ans"],
+    scores:{E2low:[0,0,1,2],sopk:[1,1,0,0]}
+  }
+];
+
+const profiles = {
+  E2high:{name:"Dominance en œstrogène",symptoms:"Ballonnements et ventre gonflé, rétention d'eau, seins douloureux avant les règles, règles douloureuses, sautes d'humeur, difficulté à perdre du poids malgré les efforts",desc:"Ton corps produit trop d'œstrogènes par rapport à la progestérone. C'est le dérèglement le plus fréquent chez les femmes entre 25 et 45 ans — et l'un des plus méconnus."},
+  prog_low:{name:"Déficience en progestérone",symptoms:"Anxiété et irritabilité intenses avant les règles, insomnie, SPM sévère, crampes, tensions mammaires, difficulté à tomber enceinte ou à maintenir une grossesse",desc:"Ta progestérone est insuffisante — souvent aggravée par le stress chronique qui épuise tes surrénales. Cette hormone est celle du calme, du sommeil et de l'équilibre émotionnel."},
+  testo_high:{name:"Excès de testostérone / androgènes",symptoms:"Acné hormonale autour du menton et de la mâchoire, pilosité excessive sur le visage ou le corps, cheveux gras, cycles irréguliers, prise de poids abdominale",desc:"Ton niveau d'androgènes est trop élevé — fréquent dans le SOPK. Cela crée des symptômes visibles qui impactent ta confiance et ta qualité de vie."},
+  cort_high:{name:"Excès de cortisol",symptoms:"Stress chronique et sentiment d'être à bout, insomnie avec esprit qui tourne la nuit, ventre arrondi malgré le sport, envies intenses de sucre, système immunitaire fragilisé",desc:"Ton axe stress est en surrégime permanent. Un cortisol chroniquement élevé sabote toutes tes autres hormones et met ton corps en mode survie."},
+  cort_low:{name:"Fatigue surrénalienne",symptoms:"Fatigue profonde dès le réveil, dépendance totale au café pour fonctionner, vertiges en se levant, hypoglycémies, difficulté à gérer le moindre stress",desc:"Après des années à fonctionner à flux tendu, ton système surrénalien est épuisé et ne parvient plus à réguler ton énergie ni ta réponse au stress."},
+  hypo:{name:"Hypothyroïdie",symptoms:"Fatigue profonde peu importe le sommeil, prise de poids inexpliquée, peau et cheveux très secs, frilosité constante, mémoire floue, constipation, dépression",desc:"Ta thyroïde ralentit tout ton métabolisme. L'hypothyroïdie est souvent sous-diagnostiquée chez les femmes car ses symptômes ressemblent à d'autres choses — ou à 'la normale'."},
+  sopk:{name:"SOPK — syndrome des ovaires polykystiques",symptoms:"Cycles irréguliers ou absents, acné hormonale, pilosité excessive, difficulté à perdre du poids, fertilité réduite, fatigue chronique",desc:"Le SOPK touche 1 femme sur 10. C'est un dérèglement multi-hormonal qui affecte le cycle, le poids, la peau et la fertilité — et qui se traite très bien naturellement."},
+  testo_low:{name:"Déficience en testostérone",symptoms:"Libido quasi absente, fatigue musculaire, dépression ou apathie, perte de cheveux, prise de masse grasse, perte de motivation",desc:"Un taux d'androgènes trop bas chez la femme affecte l'énergie, la libido, la force et l'humeur — un aspect souvent ignoré de la santé hormonale féminine."},
+  E2low:{name:"Déficience en œstrogène",symptoms:"Bouffées de chaleur, sueurs nocturnes, sécheresse vaginale, peau sèche, rides précoces, faible libido, dépression, mémoire défaillante",desc:"Ton taux d'œstrogènes est bas — cela peut arriver bien avant la ménopause, dès 35 ans. Cela impacte ta peau, ta mémoire, ton humeur et ta sexualité."}
+};
+
+let answers = {}, cur = 0, userName = '', userEmail = '';
+
+function startQuiz(){
+  userName = document.getElementById('inp-prenom').value.trim();
+  userEmail = document.getElementById('inp-email').value.trim();
+  if(!userName || !userEmail){ alert('Merci de renseigner ton prénom et ton email.'); return; }
+  if(!/\S+@\S+\.\S+/.test(userEmail)){ alert('Email invalide.'); return; }
+  show('s-quiz'); renderQ();
+}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function renderQ(){
+  const q = questions[cur];
+  const pct = Math.round(((cur+1)/questions.length)*100);
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('prog-label').textContent = (cur+1) + ' / ' + questions.length;
+  document.getElementById('q-cat').textContent = q.cat;
+  document.getElementById('q-text').textContent = q.text;
+  const wrap = document.getElementById('q-opts');
+  wrap.innerHTML = '';
+  q.opts.forEach((o,i) => {
+    const d = document.createElement('div');
+    d.className = 'opt' + (answers[cur]===i ? ' selected' : '');
+    d.innerHTML = '<div class="opt-dot"></div>' + o;
+    d.onclick = () => selectOpt(i);
+    wrap.appendChild(d);
+  });
+  const btn = document.getElementById('btn-next');
+  btn.className = 'btn-next' + (answers[cur]!==undefined ? ' ready' : '');
+  btn.textContent = cur === questions.length-1 ? 'Voir mon résultat →' : 'Suivant →';
+  document.getElementById('btn-back').style.visibility = cur === 0 ? 'hidden' : 'visible';
+}
+
+function selectOpt(i){
+  answers[cur] = i;
+  document.querySelectorAll('.opt').forEach((o,idx) => o.className = 'opt'+(idx===i?' selected':''));
+  document.getElementById('btn-next').className = 'btn-next ready';
+}
+
+function nextQ(){
+  if(answers[cur]===undefined) return;
+  if(cur < questions.length-1){ cur++; renderQ(); }
+  else { showResult(); }
+}
+function prevQ(){ if(cur>0){ cur--; renderQ(); } }
+
+function calcScores(){
+  const scores = {};
+  Object.keys(profiles).forEach(k => scores[k]=0);
+  questions.forEach((q,qi) => {
+    const ans = answers[qi];
+    if(ans===undefined) return;
+    Object.entries(q.scores||{}).forEach(([k,arr]) => {
+      if(scores[k]!==undefined) scores[k]+=(arr[ans]||0);
+    });
+  });
+  return scores;
+}
+
+function showResult(){
+  const scores = calcScores();
+  const sorted = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const topKey = sorted[0][0], topScore = sorted[0][1];
+  const secondKey = sorted[1][0], secondScore = sorted[1][1];
+  const hasSecond = secondScore >= topScore * 0.6 && secondKey !== topKey;
+  const p = profiles[topKey], p2 = profiles[secondKey];
+
+  document.getElementById('profile-reveal').innerHTML =
+    '<div class="profile-tag">Profil principal détecté</div>'
+    +'<div class="profile-name">'+p.name+'</div>'
+    +'<div class="profile-symptoms">'+p.symptoms+'</div>'
+    +(hasSecond?'<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(26,26,24,0.08)"><div class="profile-tag">Profil secondaire</div><div style="font-family:Cormorant Garamond,serif;font-size:18px;font-weight:400;margin-bottom:4px">'+p2.name+'</div><div class="profile-symptoms">'+p2.symptoms+'</div></div>':'');
+
+  document.getElementById('email-confirm').innerHTML =
+    'Ton rapport complet avec le protocole naturel pour <strong>'+p.name+'</strong> a été envoyé à <strong>'+userEmail+'</strong>. Pense à vérifier tes spams.';
+
+  sendToMailerLite(topKey, hasSecond ? secondKey : null);
+  show('s-result');
+}
+
+function sendToMailerLite(profilKey, secondKey){
+  const groupId = GROUP_IDS[profilKey];
+  const groups = groupId ? [groupId] : [];
+  const fields = { profil_hormonal: profilKey };
+  if(secondKey) fields.profil_secondaire = secondKey;
+
+  const payload = {
+    email: userEmail,
+    fields: { name: userName, ...fields },
+    groups: groups,
+    resubscribe: true,
+    status: 'active'
+  };
+
+  console.log('Envoi vers MailerLite:', profilKey, userEmail);
+
+  fetch('https://connect.mailerlite.com/api/subscribers', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + MAILERLITE_API_KEY
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(r => {
+    if(!r.ok) return r.json().then(e => { throw e; });
+    return r.json();
+  })
+  .then(d => {
+    console.log('MailerLite OK — abonnee ajoutee au groupe:', profilKey);
+  })
+  .catch(e => {
+    console.error('MailerLite error:', e);
+  });
+}
+</script>
+</body>
+</html>
