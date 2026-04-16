@@ -254,7 +254,7 @@
       <div class="cta-eyebrow">Programme 6 semaines</div>
       <div class="cta-title">Prête à <em>vraiment</em><br>te sentir mieux&nbsp;?</div>
       <p class="cta-text">Plus de 200 femmes ont rééquilibré leurs hormones naturellement avec Healthy is the new sexy. En 6 semaines, sans médicaments.</p>
-      <a href="https://healthyisthenewsexy.com" class="btn-cta">Découvrir le programme</a>
+      <a href="https://healthy-is-the-new-sexy.com" class="btn-cta">Découvrir le programme</a>
       <div class="social-proof-mini">490€ · Paiement en 3x disponible</div>
     </div>
   </div>
@@ -263,6 +263,7 @@
 <script>
 const MAILERLITE_API_KEY = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI0IiwianRpIjoiNTViODk5ZGMwNDhlYzU0YzhiYmVkNzBjODk0ZjMxOTNmZWM0YmNmYTFiYTViYzU4OTlkM2JiMmI2MDU0YTBiMGU0MTFiN2E2OWJlNmQ5ZGEiLCJpYXQiOjE3NzYxODI0ODkuNDc1MTEyLCJuYmYiOjE3NzYxODI0ODkuNDc1MTE0LCJleHAiOjQ5MzE4NTYwODkuNDY2MDMyLCJzdWIiOiI0NzMyODgiLCJzY29wZXMiOltdfQ.MGE8UnSG2QMTnvi8M3ySEg8rwMDDpLg9IzZjETupzHu3fhxOV9mNwUpRRkYsP1geUrKJoECMfVLpeppi46Uli0vdsnGyicL4ZoFblG5jbrXZ8AjOCl6t9DARNFLlxxdidAmFzc1YlnJkLF_BfYG90io-_3m9xlOOUMPdKQGHmVzRlpIANcux3A15SgSpWlqZ4Dx5llajrP2tl9LjlKDAC584VFJ4SGhUwsD2OdaYVrNVKH4hqPsM17vpfgnmG_JEaipugoySIl4cND9T0FMpjDVWWXil_dq5ueoMF4DmuHVpW7z1Jd96TMKHMcYqVAXMZdOknnkXHSx1Qlcbq6MzgyNd-3JAqUC-6Q8IOH-RWac6vqnv8U-S0E70EmLQzxc827GvPD52GCETzl_YCXuQHw6hGBffBwwDSTyCD1ptD2pKzh-vwHIvYVTiDwv2V7WF-umW6dIsH8nHB9E7dNE5mQd5l66DAXPLjnQSYFeHDW6yy3E3VhRxz1SVKmKVLL30Uu3GOrMO3DxRP7vyqm7JnkbcOgLwQUgLpo_pFRmZTDYrtJXQz79WVkehE0Vchk0F8H9_HnEXcPUDMjHZ_6ZtBIvVVsDhgJHCuZ2axL6G-4oZmcGZmPDzuA312m3ecWms3VpMDDlrm8RrSC7T5AxesAlTz1q2Ndwcjgr43iD55_Y';
 const GROUP_IDS = {
+  equilibree:'184817584359605485',
   E2high:    '184738491423262264',
   prog_low:  '184738493975496144',
   testo_high:'184738496366249463',
@@ -478,8 +479,25 @@ function showResult(){
   const topKey = sorted[0][0], topScore = sorted[0][1];
   const secondKey = sorted[1][0], secondScore = sorted[1][1];
   const hasSecond = secondScore >= topScore * 0.6 && secondKey !== topKey;
-  const p = profiles[topKey], p2 = profiles[secondKey];
 
+  // Si le score max est très bas, la femme n'a pas de déséquilibre significatif
+  const totalPossible = questions.length * 3;
+  const scoreRatio = topScore / totalPossible;
+
+  if(scoreRatio < 0.15){
+    // Profil équilibré
+    document.getElementById('profile-reveal').innerHTML =
+      '<div class="profile-tag">Bilan hormonal</div>'
+      +'<div class="profile-name" style="color:#3d4f28;">Ton profil semble équilibré</div>'
+      +'<div class="profile-symptoms">Tes réponses ne révèlent pas de déséquilibre hormonal majeur pour le moment. C\'est une excellente nouvelle ! Cela ne veut pas dire que tout est parfait, mais que ton corps fonctionne globalement bien à ce stade.</div>';
+    document.getElementById('email-confirm').innerHTML =
+      'Un email avec des conseils pour <strong>maintenir cet équilibre naturellement</strong> a été envoyé à <strong>'+userEmail+'</strong>.';
+    sendToMailerLite('equilibree', null);
+    show('s-result');
+    return;
+  }
+
+  const p = profiles[topKey], p2 = profiles[secondKey];
   document.getElementById('profile-reveal').innerHTML =
     '<div class="profile-tag">Profil principal détecté</div>'
     +'<div class="profile-name">'+p.name+'</div>'
