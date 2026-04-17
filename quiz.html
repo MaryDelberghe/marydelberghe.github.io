@@ -524,15 +524,15 @@ function showResult(){
   // Aussi équilibré si le top score est faible ET très proche du second (scores dispersés)
   const isDispersed = topScore > 0 && (secondScore / topScore > 0.88) && scoreRatio < 0.32;
 
-  if(scoreRatio < 0.22 || isDispersed){
+  if(scoreRatio < 0.28 || isDispersed){
     // Profil équilibré
     document.getElementById('profile-reveal').innerHTML =
-      '<div class="profile-tag">Bilan hormonal</div>'
-      +'<div class="profile-name" style="color:#3d4f28;">Ton profil ne révèle pas de déséquilibre majeur</div>'
-      +'<div class="profile-symptoms">Tes réponses ne révèlent pas de déséquilibre hormonal majeur pour le moment. C\'est une excellente nouvelle ! Cela ne veut pas dire que tout est parfait, mais que ton corps fonctionne globalement bien à ce stade.</div>';
+      '<div class="profile-tag">Ton profil hormonal</div>'
+      +'<div class="profile-name" style="color:#3d4f28;">Ton déséquilibre est plus difficile à identifier</div>'
+      +'<div class="profile-symptoms">Si tu as fait ce quiz, c\'est sûrement que quelque chose ne va pas tout à fait. Ton déséquilibre est peut-être plus subtil ou multi-factoriel — ce qui le rend plus difficile à détecter avec un quiz. C\'est exactement pour ça que le programme existe : pour t\'aider à identifier et corriger ce que les bilans standards ne voient pas.</div>';
     document.getElementById('profile-reveal').innerHTML += '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(26,26,24,0.08);font-size:12px;color:#8a9080;line-height:1.6;font-style:italic;">Ce quiz est un outil d\'orientation, pas un diagnostic médical. Seul un professionnel de santé peut confirmer ces pistes. Il est là pour t\'aider à mieux comprendre ton corps.</div>';
   document.getElementById('email-confirm').innerHTML =
-      'Ton profil a bien été enregistré. Tu vas recevoir un email à <strong>'+userEmail+'</strong>. Pense à vérifier tes spams.';
+      'Tu vas recevoir un email personnalisé à <strong>'+userEmail+'</strong> avec des pistes pour aller plus loin. Pense à vérifier tes spams.';
     sendToMailerLite('equilibree', null);
     show('s-result');
     return;
