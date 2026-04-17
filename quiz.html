@@ -240,8 +240,8 @@
 
   <div id="s-result" class="screen">
     <div style="margin-bottom:1.5rem">
-      <div class="hero-tag">Ton profil hormonal</div>
-      <div class="teaser-headline">Voici ce que<br>ton corps <em>essaie<br>de te dire.</em></div>
+      <div class="hero-tag">Tes pistes hormonales</div>
+      <div class="teaser-headline">Voici les pistes<br>que révèle <em>ton quiz.</em></div>
     </div>
 
     <div class="profile-reveal" id="profile-reveal"></div>
@@ -528,9 +528,10 @@ function showResult(){
     // Profil équilibré
     document.getElementById('profile-reveal').innerHTML =
       '<div class="profile-tag">Bilan hormonal</div>'
-      +'<div class="profile-name" style="color:#3d4f28;">Ton profil semble équilibré</div>'
+      +'<div class="profile-name" style="color:#3d4f28;">Ton profil ne révèle pas de déséquilibre majeur</div>'
       +'<div class="profile-symptoms">Tes réponses ne révèlent pas de déséquilibre hormonal majeur pour le moment. C\'est une excellente nouvelle ! Cela ne veut pas dire que tout est parfait, mais que ton corps fonctionne globalement bien à ce stade.</div>';
-    document.getElementById('email-confirm').innerHTML =
+    document.getElementById('profile-reveal').innerHTML += '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(26,26,24,0.08);font-size:12px;color:#8a9080;line-height:1.6;font-style:italic;">Ce quiz est un outil d\'orientation, pas un diagnostic médical. Seul un professionnel de santé peut confirmer ces pistes. Il est là pour t\'aider à mieux comprendre ton corps.</div>';
+  document.getElementById('email-confirm').innerHTML =
       'Ton profil a bien été enregistré. Tu vas recevoir un email à <strong>'+userEmail+'</strong>. Pense à vérifier tes spams.';
     sendToMailerLite('equilibree', null);
     show('s-result');
@@ -539,11 +540,12 @@ function showResult(){
 
   const p = profiles[topKey], p2 = profiles[secondKey];
   document.getElementById('profile-reveal').innerHTML =
-    '<div class="profile-tag">Profil principal détecté</div>'
+    '<div class="profile-tag">Ton profil se rapproche de</div>'
     +'<div class="profile-name">'+p.name+'</div>'
     +'<div class="profile-symptoms">'+p.symptoms+'</div>'
     +(hasSecond?'<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(26,26,24,0.08)"><div class="profile-tag">Profil secondaire</div><div style="font-family:Cormorant Garamond,serif;font-size:18px;font-weight:400;margin-bottom:4px">'+p2.name+'</div><div class="profile-symptoms">'+p2.symptoms+'</div></div>':'');
 
+  document.getElementById('profile-reveal').innerHTML += '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(26,26,24,0.08);font-size:12px;color:#8a9080;line-height:1.6;font-style:italic;">Ce quiz est un outil d\'orientation, pas un diagnostic médical. Seul un professionnel de santé peut confirmer ces pistes. Il est là pour t\'aider à mieux comprendre ton corps.</div>';
   document.getElementById('email-confirm').innerHTML =
     'Ton profil <strong>'+p.name+'</strong> a bien été enregistré. Tu vas recevoir un email personnalisé à <strong>'+userEmail+'</strong>. Pense à vérifier tes spams.';
 
