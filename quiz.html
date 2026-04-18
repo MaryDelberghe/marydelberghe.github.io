@@ -522,7 +522,7 @@ function showResult(){
   const totalPossible = questions.length * 3;
   const scoreRatio = topScore / totalPossible;
   // Aussi équilibré si le top score est faible ET très proche du second (scores dispersés)
-  const isDispersed = topScore > 0 && (secondScore / topScore > 0 && (secondScore / topScore > 0.88) && scoreRatio < 0.32;
+  const isDispersed = false;
 
   if(scoreRatio < 0.15){
     // Profil équilibré
