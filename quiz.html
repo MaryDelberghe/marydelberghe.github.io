@@ -317,25 +317,25 @@ const questions = [
     cat:"Énergie",
     text:"Tu te réveilles fatiguée même après une nuit de sommeil complète ?",
     opts:["Jamais, je me réveille en forme","Parfois, selon les périodes","Souvent, je traîne le matin","Presque tous les matins, peu importe combien j'ai dormi"],
-    scores:{E2low:[0,1,2,3],cort_low:[0,1,2,3],hypo:[0,1,2,3],sopk:[0,0,1,2]}
+    scores:{E2low:[0,1,2,4],cort_low:[0,1,2,4],hypo:[0,2,3,5],sopk:[0,0,1,2]}
   },
   {
     cat:"Énergie",
     text:"Tu as des coups de barre dans la journée, surtout l'après-midi ?",
     opts:["Rarement","Parfois","Souvent, j'ai besoin de café ou de sucre","Tous les jours, vers 14h-16h je suis à plat"],
-    scores:{cort_low:[0,1,2,3],hypo:[0,0,1,2],cort_high:[0,0,1,2],sopk:[0,0,1,2]}
+    scores:{cort_low:[0,2,3,5],hypo:[0,0,2,3],cort_high:[0,1,2,3],sopk:[0,0,1,2]}
   },
   {
     cat:"Digestion et poids",
     text:"Tu te sens ballonnée, ventre gonflé, notamment autour de tes règles ou après les repas ?",
     opts:["Jamais","Parfois","Souvent","Presque tous les jours, c'est épuisant"],
-    scores:{E2high:[0,1,2,3],prog_low:[0,1,2,3]}
+    scores:{E2high:[0,2,4,6],prog_low:[0,2,4,6]}
   },
   {
     cat:"Digestion et poids",
     text:"Tu as du mal à perdre du poids malgré une alimentation correcte et de l'activité physique ?",
     opts:["Non, pas de problème","Un peu, mais ça reste gérable","Oui, c'est frustrant","Oui, peu importe mes efforts rien ne bouge"],
-    scores:{hypo:[0,1,2,3],cort_high:[0,1,2,3],E2high:[0,0,1,2],sopk:[0,0,2,3]}
+    scores:{hypo:[0,2,3,5],cort_high:[0,2,3,5],E2high:[0,1,2,3],sopk:[0,0,2,3]}
   },
   {
     cat:"Digestion et poids",
@@ -359,13 +359,13 @@ const questions = [
     cat:"Cycle menstruel",
     text:"Tes règles sont douloureuses, avec des crampes ou des douleurs intenses dans le bas-ventre ?",
     opts:["Non, indolores","Légèrement douloureuses","Douloureuses, je prends des antidouleurs","Très douloureuses, elles m'immobilisent"],
-    scores:{prog_low:[0,1,2,3],E2high:[0,1,2,3]}
+    scores:{prog_low:[0,2,4,6],E2high:[0,2,4,6]}
   },
   {
     cat:"Cycle menstruel",
     text:"Tu ressens des symptômes intenses 7 à 10 jours avant tes règles — irritabilité, gonflement, larmes, douleurs aux seins, envies de sucre, anxiété ?",
     opts:["Non, je ne remarque rien de particulier","Quelques symptômes légers","Oui, c'est notable et ça impacte mon quotidien","Oui, cette période est très difficile à vivre"],
-    scores:{prog_low:[0,1,2,3],E2high:[0,0,1,2]}
+    scores:{prog_low:[0,2,4,6],E2high:[0,0,2,4]}
   },
   {
     cat:"Cycle menstruel",
@@ -383,7 +383,7 @@ const questions = [
     cat:"Stress et système nerveux",
     text:"Tu te sens dépassée par le stress, même pour des situations du quotidien qui devraient être gérables ?",
     opts:["Rarement","Parfois","Souvent","Tout le temps, je suis à bout"],
-    scores:{cort_high:[0,1,2,3],prog_low:[0,0,1,2]}
+    scores:{cort_high:[0,2,4,6],prog_low:[0,0,2,3]}
   },
   {
     cat:"Stress et système nerveux",
@@ -395,13 +395,13 @@ const questions = [
     cat:"Stress et système nerveux",
     text:"Le soir, ton corps est épuisé mais ton esprit continue de tourner — tu n'arrives pas à décrocher ou à t'endormir ?",
     opts:["Rarement","Parfois","Souvent","Presque toutes les nuits"],
-    scores:{cort_high:[0,1,2,3],prog_low:[0,1,2,2]}
+    scores:{cort_high:[0,2,4,6],prog_low:[0,1,3,4]}
   },
   {
     cat:"Humeur et mental",
     text:"Tu souffres de sautes d'humeur, d'irritabilité ou d'une anxiété qui semble disproportionnée par rapport à la situation ?",
     opts:["Rarement","Parfois","Souvent","Presque toujours, les gens autour de moi le remarquent"],
-    scores:{prog_low:[0,1,2,3],E2high:[0,0,1,2],cort_high:[0,1,2,3],sopk:[0,0,1,2]}
+    scores:{prog_low:[0,2,4,5],E2high:[0,0,2,3],cort_high:[0,1,2,3],sopk:[0,0,1,2]}
   },
   {
     cat:"Humeur et mental",
@@ -413,13 +413,13 @@ const questions = [
     cat:"Humeur et mental",
     text:"Tu as le brouillard mental — du mal à te concentrer, à mémoriser, à trouver tes mots ?",
     opts:["Rarement","Parfois","Souvent","Presque toujours, ça affecte mon travail ou ma vie quotidienne"],
-    scores:{hypo:[0,1,2,3],E2low:[0,1,2,3],cort_low:[0,0,1,2]}
+    scores:{hypo:[0,2,4,6],E2low:[0,2,4,6],cort_low:[0,0,2,3]}
   },
   {
     cat:"Corps et inflammation",
     text:"Tu fais de la rétention d'eau — mains, chevilles, ventre ou visage gonflés, notamment avant tes règles ?",
     opts:["Jamais","Parfois","Souvent","Presque toujours, je peux prendre 1 à 2 kg d'un coup"],
-    scores:{E2high:[0,1,2,3],prog_low:[0,1,2,3]}
+    scores:{E2high:[0,2,4,6],prog_low:[0,2,4,6]}
   },
   {
     cat:"Corps et inflammation",
@@ -522,9 +522,9 @@ function showResult(){
   const totalPossible = questions.length * 3;
   const scoreRatio = topScore / totalPossible;
   // Aussi équilibré si le top score est faible ET très proche du second (scores dispersés)
-  const isDispersed = topScore > 0 && (secondScore / topScore > 0.88) && scoreRatio < 0.32;
+  const isDispersed = topScore > 0 && (secondScore / topScore > 0 && (secondScore / topScore > 0.88) && scoreRatio < 0.32;
 
-  if(scoreRatio < 0.28 || isDispersed){
+  if(scoreRatio < 0.15){
     // Profil équilibré
     document.getElementById('profile-reveal').innerHTML =
       '<div class="profile-tag">Ton profil hormonal</div>'
