@@ -461,6 +461,25 @@ footer{background:#0e1109;padding:1.5rem 5%;display:flex;justify-content:space-b
 .pc-btn:hover::after {
   animation: shimmer-pass 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
+
+/* ═══ MOBILE CAROUSEL TÉMOIGNAGES ═══ */
+.mobile-carousel-wrap{display:none;}
+.tc-text-desktop{display:block;}
+
+@media(max-width:767px){
+  .tc-text-desktop{display:none !important;}
+  .mobile-carousel-wrap{display:block;margin-top:1.5rem;}
+  .mobile-carousel-label{font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gd);margin-bottom:1rem;display:block;}
+  .mobile-carousel{overflow:hidden;border-radius:16px;}
+  .mobile-track{display:flex;transition:transform .4s cubic-bezier(.25,.46,.45,.94);}
+  .mobile-track .tc{flex:0 0 100%;min-width:100%;background:#fff;border-radius:16px;padding:1.25rem;border:1px solid rgba(194,204,158,0.25);}
+  .mobile-nav{display:flex;align-items:center;justify-content:center;gap:1rem;margin-top:1rem;}
+  .mobile-btn{background:var(--gdk);color:#fff;border:none;width:34px;height:34px;border-radius:50%;font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  .mobile-dots{display:flex;gap:5px;align-items:center;}
+  .mobile-dot{width:6px;height:6px;border-radius:50%;background:rgba(61,79,40,0.2);cursor:pointer;transition:background .2s;}
+  .mobile-dot.active{background:var(--gdk);}
+}
+
 </style>
 </head>
 <body>
