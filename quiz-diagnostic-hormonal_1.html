@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnostic Hormonal — Healthy is the new sexy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F0E8;
+    --dark: #1A1A18;
+    --sage: #8B9E7A;
+    --sage-light: #D4E0C8;
+    --sage-dark: #4A6340;
+    --text-muted: #7A7A72;
+    --border: rgba(26,26,24,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+  .container { width: 100%; max-width: 600px; }
+  .logo {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .screen { display: none; animation: fadeIn 0.4s ease; }
+  .screen.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage-dark);
+    background: var(--sage-light);
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 1.25rem;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  h1 em { font-style: italic; color: var(--sage-dark); }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  .proof-row { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .proof-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--text-muted); }
+  .proof-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
+
+  .form-group { margin-bottom: 1rem; }
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .form-group input, .form-group select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    background: white;
+    color: var(--dark);
+    outline: none;
+    appearance: none;
+    transition: border-color 0.2s;
+  }
+  .form-group select { cursor: pointer; }
+  .form-group input:focus, .form-group select:focus { border-color: var(--sage); }
+
+  .btn-primary {
+    width: 100%;
+    background: var(--sage-dark);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: background 0.2s;
+  }
+  .btn-primary:hover { background: #3a5030; }
+  .disclaimer { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 0.75rem; line-height: 1.6; }
+
+  .progress-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 2.5rem; }
+  .progress-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; }
+  .progress-fill { height: 3px; background: var(--sage-dark); border-radius: 2px; transition: width 0.4s ease; }
+  .progress-label { font-size: 12px; color: var(--text-muted); white-space: nowrap; font-weight: 500; }
+  .q-category {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.75rem;
+  }
+  .q-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--dark);
+    margin-bottom: 2rem;
+  }
+  .options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 2rem; }
+  .opt {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--dark);
+    background: white;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    line-height: 1.4;
+  }
+  .opt:hover { border-color: var(--sage); background: var(--sage-light); }
+  .opt.selected { border-color: var(--sage-dark); background: var(--sage-light); color: var(--sage-dark); font-weight: 500; }
+  .opt-dot {
+    width: 18px; height: 18px; min-width: 18px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .opt.selected .opt-dot { border-color: var(--sage-dark); background: var(--sage-dark); }
+  .opt.selected .opt-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; }
+  .nav-row { display: flex; align-items: center; justify-content: space-between; }
+  .btn-back { font-size: 13px; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 8px 0; font-family: 'DM Sans', sans-serif; }
+  .btn-back:hover { color: var(--dark); }
+  .btn-next {
+    background: var(--dark);
+    color: var(--cream);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .btn-next.ready { opacity: 1; pointer-events: all; }
+  .btn-next.ready:hover { background: #2E2E2A; }
+
+  .teaser-headline { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; line-height: 1.2; margin-bottom: 0.75rem; }
+  .teaser-headline em { font-style: italic; color: var(--sage-dark); }
+
+  .profile-reveal { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.75rem; margin-bottom: 1.25rem; }
+  .profile-tag { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--sage-dark); margin-bottom: 0.5rem; }
+  .profile-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--dark); margin-bottom: 0.75rem; line-height: 1.2; }
+  .profile-symptoms { font-size: 13.5px; color: var(--text-muted); line-height: 1.85; }
+  .profile-desc { font-size: 14px; color: #4a4a44; line-height: 1.75; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(26,26,24,0.06); }
+
+  .scores-bar-wrap { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(26,26,24,0.06); }
+  .scores-title { font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.85rem; }
+  .score-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 12.5px; }
+  .score-label { width: 38%; min-width: 130px; color: var(--dark); }
+  .score-bar-track { flex: 1; height: 6px; background: rgba(26,26,24,0.06); border-radius: 3px; overflow: hidden; }
+  .score-bar-fill { height: 100%; background: var(--sage); border-radius: 3px; transition: width 0.6s ease; }
+  .score-bar-fill.top { background: var(--sage-dark); }
+
+  .endo-flag { background: #fff3e8; border: 1px solid #f0d9c2; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; font-size: 13px; color: #8a4a1f; line-height: 1.7; }
+  .endo-flag strong { display: block; margin-bottom: 4px; font-size: 13.5px; color: #6b3a18; }
+  .inflam-flag { background: #f0f3e8; border: 1px solid #cdd9b8; border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.25rem; font-size: 13px; color: #3d4f28; line-height: 1.7; }
+  .inflam-flag strong { display: block; margin-bottom: 4px; font-size: 13.5px; color: #2c3a1d; }
+
+  .workshop-card { background: var(--dark); border-radius: 14px; padding: 2rem 1.75rem; color: var(--cream); margin-bottom: 1rem; }
+  .workshop-eyebrow { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage-light); margin-bottom: 0.75rem; }
+  .workshop-title { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; line-height: 1.2; margin-bottom: 0.4rem; }
+  .workshop-subtitle { font-size: 13px; color: rgba(245,240,232,0.65); margin-bottom: 1.25rem; font-style: italic; }
+  .workshop-desc { font-size: 13.5px; color: rgba(245,240,232,0.85); line-height: 1.75; margin-bottom: 1.5rem; }
+  .btn-workshop { display: block; background: var(--sage-light); color: var(--dark) !important; border: none; border-radius: 100px; padding: 16px 32px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; text-decoration: none; text-align: center; transition: background 0.2s; }
+  .btn-workshop:hover { background: white; }
+
+  .second-workshop { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+  .second-workshop .profile-tag { color: var(--text-muted); }
+  .second-workshop-title { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 400; margin-bottom: 6px; }
+  .second-workshop-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 0.75rem; }
+  .link-secondary { font-size: 12px; color: var(--sage-dark); text-decoration: none; font-weight: 500; letter-spacing: 0.04em; }
+  .link-secondary:hover { text-decoration: underline; }
+
+  .all-workshops { text-align: center; margin: 1.25rem 0; font-size: 12.5px; color: var(--text-muted); }
+  .all-workshops a { color: var(--sage-dark); text-decoration: underline; }
+
+  .medical-note { font-size: 11.5px; color: var(--text-muted); line-height: 1.65; font-style: italic; text-align: center; margin-top: 1rem; padding: 0.75rem 1rem; }
+
+  .btn-restart { display: inline-block; margin-top: 1rem; font-size: 12px; color: var(--text-muted); background: none; border: none; cursor: pointer; text-decoration: underline; font-family: 'DM Sans', sans-serif; }
+  .btn-restart:hover { color: var(--dark); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="logo">Healthy is the new sexy</div>
+
+  <!-- ============== ÉCRAN 1 — INTRO + ÂGE ============== -->
+  <div id="s-intro" class="screen active">
+    <div class="hero-tag">Diagnostic hormonal approfondi</div>
+    <h1>Quel est <em>ton<br>déséquilibre</em><br>hormonal&nbsp;?</h1>
+    <p class="hero-sub">44 questions précises pour identifier exactement ce qui se joue dans ton corps — œstrogènes, progestérone, cortisol, thyroïde, androgènes, terrain inflammatoire. Compte 7 à 9 minutes pour répondre en conscience.</p>
+    <div class="proof-row">
+      <div class="proof-item"><div class="proof-dot"></div>44 questions</div>
+      <div class="proof-item"><div class="proof-dot"></div>9 profils hormonaux</div>
+      <div class="proof-item"><div class="proof-dot"></div>Terrain inflammatoire</div>
+    </div>
+    <div class="form-group">
+      <label>Ton prénom</label>
+      <input id="inp-prenom" type="text" placeholder="Sophie" />
+    </div>
+    <div class="form-group">
+      <label>Ton nom</label>
+      <input id="inp-nom" type="text" placeholder="Martin" />
+    </div>
+    <div class="form-group">
+      <label>Ta tranche d'âge</label>
+      <select id="inp-age">
+        <option value="">Sélectionne ta tranche d'âge</option>
+        <option value="moins_25">Moins de 25 ans</option>
+        <option value="25_35">25 à 35 ans</option>
+        <option value="35_45">35 à 45 ans</option>
+        <option value="45_55">45 à 55 ans</option>
+        <option value="plus_55">Plus de 55 ans</option>
+      </select>
+    </div>
+    <button class="btn-primary" onclick="startQuiz()">Commencer mon diagnostic →</button>
+    <p class="disclaimer">Réponds le plus honnêtement possible — la précision du résultat dépend de toi.</p>
+  </div>
+
+  <!-- ============== ÉCRAN 2 — QUIZ ============== -->
+  <div id="s-quiz" class="screen">
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="prog"></div></div>
+      <div class="progress-label" id="prog-label">1 / 44</div>
+    </div>
+    <div class="q-category" id="q-cat"></div>
+    <div class="q-text" id="q-text"></div>
+    <div class="options" id="q-opts"></div>
+    <div class="nav-row">
+      <button class="btn-back" id="btn-back" onclick="prevQ()">← Précédent</button>
+      <button class="btn-next" id="btn-next" onclick="nextQ()">Suivant</button>
+    </div>
+  </div>
+
+  <!-- ============== ÉCRAN 3 — RÉSULTAT ============== -->
+  <div id="s-result" class="screen">
+    <div style="margin-bottom:1.5rem">
+      <div class="hero-tag">Ton diagnostic</div>
+      <div class="teaser-headline">Voici ce que <em>ton corps</em><br>essaie de te dire.</div>
+    </div>
+
+    <div class="profile-reveal" id="profile-reveal"></div>
+
+    <div id="endo-flag-wrap"></div>
+
+    <div id="inflam-flag-wrap"></div>
+
+    <div id="workshop-recommend"></div>
+
+    <div id="second-workshop-wrap"></div>
+
+    <p class="all-workshops">Envie d'explorer un autre atelier&nbsp;? <a href="https://healthy-is-the-new-sexy.com/ateliers" id="all-ateliers-link">Voir tous les ateliers</a></p>
+
+    <p class="medical-note">Ce diagnostic est un outil d'orientation, pas un diagnostic médical. Seul un professionnel de santé peut confirmer ces pistes via examens et bilans biologiques. Il est là pour t'aider à mieux comprendre ton corps et choisir le bon point d'entrée.</p>
+
+    <div style="text-align:center;">
+      <button class="btn-restart" onclick="restartQuiz()">Refaire le diagnostic</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =============================================================
+   GOOGLE SHEETS — REMPLACE PAR L'URL DE TON WEB APP APPS SCRIPT
+   (voir instructions de setup en bas de fichier)
+   ============================================================= */
+const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxdCVtwy5xsYaxQV9v6NWXNQgU_HmrTmt2xkpB_FZgYDl5PWg5GAV4MkXQEZeMfNehEBQ/exec';
+
+/* =============================================================
+   CONFIGURATION — REMPLACE LES URLS DES ATELIERS CI-DESSOUS
+   ============================================================= */
+const WORKSHOPS = {
+  spm: {
+    title: "SPM & Cycle menstruel",
+    subtitle: "Œstrogènes, progestérone & endométriose",
+    eyebrow: "Atelier recommandé pour toi",
+    desc: "Tu vas comprendre pourquoi ton cycle te malmène — règles douloureuses, SPM intense, ballonnements, seins gonflés, sautes d'humeur — et apprendre à rééquilibrer naturellement le rapport œstrogènes/progestérone qui régit tout. On y aborde aussi spécifiquement les signes et l'accompagnement de l'endométriose.",
+    url: "https://healthy-is-the-new-sexy.com/atelier-spm-cycle-menstruel"
+  },
+  stress: {
+    title: "Cortisol & Stress",
+    subtitle: "Sortir du mode survie",
+    eyebrow: "Atelier recommandé pour toi",
+    desc: "Tu vas apprendre à réguler ton axe stress, à apaiser un cortisol qui sabote toutes tes autres hormones, à retrouver un sommeil profond et une énergie stable du matin au soir. C'est la base pour que tout le reste fonctionne.",
+    url: "https://healthy-is-the-new-sexy.com/atelier-cortisol-stress"
+  },
+  thyroide: {
+    title: "Thyroïde",
+    subtitle: "Relancer ton métabolisme",
+    eyebrow: "Atelier recommandé pour toi",
+    desc: "Une thyroïde au ralenti reste invisible aux bilans classiques pendant des années. Tu vas apprendre à repérer les vrais signes, à demander les bons examens, et à soutenir naturellement ta thyroïde pour retrouver énergie, métabolisme actif, cheveux, peau et clarté mentale.",
+    url: "https://healthy-is-the-new-sexy.com/atelier-thyroide"
+  },
+  sopk: {
+    title: "Hyperandrogénie & SOPK",
+    subtitle: "Acné, pilosité, cycles irréguliers",
+    eyebrow: "Atelier recommandé pour toi",
+    desc: "Tu vas comprendre le SOPK, l'excès d'androgènes et l'insulino-résistance qui en sont souvent la cause profonde. Comment agir sur l'acné hormonale, la pilosité, les cycles irréguliers et la prise de poids — sans pilule, par l'alimentation, le mouvement et la micronutrition ciblée.",
+    url: "https://healthy-is-the-new-sexy.com/atelier-sopk-hyperandrogenie"
+  },
+  menopause: {
+    title: "Ménopause & Péri-ménopause",
+    subtitle: "Traverser la transition avec sérénité",
+    eyebrow: "Atelier recommandé pour toi",
+    desc: "Bouffées de chaleur, sueurs nocturnes, sommeil qui se dégrade, anxiété nouvelle, prise de poids au ventre, libido en chute, brouillard mental : tu vas comprendre ce qui se passe vraiment en péri-ménopause et ménopause, et apprendre à accompagner ton corps avec les bons leviers naturels.",
+    url: "https://healthy-is-the-new-sexy.com/atelier-menopause-perimenopause"
+  }
+};
+
+/* =============================================================
+   PROFILS HORMONAUX → ATELIERS
+   ============================================================= */
+const PROFILE_TO_WORKSHOP = {
+  E2high:    'spm',
+  prog_low:  'spm',
+  cort_high: 'stress',
+  cort_low:  'stress',
+  hypo:      'thyroide',
+  testo_high:'sopk',
+  sopk:      'sopk',
+  E2low:     'menopause',
+  testo_low: 'menopause'
+};
+
+const profiles = {
+  E2high:{
+    short:"Dominance œstrogènes",
+    name:"Dominance en œstrogènes",
+    symptoms:"Ballonnements et ventre gonflé, rétention d'eau, seins douloureux avant les règles, règles abondantes et douloureuses, sautes d'humeur, difficulté à perdre du poids, migraines hormonales.",
+    desc:"Ton corps produit trop d'œstrogènes par rapport à la progestérone. C'est le déséquilibre le plus fréquent chez les femmes entre 25 et 45 ans — et l'un des plus méconnus. Très souvent associé aux signes d'endométriose et au SPM intense."
+  },
+  prog_low:{
+    short:"Progestérone basse",
+    name:"Déficit en progestérone",
+    symptoms:"Anxiété et irritabilité intenses avant les règles, insomnie en 2e partie de cycle, SPM sévère, crampes, tensions mammaires, spotting prémenstruel, difficultés de fertilité.",
+    desc:"Ta progestérone est insuffisante — souvent aggravée par le stress chronique qui épuise tes surrénales. C'est l'hormone du calme, du sommeil et de l'équilibre émotionnel."
+  },
+  testo_high:{
+    short:"Androgènes hauts",
+    name:"Excès de testostérone / androgènes",
+    symptoms:"Acné hormonale autour du menton et de la mâchoire, pilosité excessive sur le visage ou le corps, cheveux gras, cycles irréguliers, prise de poids abdominale.",
+    desc:"Ton niveau d'androgènes est trop élevé — fréquent dans le SOPK, mais pas exclusivement. Cela crée des symptômes visibles qui impactent ta confiance et ta qualité de vie."
+  },
+  cort_high:{
+    short:"Cortisol élevé",
+    name:"Excès de cortisol",
+    symptoms:"Stress chronique et sentiment d'être à bout, insomnie avec esprit qui tourne (réveils 2h-4h), ventre arrondi malgré le sport, envies intenses de sucre, immunité fragilisée.",
+    desc:"Ton axe stress est en surrégime permanent. Un cortisol chroniquement élevé sabote toutes tes autres hormones et met ton corps en mode survie. C'est très souvent la cause profonde derrière d'autres déséquilibres."
+  },
+  cort_low:{
+    short:"Surrénales épuisées",
+    name:"Fatigue surrénalienne",
+    symptoms:"Fatigue profonde dès le réveil, dépendance totale au café pour fonctionner, vertiges en se levant, hypoglycémies, difficulté à gérer le moindre stress, infections à répétition.",
+    desc:"Après des années à fonctionner à flux tendu, ton système surrénalien est épuisé et ne parvient plus à réguler ton énergie ni ta réponse au stress. Tu fonctionnes en mode 'réserve vide'."
+  },
+  hypo:{
+    short:"Hypothyroïdie",
+    name:"Hypothyroïdie",
+    symptoms:"Fatigue profonde peu importe le sommeil, prise de poids inexpliquée, peau et cheveux très secs, frilosité constante, brouillard mental, constipation, dépression.",
+    desc:"Ta thyroïde ralentit tout ton métabolisme. L'hypothyroïdie est très souvent sous-diagnostiquée chez les femmes — les bilans standards peuvent paraître normaux alors que tu cumules tous les signes."
+  },
+  sopk:{
+    short:"SOPK",
+    name:"SOPK — syndrome des ovaires polykystiques",
+    symptoms:"Cycles irréguliers ou absents, acné hormonale, pilosité excessive, prise de poids abdominale, fertilité réduite, fatigue chronique, envies de sucre, parfois acanthosis (taches brunes plis cou/aisselles).",
+    desc:"Le SOPK touche 1 femme sur 10. C'est un dérèglement multi-hormonal qui affecte le cycle, le poids, la peau et la fertilité — et qui se traite remarquablement bien naturellement quand on agit sur l'insulino-résistance."
+  },
+  testo_low:{
+    short:"Testostérone basse",
+    name:"Déficit en testostérone",
+    symptoms:"Libido quasi absente, fatigue musculaire, dépression ou apathie, perte de cheveux, prise de masse grasse, perte de motivation et d'élan.",
+    desc:"Un taux d'androgènes trop bas chez la femme affecte l'énergie, la libido, la force et l'humeur — un aspect très souvent ignoré de la santé hormonale féminine, surtout en péri-ménopause."
+  },
+  E2low:{
+    short:"Œstrogènes bas",
+    name:"Déficit en œstrogènes",
+    symptoms:"Bouffées de chaleur, sueurs nocturnes, sécheresse vaginale, peau sèche et plus fine, faible libido, brouillard mental, troubles du sommeil, anxiété nouvelle, douleurs articulaires.",
+    desc:"Ton taux d'œstrogènes baisse — cela peut arriver bien avant la ménopause, dès 35-40 ans en péri-ménopause. Cela impacte ta peau, ta mémoire, ton humeur, ton sommeil et ta sexualité."
+  }
+};
+
+/* =============================================================
+   40 QUESTIONS — diagnostic approfondi
+   Le pseudo-profil 'endo' est un FLAG (pas un atelier) qui
+   déclenche une alerte spécifique sur la page de résultat.
+   ============================================================= */
+const questions = [
+
+  /* === SECTION 1 : CYCLE MENSTRUEL (7 questions) === */
+  {
+    cat:"Cycle menstruel",
+    text:"Tes cycles sont-ils réguliers — entre 24 et 35 jours, avec moins de 5 jours de variation d'un mois à l'autre ?",
+    opts:[
+      "Très réguliers, je peux prédire mes règles à 1-2 jours près",
+      "Plutôt réguliers, avec quelques variations légères",
+      "Souvent irréguliers, je ne peux pas vraiment prévoir",
+      "Très irréguliers, absents, ou imprévisibles depuis longtemps"
+    ],
+    scores:{sopk:[0,1,4,6], hypo:[0,0,2,3], E2low:[0,0,1,2], prog_low:[0,1,2,3]}
+  },
+  {
+    cat:"Cycle menstruel",
+    text:"Combien de jours durent tes règles habituellement ?",
+    opts:[
+      "3 à 5 jours, c'est régulier",
+      "Moins de 3 jours, parfois juste 1-2 jours",
+      "6 à 7 jours",
+      "Plus de 7 jours, c'est long"
+    ],
+    scores:{E2low:[0,3,0,0], hypo:[0,2,0,0], E2high:[0,0,1,3], prog_low:[0,0,1,2]}
+  },
+  {
+    cat:"Cycle menstruel",
+    text:"Tes règles sont-elles douloureuses, avec crampes ou douleurs intenses dans le bas-ventre ?",
+    opts:[
+      "Indolores ou très légères",
+      "Inconfortables mais gérables sans médicaments",
+      "Douloureuses, j'ai souvent besoin d'antidouleurs",
+      "Très douloureuses, parfois invalidantes — je dois arrêter mes activités"
+    ],
+    scores:{prog_low:[0,2,4,6], E2high:[0,2,4,6], endo:[0,1,3,6]}
+  },
+  {
+    cat:"Cycle menstruel",
+    text:"Tes règles sont-elles abondantes, avec parfois des caillots de sang ?",
+    opts:[
+      "Flux léger à modéré, pas de caillots",
+      "Modéré, parfois quelques petits caillots",
+      "Abondantes, je dois changer toutes les 2 heures les premiers jours",
+      "Très abondantes avec gros caillots — c'est gênant ou inquiétant"
+    ],
+    scores:{E2high:[0,1,3,5], prog_low:[0,1,2,3], endo:[0,1,2,4]}
+  },
+  {
+    cat:"Cycle menstruel",
+    text:"As-tu du spotting (petits saignements) entre tes règles, ou des pertes brunes 2 à 5 jours avant tes règles ?",
+    opts:[
+      "Jamais",
+      "Très rarement",
+      "Parfois (quelques fois par an)",
+      "Souvent — presque chaque cycle"
+    ],
+    scores:{prog_low:[0,1,3,5], E2high:[0,0,1,2], endo:[0,0,1,2]}
+  },
+  {
+    cat:"Cycle menstruel",
+    text:"Ressens-tu des douleurs pelviennes en dehors des règles (bas-ventre, dos, sciatique) ?",
+    opts:[
+      "Jamais",
+      "Très rarement",
+      "Parfois, sans cause identifiée",
+      "Souvent — ça impacte mon quotidien"
+    ],
+    scores:{endo:[0,1,3,6], E2high:[0,0,1,2]}
+  },
+  {
+    cat:"Cycle menstruel",
+    text:"Ressens-tu des douleurs profondes pendant les rapports sexuels ?",
+    opts:[
+      "Jamais",
+      "Très rarement",
+      "Parfois",
+      "Souvent — j'évite ou j'appréhende les rapports à cause de ça"
+    ],
+    scores:{endo:[0,1,3,5], E2low:[0,0,1,2]}
+  },
+
+  /* === SECTION 2 : SPM (5 questions) === */
+  {
+    cat:"SPM",
+    text:"Avant tes règles (7 à 10 jours avant), ressens-tu une intensification émotionnelle — irritabilité, anxiété, larmes, hypersensibilité ?",
+    opts:[
+      "Non, je ne remarque rien de particulier",
+      "Quelques signes légers, ça reste discret",
+      "Oui, c'est notable et ça impacte mon quotidien",
+      "Oui, cette période est très difficile à vivre — je ne me reconnais pas"
+    ],
+    scores:{prog_low:[0,2,4,6], E2high:[0,1,3,5]}
+  },
+  {
+    cat:"SPM",
+    text:"Tes seins deviennent-ils douloureux, gonflés ou très tendus dans la 2e partie du cycle ?",
+    opts:[
+      "Jamais",
+      "Légèrement",
+      "Oui, c'est inconfortable",
+      "Oui, douloureux au point de gêner les mouvements ou de devoir changer de soutien-gorge"
+    ],
+    scores:{E2high:[0,2,4,6], prog_low:[0,1,2,3]}
+  },
+  {
+    cat:"SPM",
+    text:"As-tu des migraines ou maux de tête liés au cycle (avant, pendant ou juste après tes règles) ?",
+    opts:[
+      "Jamais",
+      "Parfois un mal de tête léger",
+      "Oui, des migraines récurrentes en lien avec mon cycle",
+      "Oui, des migraines intenses et invalidantes"
+    ],
+    scores:{E2high:[0,1,3,5], prog_low:[0,0,1,2], E2low:[0,0,1,2]}
+  },
+  {
+    cat:"SPM",
+    text:"Avant tes règles, as-tu des envies intenses et incontrôlables de sucre, chocolat ou féculents ?",
+    opts:[
+      "Non, je ne remarque pas de changement",
+      "Un peu plus que d'habitude",
+      "Oui, clairement",
+      "Oui, je craque systématiquement, je ne peux pas résister"
+    ],
+    scores:{prog_low:[0,1,3,4], cort_high:[0,1,2,3], sopk:[0,0,1,2]}
+  },
+  {
+    cat:"SPM",
+    text:"Ton poids fluctue-t-il de 1 à 3 kg en une journée selon le cycle (notamment juste avant les règles) ?",
+    opts:[
+      "Non",
+      "Léger gonflement parfois",
+      "Oui, je peux prendre 1-2 kg",
+      "Oui, mes vêtements ne me vont plus à certaines périodes du mois"
+    ],
+    scores:{E2high:[0,1,3,5], prog_low:[0,1,2,3]}
+  },
+
+  /* === SECTION 3 : ÉNERGIE (4 questions) === */
+  {
+    cat:"Énergie",
+    text:"Tu te réveilles fatiguée, même après une nuit de sommeil complète ?",
+    opts:[
+      "Jamais, je me réveille en forme",
+      "Parfois, selon les périodes",
+      "Souvent, je traîne au lit le matin",
+      "Presque tous les matins, peu importe combien j'ai dormi"
+    ],
+    scores:{cort_low:[0,1,3,5], hypo:[0,2,3,5], E2low:[0,1,2,3]}
+  },
+  {
+    cat:"Énergie",
+    text:"As-tu un coup de barre dans l'après-midi (entre 14h et 17h), au point d'avoir besoin de café, de sucre, ou de t'allonger ?",
+    opts:[
+      "Rarement",
+      "Parfois",
+      "Souvent, je dois me booster pour tenir",
+      "Tous les jours, je suis à plat à ce moment-là"
+    ],
+    scores:{cort_low:[0,1,3,5], cort_high:[0,1,2,3], hypo:[0,0,2,3]}
+  },
+  {
+    cat:"Énergie",
+    text:"Combien de temps mets-tu à récupérer après une journée intense, une émotion forte ou un effort physique ?",
+    opts:[
+      "Quelques heures, je récupère vite",
+      "Un jour environ",
+      "2 à 3 jours, c'est long",
+      "Plus de 3 jours, je traîne longtemps après"
+    ],
+    scores:{cort_low:[0,1,3,5], cort_high:[0,1,2,3], hypo:[0,0,2,3]}
+  },
+  {
+    cat:"Énergie",
+    text:"Comment décrirais-tu ton énergie globale sur une semaine type ?",
+    opts:[
+      "Stable et bonne, je peux compter sur moi",
+      "Variable, avec des hauts et des bas",
+      "Faible, je suis souvent fatiguée",
+      "Très faible, je fonctionne au minimum"
+    ],
+    scores:{cort_low:[0,2,4,6], hypo:[0,1,3,5], E2low:[0,1,2,3]}
+  },
+
+  /* === SECTION 4 : SOMMEIL (3 questions) === */
+  {
+    cat:"Sommeil",
+    text:"Le soir, ton corps est épuisé mais ton esprit continue de tourner — difficulté à t'endormir ?",
+    opts:[
+      "Rarement",
+      "Parfois",
+      "Souvent",
+      "Presque toutes les nuits"
+    ],
+    scores:{cort_high:[0,2,4,6], prog_low:[0,1,2,3]}
+  },
+  {
+    cat:"Sommeil",
+    text:"Te réveilles-tu la nuit (souvent entre 2h et 4h) sans raison apparente, avec parfois du mal à te rendormir ?",
+    opts:[
+      "Rarement",
+      "Parfois",
+      "Souvent",
+      "Presque toutes les nuits"
+    ],
+    scores:{cort_high:[0,2,4,6], E2low:[0,1,3,4], prog_low:[0,1,2,3]}
+  },
+  {
+    cat:"Sommeil",
+    text:"Trouves-tu ton sommeil profond et réparateur ?",
+    opts:[
+      "Oui, presque toujours",
+      "Plutôt oui",
+      "Pas vraiment, je dors mais je me lève fatiguée",
+      "Non, mon sommeil est de mauvaise qualité"
+    ],
+    scores:{cort_high:[0,1,3,4], E2low:[0,1,2,3], hypo:[0,0,2,3], prog_low:[0,1,2,3]}
+  },
+
+  /* === SECTION 5 : STRESS / SYSTÈME NERVEUX (4 questions) === */
+  {
+    cat:"Stress",
+    text:"Te sens-tu dépassée par le stress, à bout, même pour des situations qui devraient être gérables ?",
+    opts:[
+      "Rarement",
+      "Parfois",
+      "Souvent",
+      "En permanence, je suis à bout de tolérance"
+    ],
+    scores:{cort_high:[0,2,4,6], prog_low:[0,1,2,3]}
+  },
+  {
+    cat:"Glycémie",
+    text:"Ressens-tu des hypoglycémies — vertiges, tremblements, irritabilité, vue qui se trouble quand tu attends trop pour manger ?",
+    opts:[
+      "Jamais",
+      "Rarement",
+      "Souvent",
+      "Tous les jours, je dois manger toutes les 3h sinon je crashe"
+    ],
+    scores:{cort_low:[0,1,3,5], cort_high:[0,1,2,3], sopk:[0,0,2,3]}
+  },
+  {
+    cat:"Système nerveux",
+    text:"As-tu des vertiges, étourdissements ou voile devant les yeux quand tu te lèves rapidement (du lit, d'une chaise) ?",
+    opts:[
+      "Jamais",
+      "Rarement",
+      "Parfois",
+      "Souvent — ça arrive plusieurs fois par semaine"
+    ],
+    scores:{cort_low:[0,2,4,6]}
+  },
+  {
+    cat:"Immunité",
+    text:"Attrapes-tu facilement des infections (rhumes, cystites, mycoses, herpès, etc.) ou tombes-tu malade plusieurs fois par an ?",
+    opts:[
+      "Très rarement, je ne suis presque jamais malade",
+      "Une à deux fois par an",
+      "Plusieurs fois par an",
+      "Très souvent, mon immunité semble fragile"
+    ],
+    scores:{cort_low:[0,1,3,5], cort_high:[0,1,2,3], hypo:[0,0,1,2]}
+  },
+
+  /* === SECTION 6 : MÉTABOLISME / POIDS / CORPS (4 questions) === */
+  {
+    cat:"Métabolisme",
+    text:"As-tu du mal à perdre du poids malgré une alimentation correcte et de l'activité physique ?",
+    opts:[
+      "Non, pas de problème particulier",
+      "Un peu, mais c'est gérable",
+      "Oui, c'est frustrant",
+      "Oui, peu importe mes efforts rien ne bouge"
+    ],
+    scores:{hypo:[0,2,3,5], cort_high:[0,1,2,3], sopk:[0,1,2,4], E2high:[0,1,2,3]}
+  },
+  {
+    cat:"Corps",
+    text:"Stockes-tu de la graisse principalement sur le ventre (taille qui s'épaissit), même si le reste de ton corps n'a pas changé ?",
+    opts:[
+      "Non",
+      "Un peu",
+      "Oui",
+      "Oui clairement, mon ventre a changé alors que rien d'autre n'a bougé"
+    ],
+    scores:{cort_high:[0,1,3,4], sopk:[0,1,3,5], E2low:[0,0,1,2]}
+  },
+  {
+    cat:"Métabolisme",
+    text:"Es-tu particulièrement frileuse — mains et pieds froids, besoin de plusieurs couches même quand les autres ont chaud ?",
+    opts:[
+      "Non",
+      "Un peu",
+      "Oui, je suis souvent frileuse",
+      "Oui, en permanence — je ne supporte pas le froid"
+    ],
+    scores:{hypo:[0,2,4,6], cort_low:[0,0,1,2]}
+  },
+  {
+    cat:"Métabolisme",
+    text:"As-tu remarqué des taches sombres veloutées dans les plis du cou, des aisselles, de l'aine ou des coudes (acanthosis nigricans) ?",
+    opts:[
+      "Non, jamais remarqué",
+      "Je ne sais pas / pas sûre",
+      "Oui, légèrement",
+      "Oui, c'est visible"
+    ],
+    scores:{sopk:[0,0,3,5]}
+  },
+
+  /* === SECTION 7 : DIGESTION (2 questions) === */
+  {
+    cat:"Digestion",
+    text:"Souffres-tu de constipation ou d'un transit lent (moins d'une selle par jour) ?",
+    opts:[
+      "Non, mon transit est régulier",
+      "Parfois",
+      "Souvent",
+      "Tous les jours, c'est inconfortable"
+    ],
+    scores:{hypo:[0,1,3,5], E2high:[0,2,3,4], prog_low:[0,1,2,3]}
+  },
+  {
+    cat:"Digestion",
+    text:"Te sens-tu ballonnée, avec un ventre gonflé après les repas ou en fin de journée ?",
+    opts:[
+      "Rarement",
+      "Parfois",
+      "Souvent",
+      "Presque tous les jours, c'est épuisant"
+    ],
+    scores:{E2high:[0,2,4,5], prog_low:[0,1,2,3], hypo:[0,0,1,2]}
+  },
+
+  /* === SECTION 8 : CORPS / INFLAMMATION (2 questions) === */
+  {
+    cat:"Rétention",
+    text:"Fais-tu de la rétention d'eau — mains, doigts, chevilles, ventre ou visage gonflés (notamment avant tes règles) ?",
+    opts:[
+      "Jamais",
+      "Parfois",
+      "Souvent",
+      "Presque toujours, je peux prendre 1 à 2 kg d'un coup"
+    ],
+    scores:{E2high:[0,2,4,6], prog_low:[0,2,3,4]}
+  },
+  {
+    cat:"Articulations",
+    text:"As-tu remarqué récemment des douleurs articulaires nouvelles ou une raideur (mains, genoux, dos) sans cause évidente ?",
+    opts:[
+      "Non",
+      "Parfois",
+      "Souvent",
+      "Oui, c'est récent et ça me limite"
+    ],
+    scores:{E2low:[0,1,3,5], hypo:[0,0,2,3]}
+  },
+
+  /* === SECTION 9 : PEAU / CHEVEUX / PILOSITÉ (4 questions) === */
+  {
+    cat:"Peau",
+    text:"As-tu de l'acné, particulièrement autour du menton, de la mâchoire ou du bas du visage ?",
+    opts:[
+      "Jamais",
+      "Parfois un bouton",
+      "Oui, régulièrement, surtout avant les règles",
+      "Oui, c'est chronique et ça m'impacte"
+    ],
+    scores:{testo_high:[0,2,4,6], sopk:[0,1,3,5], E2high:[0,0,1,2]}
+  },
+  {
+    cat:"Pilosité",
+    text:"Remarques-tu plus de poils sur le visage (menton, lèvre supérieure, joues), le ventre, la poitrine ou le dos qu'avant ?",
+    opts:[
+      "Non, pas de changement",
+      "Un peu plus, mais rien d'inquiétant",
+      "Oui clairement plus",
+      "Oui, c'est vraiment gênant"
+    ],
+    scores:{testo_high:[0,2,4,6], sopk:[0,2,4,6]}
+  },
+  {
+    cat:"Cheveux",
+    text:"Tes cheveux sont-ils plus secs, plus cassants, plus fins, ou tu en perds plus que d'habitude ?",
+    opts:[
+      "Non",
+      "Un peu",
+      "Oui, j'en perds plus / ils sont plus fins",
+      "Oui beaucoup, ça m'inquiète"
+    ],
+    scores:{hypo:[0,2,4,6], testo_high:[0,1,2,3], E2low:[0,0,2,3], cort_high:[0,0,1,2]}
+  },
+  {
+    cat:"Peau",
+    text:"As-tu la peau ou les cheveux particulièrement gras (front, racines, à devoir laver très souvent) ?",
+    opts:[
+      "Non",
+      "Un peu",
+      "Oui, c'est notable",
+      "Oui beaucoup, je dois me laver tous les jours"
+    ],
+    scores:{testo_high:[0,2,4,5], sopk:[0,1,3,4]}
+  },
+
+  /* === SECTION 10 : MENTAL / HUMEUR / LIBIDO (3 questions) === */
+  {
+    cat:"Mental",
+    text:"As-tu un brouillard mental — difficulté à te concentrer, à mémoriser, à trouver tes mots ?",
+    opts:[
+      "Rarement",
+      "Parfois",
+      "Souvent",
+      "Presque toujours, ça affecte mon travail ou ma vie quotidienne"
+    ],
+    scores:{hypo:[0,2,4,6], E2low:[0,1,3,5], cort_low:[0,1,2,3]}
+  },
+  {
+    cat:"Humeur",
+    text:"Souffres-tu de sautes d'humeur, d'irritabilité, ou d'anxiété disproportionnées par rapport aux situations ?",
+    opts:[
+      "Rarement",
+      "Parfois",
+      "Souvent",
+      "Presque toujours, mes proches le remarquent"
+    ],
+    scores:{prog_low:[0,2,4,5], E2high:[0,1,2,3], cort_high:[0,1,2,3], E2low:[0,0,1,2]}
+  },
+  {
+    cat:"Libido & vitalité",
+    text:"Te sens-tu déprimée, sans envie, sans élan — avec une libido en chute ou quasi absente ?",
+    opts:[
+      "Non, ça va",
+      "Un peu, par périodes",
+      "Souvent",
+      "Oui, je ne me reconnais plus"
+    ],
+    scores:{E2low:[0,1,3,5], testo_low:[0,1,3,4], hypo:[0,0,2,3], cort_low:[0,0,1,2]}
+  },
+
+  /* === SECTION 11 : PÉRI-MÉNOPAUSE / MÉNOPAUSE (2 questions) === */
+  {
+    cat:"Péri-ménopause",
+    text:"Ressens-tu des bouffées de chaleur, des sueurs nocturnes, ou une sensation soudaine de chaud qui monte ?",
+    opts:[
+      "Jamais",
+      "Très rarement",
+      "Parfois",
+      "Oui souvent — ça m'impacte (notamment la nuit)"
+    ],
+    scores:{E2low:[0,2,4,6]}
+  },
+  {
+    cat:"Péri-ménopause",
+    text:"As-tu remarqué récemment une sécheresse vaginale, une sécheresse cutanée nouvelle, ou une peau qui semble s'amincir ou se relâcher ?",
+    opts:[
+      "Non",
+      "Un peu",
+      "Oui, c'est notable",
+      "Oui, c'est gênant au quotidien"
+    ],
+    scores:{E2low:[0,2,4,6]}
+  },
+
+  /* === SECTION 12 : INFLAMMATION (4 questions) === */
+  {
+    cat:"Inflammation",
+    text:"As-tu développé des sensibilités ou intolérances alimentaires (gluten, produits laitiers, FODMAPs, etc.) — gaz, ballonnements, maux de ventre, fatigue après certains repas ?",
+    opts:[
+      "Non, je tolère bien tous les aliments",
+      "Parfois, sans cause claire",
+      "Oui, je dois éviter certains aliments",
+      "Oui, plusieurs aliments me posent problème"
+    ],
+    scores:{inflam:[0,1,3,5], hypo:[0,0,2,3], E2high:[0,0,1,2]}
+  },
+  {
+    cat:"Inflammation",
+    text:"Souffres-tu de problèmes de peau inflammatoires — eczéma, psoriasis, rosacée, dermatite, démangeaisons chroniques, plaques rouges ?",
+    opts:[
+      "Non, jamais",
+      "Parfois, par périodes ou très localisé",
+      "Oui, c'est régulier",
+      "Oui, c'est chronique et étendu"
+    ],
+    scores:{inflam:[0,2,4,6], hypo:[0,0,1,2], cort_high:[0,0,1,2]}
+  },
+  {
+    cat:"Inflammation",
+    text:"As-tu des maux de tête ou migraines fréquents en dehors de ton cycle (plus de 2 fois par mois) ?",
+    opts:[
+      "Jamais",
+      "Rarement",
+      "Souvent",
+      "Tous les jours ou presque"
+    ],
+    scores:{inflam:[0,1,3,5], cort_high:[0,1,2,3], E2high:[0,0,1,2]}
+  },
+  {
+    cat:"Inflammation",
+    text:"Te réveilles-tu parfois avec le visage bouffi, les paupières gonflées, ou une sensation de gonflement général sans cause évidente ?",
+    opts:[
+      "Jamais",
+      "Très rarement",
+      "Parfois",
+      "Souvent — c'est notable"
+    ],
+    scores:{inflam:[0,1,3,5], hypo:[0,0,2,3], E2high:[0,0,1,2]}
+  }
+];
+
+/* =============================================================
+   ÉTAT + LOGIQUE
+   ============================================================= */
+let answers = {}, cur = 0, userAge = '', userPrenom = '', userNom = '';
+
+function startQuiz(){
+  userPrenom = document.getElementById('inp-prenom').value.trim();
+  userNom = document.getElementById('inp-nom').value.trim();
+  userAge = document.getElementById('inp-age').value;
+  if(!userPrenom){ alert('Merci de renseigner ton prénom.'); return; }
+  if(!userNom){ alert('Merci de renseigner ton nom.'); return; }
+  if(!userAge){ alert('Merci de sélectionner ta tranche d\'âge.'); return; }
+  answers = {};
+  cur = 0;
+  show('s-quiz');
+  renderQ();
+}
+
+function restartQuiz(){
+  document.getElementById('inp-prenom').value = '';
+  document.getElementById('inp-nom').value = '';
+  document.getElementById('inp-age').value = '';
+  show('s-intro');
+}
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function renderQ(){
+  const q = questions[cur];
+  const pct = Math.round(((cur+1)/questions.length)*100);
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('prog-label').textContent = (cur+1) + ' / ' + questions.length;
+  document.getElementById('q-cat').textContent = q.cat;
+  document.getElementById('q-text').textContent = q.text;
+  const wrap = document.getElementById('q-opts');
+  wrap.innerHTML = '';
+  q.opts.forEach((o,i) => {
+    const d = document.createElement('div');
+    d.className = 'opt' + (answers[cur]===i ? ' selected' : '');
+    d.innerHTML = '<div class="opt-dot"></div>' + o;
+    d.onclick = () => selectOpt(i);
+    wrap.appendChild(d);
+  });
+  const btn = document.getElementById('btn-next');
+  btn.className = 'btn-next' + (answers[cur]!==undefined ? ' ready' : '');
+  btn.textContent = cur === questions.length-1 ? 'Voir mon résultat →' : 'Suivant →';
+  document.getElementById('btn-back').style.visibility = cur === 0 ? 'hidden' : 'visible';
+}
+
+function selectOpt(i){
+  answers[cur] = i;
+  document.querySelectorAll('.opt').forEach((o,idx) => o.className = 'opt'+(idx===i?' selected':''));
+  document.getElementById('btn-next').className = 'btn-next ready';
+}
+
+function nextQ(){
+  if(answers[cur]===undefined) return;
+  if(cur < questions.length-1){ cur++; renderQ(); }
+  else { showResult(); }
+}
+function prevQ(){ if(cur>0){ cur--; renderQ(); } }
+
+function calcScores(){
+  const scores = {};
+  Object.keys(profiles).forEach(k => scores[k]=0);
+  scores['endo'] = 0;
+  scores['inflam'] = 0;
+
+  questions.forEach((q,qi) => {
+    const ans = answers[qi];
+    if(ans===undefined) return;
+    Object.entries(q.scores||{}).forEach(([k,arr]) => {
+      if(scores[k]!==undefined) scores[k]+=(arr[ans]||0);
+    });
+  });
+
+  /* Bonus selon l'âge — ajuste les probabilités physiologiques */
+  if(userAge === 'moins_25'){
+    scores['sopk'] += 4;
+  } else if(userAge === '25_35'){
+    scores['sopk'] += 2;
+    scores['prog_low'] += 1;
+  } else if(userAge === '35_45'){
+    scores['E2low'] += 2;
+    scores['prog_low'] += 2;
+    scores['hypo'] += 1;
+  } else if(userAge === '45_55'){
+    scores['E2low'] += 6;
+    scores['testo_low'] += 3;
+    scores['prog_low'] += 2;
+  } else if(userAge === 'plus_55'){
+    scores['E2low'] += 8;
+    scores['testo_low'] += 4;
+  }
+
+  return scores;
+}
+
+function aggregateWorkshopScores(profileScores){
+  const ws = { spm:0, stress:0, thyroide:0, sopk:0, menopause:0 };
+  Object.entries(profileScores).forEach(([profile, score]) => {
+    const w = PROFILE_TO_WORKSHOP[profile];
+    if(w) ws[w] += score;
+  });
+  return ws;
+}
+
+function showResult(){
+  const scores = calcScores();
+  const endoScore = scores['endo'] || 0;
+  const inflamScore = scores['inflam'] || 0;
+  delete scores['endo'];
+  delete scores['inflam'];
+
+  const sorted = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
+  const topKey = sorted[0][0], topScore = sorted[0][1];
+  const secondKey = sorted[1][0], secondScore = sorted[1][1];
+  const maxScore = Math.max(topScore, 1);
+
+  /* Approximation du max théorique pour évaluer la dispersion */
+  const totalPossibleApprox = questions.length * 4;
+  const scoreRatio = topScore / totalPossibleApprox;
+
+  /* --- Cas profil dispersé / faible : on guide vers SPM par défaut --- */
+  if(scoreRatio < 0.01){
+    document.getElementById('profile-reveal').innerHTML =
+      '<div class="profile-tag">Ton profil hormonal</div>'
+      +'<div class="profile-name" style="color:#3d4f28;">Un déséquilibre subtil ou multi-factoriel</div>'
+      +'<div class="profile-symptoms">Si tu as fait ce diagnostic, c\'est sûrement que quelque chose ne va pas tout à fait. Ton déséquilibre est peut-être plus subtil ou multi-factoriel — ce qui le rend plus difficile à pointer avec précision via un questionnaire.</div>'
+      +'<div class="profile-desc">Le bon point d\'entrée pour toi : commencer par comprendre ton cycle et tes hormones de base. C\'est la fondation à partir de laquelle on identifie ce qui se joue vraiment.</div>'
+      + buildScoresBar(sorted, topKey);
+    document.getElementById('endo-flag-wrap').innerHTML = '';
+    renderInflamFlag(inflamScore);
+    renderWorkshop('spm', null);
+    document.getElementById('second-workshop-wrap').innerHTML = '';
+    sendToGoogleSheets(null, null, 'spm', endoScore, inflamScore, scores);
+    show('s-result');
+    return;
+  }
+
+  const p = profiles[topKey];
+  const topWorkshop = PROFILE_TO_WORKSHOP[topKey];
+  const secondWorkshop = PROFILE_TO_WORKSHOP[secondKey];
+
+  /* Profil secondaire affiché si suffisamment proche ET pointant vers atelier différent */
+  const hasMeaningfulSecond =
+    secondScore >= topScore * 0.65 &&
+    secondKey !== topKey &&
+    secondWorkshop !== topWorkshop;
+
+  let revealHTML =
+    '<div class="profile-tag">Ton profil principal</div>'
+    +'<div class="profile-name">'+p.name+'</div>'
+    +'<div class="profile-symptoms"><strong>Tes signes :</strong> '+p.symptoms+'</div>'
+    +'<div class="profile-desc">'+p.desc+'</div>';
+
+  if(hasMeaningfulSecond){
+    const p2 = profiles[secondKey];
+    revealHTML +=
+      '<div style="margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(26,26,24,0.08)">'
+      +'<div class="profile-tag">Profil secondaire détecté</div>'
+      +'<div style="font-family:Cormorant Garamond,serif;font-size:20px;font-weight:400;margin-bottom:6px">'+p2.name+'</div>'
+      +'<div class="profile-symptoms" style="font-size:12.5px;">'+p2.symptoms+'</div>'
+      +'</div>';
+  }
+
+  revealHTML += buildScoresBar(sorted, topKey);
+  document.getElementById('profile-reveal').innerHTML = revealHTML;
+
+  /* Flag endométriose */
+  if(endoScore >= 8){
+    document.getElementById('endo-flag-wrap').innerHTML =
+      '<div class="endo-flag">'
+      +'<strong>Signes évocateurs d\'endométriose détectés</strong>'
+      +'Tes réponses indiquent des signes qui peuvent évoquer une endométriose (règles très douloureuses, douleurs pelviennes hors règles ou pendant les rapports, règles abondantes). Ce n\'est pas un diagnostic — seul un examen médical (échographie pelvienne, IRM, consultation gynécologique spécialisée) peut le confirmer. L\'atelier SPM aborde spécifiquement l\'endométriose.'
+      +'</div>';
+  } else {
+    document.getElementById('endo-flag-wrap').innerHTML = '';
+  }
+
+  renderInflamFlag(inflamScore);
+
+  /* Si endométriose forte et atelier principal ≠ SPM, on force SPM */
+  let recommendedWorkshop = topWorkshop;
+  if(endoScore >= 10 && topWorkshop !== 'spm'){
+    recommendedWorkshop = 'spm';
+  }
+
+  const showSecondWorkshop = hasMeaningfulSecond ? secondWorkshop : null;
+  renderWorkshop(recommendedWorkshop, showSecondWorkshop);
+
+  sendToGoogleSheets(topKey, hasMeaningfulSecond ? secondKey : null, recommendedWorkshop, endoScore, inflamScore, scores);
+
+  show('s-result');
+}
+
+function buildScoresBar(sortedScores, topKey){
+  const max = Math.max(sortedScores[0][1], 1);
+  /* On affiche tous les profils avec un score > 0 */
+  const filtered = sortedScores.filter(([k,v]) => v > 0);
+  if(filtered.length === 0) return '';
+  let html = '<div class="scores-bar-wrap"><div class="scores-title">Répartition de tes signaux hormonaux</div>';
+  filtered.forEach(([k,v]) => {
+    const pct = Math.round((v/max)*100);
+    const isTop = k === topKey ? ' top' : '';
+    const label = profiles[k] ? profiles[k].short : k;
+    html += '<div class="score-row">'
+      + '<div class="score-label">'+label+'</div>'
+      + '<div class="score-bar-track"><div class="score-bar-fill'+isTop+'" style="width:'+pct+'%"></div></div>'
+      + '</div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function inflamIntensity(score){
+  if(score >= 14) return 'Marqué';
+  if(score >= 10) return 'Modéré';
+  if(score >= 8) return 'Léger à modéré';
+  return 'Aucun signe';
+}
+
+function sendToGoogleSheets(profilKey, secondKey, workshopKey, endoScore, inflamScore, scores){
+  if(!SHEETS_WEBHOOK_URL || SHEETS_WEBHOOK_URL.indexOf('REMPLACE') !== -1){
+    console.log('Google Sheets webhook non configuré — données non envoyées');
+    return;
+  }
+
+  const profileKeys = Object.keys(profiles);
+
+  const headers = [
+    'Date',
+    'Prénom',
+    'Nom',
+    'Tranche d\'âge',
+    'Profil principal',
+    'Profil secondaire',
+    'Atelier recommandé',
+    'Signes endométriose',
+    'Score endo',
+    'Inflammation',
+    'Score inflammation'
+  ]
+  .concat(profileKeys.map(k => 'Score ' + (profiles[k].short || k)))
+  .concat(questions.map((q, i) => 'Q' + (i+1) + ' — ' + q.cat));
+
+  const row = [
+    new Date().toISOString(),
+    userPrenom,
+    userNom,
+    userAge,
+    profilKey ? profiles[profilKey].name : '—',
+    secondKey ? profiles[secondKey].name : '',
+    workshopKey && WORKSHOPS[workshopKey] ? WORKSHOPS[workshopKey].title : '',
+    endoScore >= 8 ? 'Oui' : 'Non',
+    endoScore,
+    inflamIntensity(inflamScore),
+    inflamScore
+  ]
+  .concat(profileKeys.map(k => scores[k] || 0))
+  .concat(questions.map((q, i) => answers[i] !== undefined ? q.opts[answers[i]] : ''));
+
+  fetch(SHEETS_WEBHOOK_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ headers: headers, row: row })
+  }).catch(e => console.error('Sheets error:', e));
+}
+
+function renderInflamFlag(inflamScore){
+  const wrap = document.getElementById('inflam-flag-wrap');
+  if(inflamScore >= 8){
+    let intensity = '';
+    if(inflamScore >= 14) intensity = 'marqué';
+    else if(inflamScore >= 10) intensity = 'modéré';
+    else intensity = 'léger à modéré';
+    wrap.innerHTML =
+      '<div class="inflam-flag">'
+      +'<strong>Terrain inflammatoire détecté ('+intensity+')</strong>'
+      +'Tes réponses suggèrent une inflammation chronique de bas grade — souvent à la racine ou amplificateur d\'un déséquilibre hormonal. L\'inflammation perturbe le métabolisme des œstrogènes, fatigue les surrénales et peut bloquer la conversion thyroïdienne. Travailler l\'alimentation anti-inflammatoire, le microbiote intestinal et la gestion du stress fait partie intégrante de ton plan de rééquilibrage.'
+      +'</div>';
+  } else {
+    wrap.innerHTML = '';
+  }
+}
+
+function renderWorkshop(workshopKey, secondWorkshopKey){
+  const w = WORKSHOPS[workshopKey];
+  document.getElementById('workshop-recommend').innerHTML =
+    '<div class="workshop-card">'
+    +'<div class="workshop-eyebrow">'+w.eyebrow+'</div>'
+    +'<div class="workshop-title">'+w.title+'</div>'
+    +'<div class="workshop-subtitle">'+w.subtitle+'</div>'
+    +'<div class="workshop-desc">'+w.desc+'</div>'
+    +'<a href="'+w.url+'" class="btn-workshop" target="_blank" rel="noopener">Accéder à l\'atelier →</a>'
+    +'</div>';
+
+  if(secondWorkshopKey && WORKSHOPS[secondWorkshopKey]){
+    const w2 = WORKSHOPS[secondWorkshopKey];
+    document.getElementById('second-workshop-wrap').innerHTML =
+      '<div class="second-workshop">'
+      +'<div class="profile-tag">Atelier complémentaire</div>'
+      +'<div class="second-workshop-title">'+w2.title+'</div>'
+      +'<div class="second-workshop-desc">'+w2.subtitle+' — souvent lié à ton déséquilibre principal.</div>'
+      +'<a href="'+w2.url+'" class="link-secondary" target="_blank" rel="noopener">Voir cet atelier →</a>'
+      +'</div>';
+  } else {
+    document.getElementById('second-workshop-wrap').innerHTML = '';
+  }
+}
+</script>
+</body>
+</html>
