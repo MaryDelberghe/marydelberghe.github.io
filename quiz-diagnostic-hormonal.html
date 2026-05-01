@@ -311,7 +311,7 @@
    GOOGLE SHEETS — REMPLACE PAR L'URL DE TON WEB APP APPS SCRIPT
    (voir instructions de setup en bas de fichier)
    ============================================================= */
-const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxdCVtwy5xsYaxQV9v6NWXNQgU_HmrTmt2xkpB_FZgYDl5PWg5GAV4MkXQEZeMfNehEBQ/exec';
+const SHEETS_WEBHOOK_URL = 'REMPLACE_PAR_TON_URL_GOOGLE_APPS_SCRIPT';
 
 /* =============================================================
    CONFIGURATION — REMPLACE LES URLS DES ATELIERS CI-DESSOUS
@@ -432,6 +432,20 @@ const profiles = {
    déclenche une alerte spécifique sur la page de résultat.
    ============================================================= */
 const questions = [
+
+  /* === SECTION 0 : DIAGNOSTIC EXISTANT === */
+  {
+    cat:"Diagnostic médical",
+    text:"As-tu déjà reçu un diagnostic médical pour l'une de ces conditions ?",
+    opts:[
+      "Non, aucun diagnostic posé",
+      "Endométriose (confirmée ou suspectée)",
+      "SOPK — syndrome des ovaires polykystiques",
+      "Hypothyroïdie (Hashimoto ou autre)"
+    ],
+    scores:{endo:[0,6,0,0], sopk:[0,0,6,0], hypo:[0,0,0,6]},
+    multiSelect: false
+  },
 
   /* === SECTION 1 : CYCLE MENSTRUEL (7 questions) === */
   {
