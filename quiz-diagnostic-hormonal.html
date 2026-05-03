@@ -311,7 +311,7 @@
    GOOGLE SHEETS — REMPLACE PAR L'URL DE TON WEB APP APPS SCRIPT
    (voir instructions de setup en bas de fichier)
    ============================================================= */
-const SHEETS_WEBHOOK_URL = 'REMPLACE_PAR_TON_URL_GOOGLE_APPS_SCRIPT';
+const SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxdCVtwy5xsYaxQV9v6NWXNQgU_HmrTmt2xkpB_FZgYDl5PWg5GAV4MkXQEZeMfNehEBQ/exec';
 
 /* =============================================================
    CONFIGURATION — REMPLACE LES URLS DES ATELIERS CI-DESSOUS
@@ -371,9 +371,9 @@ const PROFILE_TO_WORKSHOP = {
 
 const profiles = {
   E2high:{
-    short:"Dominance œstrogènes",
-    name:"Dominance en œstrogènes",
-    desc:"Ton corps produit trop d'œstrogènes par rapport à la progestérone. C'est le déséquilibre le plus fréquent chez les femmes entre 25 et 45 ans, et l'un des plus méconnus. Quand ce rapport est déséquilibré, tout le reste suit : le cycle, l'humeur, le poids, l'énergie. La bonne nouvelle, c'est qu'on a de très bons résultats en travaillant sur l'élimination des œstrogènes en excès par le foie et l'intestin."
+    short:"Dominance oestrogènes",
+    name:"Dominance en oestrogènes",
+    desc:"Ton corps produit trop d'oestrogènes par rapport à la progestérone. C'est le déséquilibre le plus fréquent chez les femmes entre 25 et 45 ans, et l'un des plus méconnus. Quand ce rapport est déséquilibré, tout le reste suit : le cycle, l'humeur, le poids, l'énergie. La bonne nouvelle, c'est qu'on a de très bons résultats en travaillant sur l'élimination des oestrogènes en excès par le foie et l'intestin."
   },
   prog_low:{
     short:"Progestérone basse",
@@ -388,7 +388,7 @@ const profiles = {
   cort_high:{
     short:"Cortisol élevé",
     name:"Excès de cortisol",
-    desc:"Ton axe stress fonctionne en surrégime. Le cortisol, quand il est chroniquement élevé, perturbe toutes les autres hormones en cascade : progestérone, thyroïde, insuline, œstrogènes. C'est très souvent le point de départ de plusieurs déséquilibres à la fois, et le premier levier à travailler."
+    desc:"Ton axe stress fonctionne en surrégime. Le cortisol, quand il est chroniquement élevé, perturbe toutes les autres hormones en cascade : progestérone, thyroïde, insuline, oestrogènes. C'est très souvent le point de départ de plusieurs déséquilibres à la fois, et le premier levier à travailler."
   },
   cort_low:{
     short:"Surrénales épuisées",
@@ -403,7 +403,7 @@ const profiles = {
   sopk:{
     short:"SOPK ou Hyperandrogénie",
     name:"SOPK ou Hyperandrogénie",
-    desc:"Le SOPK touche 1 femme sur 10 et reste souvent mal compris, même par les professionnels de santé. À la racine, il y a presque toujours une insulino-résistance et un état inflammatoire. Ce sont exactement ces deux mécanismes que l'on adresse dans la formation, avec des résultats concrets sur le cycle, la peau et l'énergie."
+    desc:"Le SOPK touche 1 femme sur 10 et reste souvent mal compris, même par les professionnels de santé. A la racine, il y a presque toujours une insulino-résistance et un état inflammatoire. Ce sont exactement ces deux mécanismes que l'on adresse dans la formation, avec des résultats concrets sur le cycle, la peau et l'énergie."
   },
   testo_low:{
     short:"Testostérone basse",
@@ -411,9 +411,9 @@ const profiles = {
     desc:"La testostérone joue un rôle essentiel chez la femme sur l'énergie, la libido, la masse musculaire et la motivation. Un déficit dans ce domaine est très souvent lié à la chute hormonale de la péri-ménopause ou à un épuisement surrénalien, deux contextes bien couverts dans HITNS."
   },
   E2low:{
-    short:"Œstrogènes bas",
-    name:"Déficit en œstrogènes",
-    desc:"Quand les œstrogènes baissent, et cela peut arriver dès 35-40 ans bien avant la ménopause officielle, le corps le fait sentir sur de nombreux plans : la peau, la mémoire, le sommeil, l'humeur, la sexualité. Comprendre cette transition et savoir comment soutenir naturellement la production hormonale change tout."
+    short:"Oestrogènes bas",
+    name:"Déficit en oestrogènes",
+    desc:"Quand les oestrogènes baissent, et cela peut arriver dès 35-40 ans bien avant la ménopause officielle, le corps le fait sentir sur de nombreux plans : la peau, la mémoire, le sommeil, l'humeur, la sexualité. Comprendre cette transition et savoir comment soutenir naturellement la production hormonale change tout."
   }
 };
 
@@ -423,6 +423,31 @@ const profiles = {
    déclenche une alerte spécifique sur la page de résultat.
    ============================================================= */
 const questions = [
+
+  /* === STATUT MENSTRUEL === */
+  {
+    cat:"Statut menstruel",
+    text:"Es-tu actuellement menstruée ?",
+    opts:[
+      "Oui, j'ai mes règles naturellement",
+      "Non, je suis sous pilule (ou autre contraception hormonale)",
+      "Non, je suis ménopausée (ou en péri-ménopause)"
+    ],
+    scores:{}
+  },
+
+  /* === DIAGNOSTIC MÉDICAL === */
+  {
+    cat:"Diagnostic médical",
+    text:"As-tu déjà reçu un diagnostic médical pour l'une de ces conditions ?",
+    opts:[
+      "Non, aucun diagnostic posé",
+      "Endométriose (confirmée ou suspectée)",
+      "SOPK — syndrome des ovaires polykystiques",
+      "Hypothyroïdie (Hashimoto ou autre)"
+    ],
+    scores:{endo:[0,6,0,0], sopk:[0,0,6,0], hypo:[0,0,0,6]}
+  },
 
   /* === SECTION 0 : STATUT MENSTRUEL === */
   {
@@ -964,16 +989,13 @@ const questions = [
    ÉTAT + LOGIQUE
    ============================================================= */
 let answers = {}, cur = 0, userAge = '', userPrenom = '', userNom = '';
-let menstrualStatus = null; // 'oui' | 'pilule' | 'menopause'
-
-/* Catégories à sauter selon le statut menstruel */
+let menstrualStatus = null;
 const SKIP_CATS = ['Cycle menstruel','SPM'];
 
 function shouldSkipQuestion(idx){
   if(!menstrualStatus || menstrualStatus === 'oui') return false;
   return SKIP_CATS.includes(questions[idx].cat);
 }
-
 function getNextIdx(from){
   let next = from + 1;
   while(next < questions.length && shouldSkipQuestion(next)) next++;
@@ -984,6 +1006,7 @@ function getPrevIdx(from){
   while(prev > 0 && shouldSkipQuestion(prev)) prev--;
   return prev;
 }
+
 
 function startQuiz(){
   userPrenom = document.getElementById('inp-prenom').value.trim();
@@ -1122,16 +1145,13 @@ function showResult(){
       '<div class="profile-tag">Ton profil</div>'
       +'<div class="profile-name" style="color:#3d4f28;">Contraception hormonale</div>'
       +'<div class="profile-desc" style="margin-top:1rem;">'
-      +'La contraception hormonale met tes hormones naturelles en veille. Ton corps ne produit plus ses propres cycles de fluctuation, ce qui rend difficile l\'identification d\'un profil hormonal précis.'
-      +'<br><br>Ce que l\'on sait, c\'est que la pilule modifie l\'absorption de certains nutriments essentiels au bon fonctionnement hormonal : le magnésium, le zinc, les vitamines B6 et B9. Travailler sur l\'inflammation de fond, la santé intestinale et la recharge micronutritionnelle est particulièrement précieux dans ce contexte.'
+      +'La contraception hormonale met tes hormones naturelles en veille. Ton corps ne produit plus ses propres cycles de fluctuation, ce qui rend difficile l\'identification d\'un profil hormonal pr\u00e9cis.'
+      +'<br><br>Ce que l\'on sait, c\'est que la pilule modifie l\'absorption de certains nutriments essentiels : le magn\u00e9sium, le zinc, les vitamines B6 et B9. Travailler sur l\'inflammation de fond, la sant\u00e9 intestinale et la recharge micronutritionnelle est particuli\u00e8rement pr\u00e9cieux dans ce contexte.'
       +'<br><br>Dans HITNS, ces trois axes sont au c\u0153ur du programme.'
       +'</div>';
     document.getElementById('endo-flag-wrap').innerHTML = '';
     document.getElementById('second-workshop-wrap').innerHTML = '';
-    const inflamScore = calcInflamOnly();
-    renderInflamFlag(inflamScore);
-    renderWorkshop(null, null);
-    sendToGoogleSheets('pilule', null, null, 0, inflamScore, {});
+    document.getElementById('workshop-recommend').innerHTML = '';
     show('s-result');
     return;
   }
@@ -1140,18 +1160,15 @@ function showResult(){
   if(menstrualStatus === 'menopause'){
     document.getElementById('profile-reveal').innerHTML =
       '<div class="profile-tag">Ton profil</div>'
-      +'<div class="profile-name" style="color:#3d4f28;">Péri-ménopause ou Ménopause</div>'
+      +'<div class="profile-name" style="color:#3d4f28;">P\u00e9ri-m\u00e9nopause ou M\u00e9nopause</div>'
       +'<div class="profile-desc" style="margin-top:1rem;">'
-      +'En péri-ménopause ou ménopause, les ovaires réduisent progressivement leur production d\'\u0153strogènes et de progestérone. C\'est une transition naturelle du corps féminin, pas un dérèglement.'
-      +'<br><br>Quand cette transition est bien accompagnée, le corps s\'adapte avec beaucoup plus de douceur. Comprendre ce qui se passe hormonalement permet d\'agir sur les bons leviers, au bon moment.'
-      +'<br><br>L\'atelier Ménopause dans HITNS est fait pour t\'accompagner spécifiquement dans cette phase.'
+      +'En p\u00e9ri-m\u00e9nopause ou m\u00e9nopause, les ovaires r\u00e9duisent progressivement leur production d\'\u0153strog\u00e8nes et de progest\u00e9rone. C\'est une transition naturelle du corps f\u00e9minin, pas un d\u00e9r\u00e8glement.'
+      +'<br><br>Quand cette transition est bien accompagn\u00e9e, le corps s\'adapte avec beaucoup plus de douceur. Comprendre ce qui se passe hormonalement permet d\'agir sur les bons leviers, au bon moment.'
+      +'<br><br>L\'atelier M\u00e9nopause dans HITNS est fait pour t\'accompagner sp\u00e9cifiquement dans cette phase.'
       +'</div>';
     document.getElementById('endo-flag-wrap').innerHTML = '';
     document.getElementById('second-workshop-wrap').innerHTML = '';
-    const inflamScore2 = calcInflamOnly();
-    renderInflamFlag(inflamScore2);
-    renderWorkshop('menopause', null);
-    sendToGoogleSheets('menopause', null, 'menopause', 0, inflamScore2, {});
+    document.getElementById('workshop-recommend').innerHTML = '<div class="workshop-card"><div class="workshop-eyebrow">Atelier recommand\u00e9 pour toi</div><div class="workshop-title">M\u00e9nopause &amp; P\u00e9ri-m\u00e9nopause</div></div>';
     show('s-result');
     return;
   }
@@ -1345,7 +1362,7 @@ function renderWorkshop(workshopKey, secondWorkshopKey){
     +'<div class="workshop-title">'+w.title+'</div>'
     +'<div class="workshop-subtitle">'+w.subtitle+'</div>'
     +'<div class="workshop-desc">'+w.desc+'</div>'
-    +'<a href="'+w.url+'" class="btn-workshop" target="_blank" rel="noopener">Accéder à l\'atelier →</a>'
+
     +'</div>';
 
   if(secondWorkshopKey && WORKSHOPS[secondWorkshopKey]){
@@ -1355,7 +1372,7 @@ function renderWorkshop(workshopKey, secondWorkshopKey){
       +'<div class="profile-tag">Atelier complémentaire</div>'
       +'<div class="second-workshop-title">'+w2.title+'</div>'
       +'<div class="second-workshop-desc">'+w2.subtitle+' — souvent lié à ton déséquilibre principal.</div>'
-      +'<a href="'+w2.url+'" class="link-secondary" target="_blank" rel="noopener">Voir cet atelier →</a>'
+
       +'</div>';
   } else {
     document.getElementById('second-workshop-wrap').innerHTML = '';
