@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mary Delberghe — Naturopathe Santé Féminine</title>
+<meta name="description" content="Mary Delberghe, naturopathe spécialisée en santé de la femme. Masterclass gratuite, programme hormones 21 jours, compléments.">
+<meta name="robots" content="noindex">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --g:#c2cc9e;--gd:#7a8a5a;--gdk:#3d4f28;
+  --cream:#fdfaf4;--warm:#f7f3ea;--sand:#ede8dc;
+  --dark:#161a12;--mid:#52584a;--soft:#8a9080;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  font-weight:300;
+  color:var(--dark);
+  background:var(--cream);
+  min-height:100svh;
+  overflow-x:hidden;
+  line-height:1.65;
+}
+a{text-decoration:none;color:inherit;}
+
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% -10%, rgba(194,204,158,0.22) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 85% 90%, rgba(122,138,90,0.12) 0%, transparent 55%);
+  pointer-events:none;z-index:0;
+}
+
+.wrap{
+  position:relative;z-index:1;
+  max-width:480px;
+  margin:0 auto;
+  padding:3rem 1.5rem 4rem;
+  display:flex;flex-direction:column;align-items:center;
+  gap:0;
+}
+
+.avatar-ring{
+  width:110px;height:110px;
+  border-radius:50%;
+  padding:3px;
+  background:linear-gradient(135deg, var(--g) 0%, var(--gdk) 100%);
+  margin-bottom:1.25rem;
+  flex-shrink:0;
+}
+.avatar-ring img{
+  width:100%;height:100%;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+  background:var(--sand);
+}
+.avatar-placeholder{
+  width:100%;height:100%;
+  border-radius:50%;
+  background:var(--sand);
+  display:flex;align-items:center;justify-content:center;
+  font-size:36px;
+}
+
+.identity{text-align:center;margin-bottom:0.5rem;}
+.identity-name{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(22px,6vw,28px);
+  letter-spacing:0.02em;
+  text-transform:uppercase;
+  color:var(--dark);
+  line-height:1;
+  margin-bottom:6px;
+}
+.identity-title{
+  font-family:'Libre Baskerville',serif;
+  font-style:italic;
+  font-size:clamp(13px,3.5vw,15px);
+  color:var(--gd);
+  line-height:1.4;
+}
+
+.proof-pill{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--gdk);
+  color:#fff;
+  border-radius:100px;
+  padding:7px 18px;
+  font-size:12px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  font-family:'Anton',sans-serif;
+  margin:1rem 0 2rem;
+  flex-shrink:0;
+}
+.proof-pill .dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--g);flex-shrink:0;
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.6;transform:scale(0.8)}}
+
+.section-label{
+  font-size:10px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--soft);
+  display:flex;align-items:center;gap:10px;
+  align-self:stretch;
+  margin-bottom:0.75rem;
+}
+.section-label::before,.section-label::after{
+  content:'';flex:1;height:1px;background:rgba(90,100,75,0.15);
+}
+
+.cards{
+  display:flex;flex-direction:column;
+  gap:14px;
+  width:100%;
+}
+
+.card{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  background:#fff;
+  border:1px solid rgba(194,204,158,0.35);
+  border-radius:20px;
+  padding:1.25rem 1.25rem 1.25rem 1rem;
+  text-decoration:none;
+  color:var(--dark);
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform 0.18s ease, box-shadow 0.18s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.card:active{transform:scale(0.975);}
+@media(hover:hover){
+  .card:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(61,79,40,0.12);}
+}
+
+.card::before{
+  content:'';
+  position:absolute;left:0;top:0;bottom:0;
+  width:4px;
+  background:linear-gradient(to bottom, var(--g), var(--gdk));
+  border-radius:4px 0 0 4px;
+}
+
+.card.featured{
+  background:var(--gdk);
+  border-color:var(--gdk);
+}
+.card.featured::before{background:linear-gradient(to bottom, var(--g), rgba(194,204,158,0.5));}
+.card.featured .card-title{color:#fff;}
+.card.featured .card-desc{color:rgba(255,255,255,0.6);}
+.card.featured .card-arrow{color:var(--g);}
+.card.featured .date-chip{background:rgba(194,204,158,0.2);color:var(--g);}
+.card.featured .card-icon{background:rgba(194,204,158,0.15);}
+
+.card-icon{
+  font-size:28px;
+  flex-shrink:0;
+  width:52px;height:52px;
+  background:var(--warm);
+  border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  line-height:1;
+}
+
+.card-body{flex:1;min-width:0;}
+.card-tag{
+  display:inline-block;
+  font-size:10px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  background:rgba(194,204,158,0.25);
+  color:var(--gd);
+  border-radius:100px;
+  padding:3px 10px;
+  margin-bottom:5px;
+  font-weight:500;
+}
+.card-title{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(15px,4.5vw,18px);
+  letter-spacing:0.02em;
+  text-transform:uppercase;
+  color:var(--dark);
+  line-height:1.15;
+  margin-bottom:4px;
+}
+.card-desc{
+  font-size:12px;
+  color:var(--mid);
+  line-height:1.5;
+}
+
+.card-arrow{
+  color:var(--gd);
+  font-size:18px;
+  flex-shrink:0;
+  opacity:0.7;
+}
+
+.date-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(194,204,158,0.25);
+  color:var(--gd);
+  font-size:10px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  border-radius:100px;
+  padding:3px 10px;
+  margin-bottom:5px;
+}
+
+.countdown-wrap{
+  width:100%;
+  background:rgba(22,26,18,0.04);
+  border:1px solid rgba(194,204,158,0.3);
+  border-radius:16px;
+  padding:1.25rem;
+  text-align:center;
+  margin-top:2rem;
+}
+.cw-label{
+  font-size:11px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--soft);
+  margin-bottom:0.75rem;
+}
+.cw-timer{display:flex;justify-content:center;gap:1rem;}
+.cw-unit{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.cw-num{
+  font-family:'Anton',sans-serif;
+  font-size:clamp(26px,8vw,36px);
+  color:var(--gdk);
+  line-height:1;
+  min-width:44px;
+  text-align:center;
+}
+.cw-sep{
+  font-family:'Anton',sans-serif;
+  font-size:28px;
+  color:var(--g);
+  line-height:1;
+  align-self:flex-start;
+  margin-top:2px;
+}
+.cw-lbl{
+  font-size:9px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--soft);
+}
+
+.footer{
+  margin-top:2.5rem;
+  text-align:center;
+  font-size:11px;
+  color:var(--soft);
+  letter-spacing:0.06em;
+}
+.footer a{color:var(--gd);}
+
+.socials{
+  display:flex;gap:14px;justify-content:center;
+  margin-top:1.25rem;
+}
+.soc-btn{
+  width:40px;height:40px;
+  border-radius:50%;
+  background:#fff;
+  border:1px solid rgba(194,204,158,0.4);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+  transition:transform 0.15s;
+  text-decoration:none;
+}
+.soc-btn:active{transform:scale(0.92);}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <div class="avatar-ring">
+    <div class="avatar-placeholder">🌿</div>
+    <!-- Remplace par : <img src="ta-photo.jpg" alt="Mary Delberghe"> -->
+  </div>
+
+  <div class="identity">
+    <div class="identity-name">Mary Delberghe</div>
+    <div class="identity-title">Naturopathe spécialisée<br>en santé de la femme</div>
+  </div>
+
+  <div class="proof-pill">
+    <span class="dot"></span>
+    +1&nbsp;000 femmes accompagnées
+  </div>
+
+  <div class="section-label">Mes ressources pour toi</div>
+
+  <div class="cards">
+
+    <a href="#" class="card featured" id="masterclass-link">
+      <div class="card-icon">🎓</div>
+      <div class="card-body">
+        <div class="date-chip">📅 1er juillet 2025</div>
+        <div class="card-title">Masterclass gratuite<br>Hormones</div>
+        <div class="card-desc">Comprends enfin ce qui se passe dans ton corps — et reprends le contrôle.</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="#" class="card" id="h21-link">
+      <div class="card-icon">⚡</div>
+      <div class="card-body">
+        <div class="card-tag">Programme</div>
+        <div class="card-title">H21 — Protocole 21 jours</div>
+        <div class="card-desc">Réduire le cortisol &amp; l'inflammation. Résultats durables, naturellement.</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+    <a href="#" class="card" id="complements-link">
+      <div class="card-icon">🌿</div>
+      <div class="card-body">
+        <div class="card-tag">Ma sélection</div>
+        <div class="card-title">Mes compléments</div>
+        <div class="card-desc">Les compléments que j'utilise et recommande à mes clientes.</div>
+      </div>
+      <div class="card-arrow">→</div>
+    </a>
+
+  </div>
+
+  <div class="countdown-wrap">
+    <div class="cw-label">La masterclass gratuite dans</div>
+    <div class="cw-timer">
+      <div class="cw-unit">
+        <span class="cw-num" id="cd-d">--</span>
+        <span class="cw-lbl">Jours</span>
+      </div>
+      <span class="cw-sep">:</span>
+      <div class="cw-unit">
+        <span class="cw-num" id="cd-h">--</span>
+        <span class="cw-lbl">Heures</span>
+      </div>
+      <span class="cw-sep">:</span>
+      <div class="cw-unit">
+        <span class="cw-num" id="cd-m">--</span>
+        <span class="cw-lbl">Min</span>
+      </div>
+      <span class="cw-sep">:</span>
+      <div class="cw-unit">
+        <span class="cw-num" id="cd-s">--</span>
+        <span class="cw-lbl">Sec</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="socials">
+    <a href="https://www.instagram.com/mary.naturopathe" class="soc-btn" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+    <a href="https://healthy-is-the-new-sexy.com" class="soc-btn" target="_blank" rel="noopener" aria-label="Site web">🌐</a>
+  </div>
+
+  <div class="footer">
+    <a href="https://healthy-is-the-new-sexy.com">healthy-is-the-new-sexy.com</a>
+  </div>
+
+</div>
+
+<script>
+const TARGET = new Date('2025-07-01T09:00:00+02:00');
+function pad(n){return String(n).padStart(2,'0');}
+function tick(){
+  const now = new Date();
+  const diff = TARGET - now;
+  if(diff <= 0){
+    ['cd-d','cd-h','cd-m','cd-s'].forEach(id=>document.getElementById(id).textContent='00');
+    return;
+  }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('cd-d').textContent=pad(d);
+  document.getElementById('cd-h').textContent=pad(h);
+  document.getElementById('cd-m').textContent=pad(m);
+  document.getElementById('cd-s').textContent=pad(s);
+}
+tick();
+setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
