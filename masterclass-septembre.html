@@ -102,6 +102,9 @@ em{font-style:italic;color:var(--gd);}
 .optin span{font-size:13px;color:var(--dark);line-height:1.5;}
 
 .form-card .btn{width:100%;}
+.reassure{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin:0 0 1.5rem;}
+.reassure li{position:relative;padding-left:1.5rem;font-size:14px;color:var(--dark);}
+.reassure li::before{content:'✓';position:absolute;left:0;top:0;color:var(--gdk);font-size:13px;}
 .disclaimer{text-align:center;font-size:11px;color:#a8a596;margin-top:0.9rem;line-height:1.6;}
 
 /* ---------- FINAL CTA ---------- */
@@ -148,7 +151,7 @@ em{font-style:italic;color:var(--gd);}
       <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">Sec</span></div>
     </div>
     <div style="margin-top:1.75rem;">
-      <a href="#inscription" class="btn">Je réserve ma place gratuite →</a>
+      <a href="https://mary-delberghe.systeme.io/6e236216" class="btn" target="_blank" rel="noopener">Je réserve ma place gratuite →</a>
     </div>
     <p class="disclaimer">Places en direct limitées · Replay envoyé aux inscrites</p>
   </div>
@@ -222,59 +225,16 @@ em{font-style:italic;color:var(--gd);}
     <div class="form-card">
       <p class="kicker">Inscription gratuite</p>
       <h2>Réserve ta place</h2>
-      <p class="sub">Le lien pour regarder t'arrive par email et par SMS avant le direct.</p>
+      <p class="sub">Il te suffit de ton prénom et de ton email. Le lien pour regarder t'arrive ensuite par email et par SMS avant le direct.</p>
 
-      <!-- ==========================================================
-           👉 EMPLACEMENT D'INTÉGRATION DU QUESTIONNAIRE SYSTEME.IO
-           ----------------------------------------------------------
-           Deux options :
+      <ul class="reassure">
+        <li>Places en direct limitées</li>
+        <li>Replay envoyé aux inscrites</li>
+        <li>Désabonnement en 1 clic · Zéro spam</li>
+      </ul>
 
-           OPTION A — Coller ton embed Systeme.io
-             Dans Systeme.io : ouvre ta page de capture,
-             clique sur le formulaire → "Intégrer / Code d'intégration",
-             copie le code, puis REMPLACE tout le <form> ci-dessous
-             par ce code. Le tag "MC1_inscrites" et la redirection
-             vers la page de confirmation se règlent côté Systeme.io
-             (Réglages du formulaire → "Après inscription").
-
-           OPTION B — Garder ce design et brancher l'action
-             Remplace l'attribut action="#" ci-dessous par l'URL
-             de soumission de ton tunnel Systeme.io, et vérifie que
-             les attributs name= correspondent à tes champs.
-
-           Champs demandés : Prénom · Email · Téléphone
-           Case opt-in : "Je veux recevoir mes rappels par SMS"
-           Tag à appliquer après inscription : MC1_inscrites
-           Après soumission → rediriger vers :
-               masterclass-septembre-merci.html
-      ========================================================== -->
-
-      <form action="#" method="post" onsubmit="return false;">
-        <div class="field">
-          <label for="f-prenom">Ton prénom</label>
-          <input id="f-prenom" name="first_name" type="text" placeholder="Sophie" autocomplete="given-name" required>
-        </div>
-        <div class="field">
-          <label for="f-email">Ton email</label>
-          <input id="f-email" name="email" type="email" placeholder="sophie@email.com" autocomplete="email" required>
-        </div>
-        <div class="field">
-          <label for="f-tel">Ton téléphone</label>
-          <input id="f-tel" name="phone" type="tel" placeholder="06 12 34 56 78" autocomplete="tel">
-          <p class="hint">Pour recevoir le lien du direct par SMS (facultatif).</p>
-        </div>
-
-        <label class="optin" for="f-sms">
-          <input id="f-sms" name="sms_optin" type="checkbox" value="oui">
-          <span>Je veux recevoir mes rappels par SMS avant la masterclass.</span>
-        </label>
-
-        <button type="submit" class="btn">Je réserve ma place gratuite →</button>
-        <p class="disclaimer">En t'inscrivant, tu acceptes de recevoir mes emails à propos de la masterclass. Désabonnement en 1 clic · Zéro spam.</p>
-      </form>
-
-      <!-- ==================== FIN DE L'EMPLACEMENT ==================== -->
-
+      <a href="https://mary-delberghe.systeme.io/6e236216" class="btn" target="_blank" rel="noopener">Je réserve ma place gratuite →</a>
+      <p class="disclaimer">Tu seras redirigée vers un formulaire sécurisé pour finaliser ton inscription.</p>
     </div>
   </div>
 </section>
@@ -284,7 +244,7 @@ em{font-style:italic;color:var(--gd);}
   <div class="wrap">
     <p class="kicker">Rendez-vous le 20 septembre</p>
     <h2 class="h2">Tes hormones méritent<br>enfin des réponses claires</h2>
-    <a href="#inscription" class="btn">Je m'inscris gratuitement →</a>
+    <a href="https://mary-delberghe.systeme.io/6e236216" class="btn" target="_blank" rel="noopener">Je m'inscris gratuitement →</a>
   </div>
 </section>
 
