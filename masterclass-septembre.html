@@ -3,147 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Masterclass gratuite — Hormones &amp; santé de la femme | Mary Delberghe</title>
-<meta name="description" content="Masterclass en ligne gratuite le 20 septembre : comprends et rééquilibre tes hormones naturellement. Inscris-toi, reçois le replay et tes rappels.">
+<title>La science des Hormones — Masterclass gratuite | Mary Delberghe</title>
+<meta name="description" content="Masterclass en ligne gratuite le dimanche 20 septembre à 20h : reprends le contrôle de ton énergie, ton poids et tes hormones. Inscris-toi, reçois le replay.">
 <meta name="robots" content="noindex">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="Masterclass gratuite — Hormones & santé de la femme">
-<meta property="og:description" content="20 septembre, en ligne et gratuit. Comprends enfin tes hormones et repars avec un plan concret.">
-<meta property="og:image" content="https://healthy-is-the-new-sexy.com/visuel-masterclass.jpg">
+<meta property="og:title" content="La science des Hormones — Masterclass gratuite">
+<meta property="og:description" content="Dimanche 20 septembre à 20h, en ligne et gratuit. Reprends le contrôle de ton énergie, ton poids et tes hormones.">
+<meta property="og:image" content="https://healthy-is-the-new-sexy.com/hero-hormones.jpg">
 <meta property="og:url" content="https://healthy-is-the-new-sexy.com/masterclass-septembre.html">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --g:#c2cc9e;--gd:#7a8a5a;--gdk:#3d4f28;
-  --cream:#faf9f6;--dark:#1a1a17;--mid:#6b6b60;--light:#e8e6df;--border:#e3e1d8;
+  /* palette reprise du visuel : ivoire, jaune beurre / or, bleu ciel, encre */
+  --ivory:#fbf9f3;--ink:#24231f;--mid:#6f6d63;
+  --gold:#b8993f;--gold-soft:#e6d38f;--blue:#9db8cb;--blue-deep:#5b7d92;
+  --light:#efeadd;--border:#e7e1d3;
 }
 html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;font-weight:300;color:var(--dark);background:var(--cream);line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+body{font-family:'Montserrat',sans-serif;font-weight:400;color:var(--ink);background:var(--ivory);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
 a{text-decoration:none;color:inherit;}
 img{display:block;max-width:100%;}
-em{font-style:italic;color:var(--gd);}
+em{font-style:italic;color:var(--gold);}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
 
 .wrap{max-width:720px;margin:0 auto;padding:0 1.25rem;}
 .section{padding:3.5rem 0;}
 
-/* ---------- HERO ---------- */
-.hero{text-align:center;padding:3.5rem 0 2.75rem;}
-.eyebrow{display:inline-block;font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gdk);background:rgba(194,204,158,0.28);border:1px solid rgba(122,138,90,0.28);border-radius:100px;padding:6px 16px;margin-bottom:1.5rem;}
-.hero h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,7vw,54px);line-height:1.08;letter-spacing:0.005em;margin-bottom:1.1rem;}
-.hero-sub{font-size:clamp(15px,2.3vw,18px);color:var(--mid);max-width:520px;margin:0 auto 1.75rem;}
-.meta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:0.6rem 1.4rem;margin-bottom:2rem;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--gd);}
+/* ---------- HERO BANNER ---------- */
+.hero-banner{width:100%;max-width:1040px;margin:0 auto;}
+.hero-banner img{width:100%;height:auto;display:block;}
+
+/* ---------- INTRO ---------- */
+.intro{text-align:center;padding:2.75rem 0 0.5rem;}
+.eyebrow{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--blue-deep);background:rgba(157,184,203,0.16);border:1px solid rgba(91,125,146,0.25);border-radius:100px;padding:6px 16px;margin-bottom:1.25rem;}
+.lede{font-size:clamp(15px,2.3vw,18px);font-weight:300;color:var(--mid);max-width:540px;margin:0 auto 1.5rem;}
+.meta-row{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem 1.4rem;margin-bottom:0.5rem;font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--gold);}
 .meta-item{display:flex;align-items:center;gap:7px;}
-.meta-dot{width:5px;height:5px;border-radius:50%;background:var(--g);}
-.hero-visual{width:100%;max-width:520px;margin:0.5rem auto 0;border-radius:16px;overflow:hidden;border:1px solid var(--light);box-shadow:0 20px 50px rgba(61,79,40,0.10);}
-.hero-visual img{width:100%;aspect-ratio:16/10;object-fit:cover;}
+.meta-dot{width:5px;height:5px;border-radius:50%;background:var(--gold-soft);}
 
 /* ---------- COUNTDOWN ---------- */
-.countdown{display:flex;justify-content:center;gap:0.75rem;margin:0 auto 0.5rem;}
+.countdown{display:flex;justify-content:center;gap:0.75rem;margin:1.75rem auto 0.5rem;}
 .cd-unit{background:#fff;border:1px solid var(--border);border-radius:12px;padding:0.85rem 0;min-width:72px;text-align:center;}
-.cd-num{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:34px;line-height:1;color:var(--gdk);}
-.cd-lbl{display:block;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#b0ad9f;margin-top:6px;}
+.cd-num{font-family:'Playfair Display',serif;font-weight:500;font-size:34px;line-height:1;color:var(--ink);}
+.cd-lbl{display:block;font-size:9px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#b3ac9a;margin-top:6px;}
 
 /* ---------- CTA BUTTON ---------- */
-.btn{display:inline-block;background:var(--gdk);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:17px 40px;border-radius:100px;border:none;cursor:pointer;transition:transform 0.15s,box-shadow 0.2s,background 0.2s;}
-@media(hover:hover){.btn:hover{background:#324222;box-shadow:0 10px 26px rgba(61,79,40,0.28);transform:translateY(-1px);}}
+.btn{display:inline-block;background:var(--ink);color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:17px 40px;border-radius:100px;border:none;cursor:pointer;transition:transform 0.15s,box-shadow 0.2s,background 0.2s;}
+@media(hover:hover){.btn:hover{background:#3a382f;box-shadow:0 10px 26px rgba(36,35,31,0.22);transform:translateY(-1px);}}
 .btn:active{transform:translateY(0);}
-.btn-ghost{background:transparent;color:var(--gdk);border:1px solid rgba(122,138,90,0.5);}
-@media(hover:hover){.btn-ghost:hover{background:rgba(194,204,158,0.18);box-shadow:none;}}
 
 /* ---------- SECTION HEADINGS ---------- */
-.kicker{text-align:center;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gd);margin-bottom:0.75rem;}
-.h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(26px,4.5vw,38px);line-height:1.15;text-align:center;margin-bottom:2.25rem;}
+.kicker{text-align:center;font-size:11px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;}
+.h2{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(26px,4.5vw,40px);line-height:1.15;text-align:center;margin-bottom:2.25rem;}
+
+/* ---------- FORM / INSCRIPTION ---------- */
+.form-section{background:linear-gradient(180deg,rgba(157,184,203,0.14),rgba(230,211,143,0.08));border-top:1px solid var(--light);border-bottom:1px solid var(--light);}
+.form-card{max-width:480px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem 1.75rem 2.25rem;box-shadow:0 16px 44px rgba(36,35,31,0.07);}
+.form-card .kicker{margin-bottom:0.6rem;}
+.form-card h2{font-family:'Playfair Display',serif;font-weight:500;font-size:28px;text-align:center;line-height:1.15;margin-bottom:0.6rem;}
+.free-badge{display:block;width:fit-content;margin:0 auto 0.9rem;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);background:rgba(230,211,143,0.28);border:1px solid rgba(184,153,63,0.3);border-radius:100px;padding:5px 14px;}
+.form-card .sub{text-align:center;font-size:14px;font-weight:300;color:var(--mid);margin-bottom:1.5rem;}
+.reassure{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin:0 0 1.5rem;}
+.reassure li{position:relative;padding-left:1.5rem;font-size:14px;font-weight:300;color:var(--ink);}
+.reassure li::before{content:'✓';position:absolute;left:0;top:0;color:var(--gold);font-size:13px;}
+.disclaimer{text-align:center;font-size:11px;font-weight:300;color:#a8a494;margin-top:0.9rem;line-height:1.6;}
 
 /* ---------- PAIN LIST ---------- */
 .pain-grid{display:grid;gap:0.85rem;}
 .pain{display:flex;gap:0.9rem;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem;}
-.pain-check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(194,204,158,0.35);color:var(--gdk);display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:2px;}
-.pain p{font-size:15px;color:var(--dark);}
+.pain-check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:rgba(230,211,143,0.4);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:12px;margin-top:2px;}
+.pain p{font-size:15px;font-weight:300;color:var(--ink);}
 
 /* ---------- LEARN CARDS ---------- */
 .learn-grid{display:grid;grid-template-columns:1fr;gap:1rem;}
 @media(min-width:560px){.learn-grid{grid-template-columns:1fr 1fr;}}
-.learn{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.5rem;}
-.learn-num{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--g);line-height:1;margin-bottom:0.6rem;}
-.learn h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:20px;margin-bottom:0.4rem;}
-.learn p{font-size:14px;color:var(--mid);}
+.learn{background:var(--ivory);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.5rem;}
+.learn-num{font-family:'Playfair Display',serif;font-size:24px;color:var(--gold-soft);line-height:1;margin-bottom:0.6rem;}
+.learn h3{font-family:'Playfair Display',serif;font-weight:600;font-size:20px;margin-bottom:0.4rem;}
+.learn p{font-size:14px;font-weight:300;color:var(--mid);}
 
 /* ---------- ABOUT ---------- */
 .about{background:#fff;border:1px solid var(--border);border-radius:18px;padding:2.25rem;display:flex;flex-direction:column;align-items:center;text-align:center;gap:1.25rem;}
 @media(min-width:600px){.about{flex-direction:row;text-align:left;align-items:center;gap:2rem;}}
 .about-photo{width:120px;height:120px;border-radius:50%;overflow:hidden;border:1px solid var(--light);flex-shrink:0;}
 .about-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
-.about-name{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;margin-bottom:0.15rem;}
-.about-role{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gd);margin-bottom:0.8rem;}
-.about p{font-size:15px;color:var(--mid);}
-
-/* ---------- FORM / INSCRIPTION ---------- */
-.form-section{background:linear-gradient(180deg,rgba(194,204,158,0.16),rgba(194,204,158,0.05));border-top:1px solid var(--light);border-bottom:1px solid var(--light);}
-.form-card{max-width:480px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:18px;padding:2rem 1.75rem 2.25rem;box-shadow:0 16px 44px rgba(61,79,40,0.08);}
-.form-card .kicker{margin-bottom:0.5rem;}
-.form-card h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:28px;text-align:center;line-height:1.15;margin-bottom:0.4rem;}
-.form-card .sub{text-align:center;font-size:14px;color:var(--mid);margin-bottom:1.5rem;}
-
-.field{margin-bottom:1rem;}
-.field label{display:block;font-size:10px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gd);margin-bottom:0.4rem;}
-.field input{width:100%;border:1px solid var(--border);border-radius:9px;padding:14px 16px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--dark);background:#fdfdfb;outline:none;transition:border-color 0.2s;}
-.field input:focus{border-color:var(--gd);}
-.field .hint{font-size:11px;color:#a8a596;margin-top:0.3rem;}
-
-.optin{display:flex;gap:0.65rem;align-items:flex-start;background:rgba(194,204,158,0.14);border:1px solid rgba(122,138,90,0.2);border-radius:10px;padding:0.85rem 1rem;margin:0.5rem 0 1.4rem;cursor:pointer;}
-.optin input{margin-top:3px;width:17px;height:17px;flex-shrink:0;accent-color:var(--gdk);cursor:pointer;}
-.optin span{font-size:13px;color:var(--dark);line-height:1.5;}
-
-.form-card .btn{width:100%;}
-.reassure{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin:0 0 1.5rem;}
-.reassure li{position:relative;padding-left:1.5rem;font-size:14px;color:var(--dark);}
-.reassure li::before{content:'✓';position:absolute;left:0;top:0;color:var(--gdk);font-size:13px;}
-.disclaimer{text-align:center;font-size:11px;color:#a8a596;margin-top:0.9rem;line-height:1.6;}
+.about-name{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;margin-bottom:0.15rem;}
+.about-role{font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:0.8rem;}
+.about p{font-size:15px;font-weight:300;color:var(--mid);}
 
 /* ---------- FINAL CTA ---------- */
 .final{text-align:center;}
 .final .h2{margin-bottom:1.25rem;}
 
 /* ---------- FOOTER ---------- */
-.footer{text-align:center;padding:2.5rem 0 3rem;font-size:11px;letter-spacing:0.06em;color:#b0ad9f;}
-.footer a{color:var(--gd);}
+.footer{text-align:center;padding:2.5rem 0 3rem;font-size:11px;letter-spacing:0.06em;color:#b3ac9a;}
+.footer a{color:var(--gold);}
 .footer-links{margin-top:0.6rem;}
 .footer-links a{margin:0 0.5rem;}
 </style>
 </head>
 <body>
 
-<!-- ================= HERO ================= -->
-<header class="hero">
-  <div class="wrap">
-    <span class="eyebrow">Masterclass gratuite en ligne</span>
-    <h1>Comprends enfin tes <em>hormones</em><br>et reprends la main</h1>
-    <p class="hero-sub">Fatigue, cycles chaotiques, prise de poids inexpliquée, moral en dents de scie… Et si tout partait de tes hormones ? En 1 h, je t'explique comment les rééquilibrer naturellement — et tu repars avec un plan concret.</p>
-
-    <div class="meta-row">
-      <span class="meta-item"><span class="meta-dot"></span>Samedi 20 septembre</span>
-      <span class="meta-item"><span class="meta-dot"></span>20h00 (heure de Paris)</span>
-      <span class="meta-item"><span class="meta-dot"></span>En ligne &amp; 100% gratuit</span>
-    </div>
-
-    <div class="hero-visual">
-      <img src="visuel-masterclass.jpg" alt="Masterclass Hormones & santé de la femme"
-           onerror="this.parentElement.style.display='none'">
-    </div>
-  </div>
+<!-- ================= HERO BANNER (ton visuel) ================= -->
+<header class="hero-banner">
+  <img src="hero-hormones.jpg" alt="La science des Hormones — Masterclass avec Mary Delberghe, dimanche 20 septembre à 20h en live"
+       onerror="this.style.display='none'">
 </header>
 
-<!-- ================= COUNTDOWN + CTA ================= -->
-<section class="section" style="padding-top:0.5rem;text-align:center;">
+<!-- ================= INTRO + COUNTDOWN + CTA ================= -->
+<section class="intro">
   <div class="wrap">
-    <p class="kicker">La masterclass commence dans</p>
+    <span class="eyebrow">Masterclass en ligne · 100% gratuite</span>
+    <h1 class="vh">La science des Hormones — Masterclass gratuite avec Mary Delberghe</h1>
+    <p class="lede">Reprends le contrôle de ton énergie, de ton poids et de tes déséquilibres hormonaux. En 1 heure, je t'explique comment rééquilibrer tes hormones naturellement — et tu repars avec un plan concret.</p>
+
+    <div class="meta-row">
+      <span class="meta-item"><span class="meta-dot"></span>Dimanche 20 septembre</span>
+      <span class="meta-item"><span class="meta-dot"></span>20h00 (heure de Paris)</span>
+      <span class="meta-item"><span class="meta-dot"></span>En direct &amp; 100% gratuit</span>
+    </div>
+
+    <p class="kicker" style="margin-top:2.25rem;">La masterclass commence dans</p>
     <div class="countdown">
       <div class="cd-unit"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">Jours</span></div>
       <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">Heures</span></div>
@@ -154,6 +141,111 @@ em{font-style:italic;color:var(--gd);}
       <a href="#inscription" class="btn">Je réserve ma place gratuite →</a>
     </div>
     <p class="disclaimer">Places en direct limitées · Replay envoyé aux inscrites</p>
+  </div>
+</section>
+
+<!-- ================= INSCRIPTION / FORMULAIRE (remonté) ================= -->
+<section class="section form-section" id="inscription">
+  <div class="wrap">
+    <div class="form-card">
+      <p class="kicker">Inscription gratuite</p>
+      <h2>Réserve ta place</h2>
+      <span class="free-badge">✦ 100% gratuit · en direct</span>
+      <p class="sub">Aucune carte bancaire, c'est offert. Il te suffit de ton prénom et de ton email — le lien pour regarder t'arrive ensuite par email avant le direct.</p>
+
+      <ul class="reassure">
+        <li>Inscription 100% gratuite</li>
+        <li>Replay envoyé aux inscrites</li>
+        <li>Désabonnement en 1 clic · Zéro spam</li>
+      </ul>
+
+<!-- ==================== FORMULAIRE MAILERLITE (embarqué) ==================== -->
+<style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1785851");</style>
+<style type="text/css">
+  .ml-form-embedSubmitLoad{display:inline-block;width:20px;height:20px;}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
+  .ml-form-embedSubmitLoad:after{content:" ";display:block;width:11px;height:11px;margin:1px;border-radius:50%;border:4px solid #fff;border-color:#ffffff #ffffff #ffffff transparent;animation:ml-form-embedSubmitLoad 1.2s linear infinite;}
+  @keyframes ml-form-embedSubmitLoad{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+  #mlb2-44588124.ml-form-embedContainer{box-sizing:border-box;display:table;margin:0 auto;position:static;width:100%!important;}
+  #mlb2-44588124.ml-form-embedContainer h4,#mlb2-44588124.ml-form-embedContainer p,#mlb2-44588124.ml-form-embedContainer span,#mlb2-44588124.ml-form-embedContainer button{text-transform:none!important;letter-spacing:normal!important;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper{background-color:#fffdf7;border-width:0px;border-color:transparent;border-radius:4px;border-style:solid;box-sizing:border-box;display:inline-block!important;margin:0;padding:0;position:relative;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper.embedForm{max-width:400px;width:100%;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-align-center{text-align:center;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody{padding:20px 20px 0 20px;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group{text-align:left!important;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form{margin:0;width:100%;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent{margin:0 0 20px 0;width:100%;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow{margin:0 0 10px 0;width:100%;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item{margin:0;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input{background-color:#ffffff!important;color:#333333!important;border-color:#cccccc;border-radius:4px!important;border-style:solid!important;border-width:1px!important;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:14px!important;height:auto;line-height:21px!important;margin:0;padding:10px 10px!important;width:100%!important;box-sizing:border-box!important;max-width:100%!important;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow{margin:0 0 20px 0;width:100%;float:left;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type="checkbox"]{box-sizing:border-box;padding:0;position:absolute;z-index:-1;opacity:0;margin:0;overflow:visible;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label{font-weight:normal;margin:0;padding:0 0 0 28px;position:relative;display:block;min-height:20px;cursor:pointer;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description{color:#000000;display:block;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;text-align:left;margin:0;position:relative;vertical-align:top;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before{content:"";position:absolute;top:0;left:-28px;display:block;width:18px;height:18px;pointer-events:none;background-color:#ffffff;border:#adb5bd solid 1px;border-radius:4px;box-sizing:border-box;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::before{border-color:#24231f!important;background-color:#24231f!important;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::after{content:"";position:absolute;top:0;left:-28px;display:block;width:18px;height:18px;background:no-repeat 50%/10px 10px;background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p{color:#000000!important;font-family:'Open Sans',Arial,Helvetica,sans-serif!important;font-size:12px!important;font-weight:normal!important;line-height:18px!important;padding:0!important;margin:0!important;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit{margin:0 0 20px 0;float:left;width:100%;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button{background-color:#24231f!important;border:none!important;border-radius:100px!important;box-shadow:none!important;color:#ffffff!important;cursor:pointer;font-family:'Montserrat','Open Sans',Arial,sans-serif!important;font-size:13px!important;font-weight:600!important;letter-spacing:0.08em!important;text-transform:uppercase!important;line-height:21px!important;height:auto;padding:15px!important;width:100%!important;box-sizing:border-box!important;}
+  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading{display:none;}
+  .ml-error input{border-color:red!important;}
+</style>
+
+<div id="mlb2-44588124" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-44588124">
+  <div class="ml-form-align-center">
+    <div class="ml-form-embedWrapper embedForm">
+      <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+        <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/444393/forms/195064909899236919/subscribe" data-code="" method="post" target="_blank">
+          <div class="ml-form-formContent">
+            <div class="ml-form-fieldRow">
+              <div class="ml-field-group ml-field-name">
+                <input aria-label="name" type="text" class="form-control" name="fields[name]" placeholder="Prénom" autocomplete="given-name">
+              </div>
+            </div>
+            <div class="ml-form-fieldRow">
+              <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                <input aria-label="email" aria-required="true" type="email" class="form-control" name="fields[email]" placeholder="Email" autocomplete="email">
+              </div>
+            </div>
+            <div class="ml-form-fieldRow ml-last-item">
+              <div class="ml-field-group ml-field-phone ml-validate-required">
+                <input aria-label="phone" aria-required="true" type="text" class="form-control" name="fields[phone]" placeholder="Numéro de téléphone" autocomplete="tel">
+              </div>
+            </div>
+          </div>
+          <div class="ml-form-checkboxRow ml-validate-required">
+            <label class="checkbox">
+              <input type="checkbox">
+              <div class="label-description"><p>Je consens à recevoir des emails</p></div>
+            </label>
+          </div>
+          <input type="hidden" name="ml-submit" value="1">
+          <div class="ml-form-embedSubmit">
+            <button type="submit" class="primary">Rejoindre la masterclass</button>
+            <button disabled="disabled" style="display:none;" type="button" class="loading">
+              <div class="ml-form-embedSubmitLoad"></div><span class="sr-only">Loading...</span>
+            </button>
+          </div>
+          <input type="hidden" name="anticsrf" value="true">
+        </form>
+      </div>
+      <div class="ml-form-successBody row-success" style="display:none">
+        <div class="ml-form-successContent">
+          <h4>Merci&nbsp;!</h4>
+          <p>Ton inscription est bien enregistrée. À très vite pour la masterclass&nbsp;🌿</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function ml_webform_success_44588124(){ window.location.href = 'masterclass-septembre-merci.html'; }
+</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+<script>fetch("https://assets.mailerlite.com/jsonp/444393/forms/195064909899236919/takel")</script>
+<!-- ==================== FIN FORMULAIRE MAILERLITE ==================== -->
+    </div>
   </div>
 </section>
 
@@ -213,112 +305,8 @@ em{font-style:italic;color:var(--gd);}
       <div>
         <div class="about-name">Mary Delberghe</div>
         <div class="about-role">Naturopathe · santé de la femme</div>
-        <p>J'accompagne les femmes à retrouver un équilibre hormonal durable, sans régime extrême ni protocole intenable. <em>Plus de 1 000 femmes</em> déjà accompagnées — et je serai en direct avec toi le 20 septembre pour répondre à tes questions.</p>
+        <p>J'accompagne les femmes à retrouver un équilibre hormonal durable, sans régime extrême ni protocole intenable. <em>Plus de 1 000 femmes</em> déjà accompagnées — et je serai en direct avec toi le dimanche 20 septembre pour répondre à tes questions.</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= INSCRIPTION / FORMULAIRE ================= -->
-<section class="section form-section" id="inscription">
-  <div class="wrap">
-    <div class="form-card">
-      <p class="kicker">Inscription gratuite</p>
-      <h2>Réserve ta place</h2>
-      <p class="sub">Il te suffit de ton prénom et de ton email. Le lien pour regarder t'arrive ensuite par email et par SMS avant le direct.</p>
-
-      <ul class="reassure">
-        <li>Places en direct limitées</li>
-        <li>Replay envoyé aux inscrites</li>
-        <li>Désabonnement en 1 clic · Zéro spam</li>
-      </ul>
-
-<!-- ==================== FORMULAIRE MAILERLITE (embarqué) ==================== -->
-<style type="text/css">@import url("https://assets.mlcdn.com/fonts.css?version=1785851");</style>
-<style type="text/css">
-  .ml-form-embedSubmitLoad{display:inline-block;width:20px;height:20px;}
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0;}
-  .ml-form-embedSubmitLoad:after{content:" ";display:block;width:11px;height:11px;margin:1px;border-radius:50%;border:4px solid #fff;border-color:#ffffff #ffffff #ffffff transparent;animation:ml-form-embedSubmitLoad 1.2s linear infinite;}
-  @keyframes ml-form-embedSubmitLoad{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-  #mlb2-44588124.ml-form-embedContainer{box-sizing:border-box;display:table;margin:0 auto;position:static;width:100%!important;}
-  #mlb2-44588124.ml-form-embedContainer h4,#mlb2-44588124.ml-form-embedContainer p,#mlb2-44588124.ml-form-embedContainer span,#mlb2-44588124.ml-form-embedContainer button{text-transform:none!important;letter-spacing:normal!important;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper{background-color:#fffdf7;border-width:0px;border-color:transparent;border-radius:4px;border-style:solid;box-sizing:border-box;display:inline-block!important;margin:0;padding:0;position:relative;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper.embedForm{max-width:400px;width:100%;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-align-center{text-align:center;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody{padding:20px 20px 0 20px;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-block-form .ml-field-group{text-align:left!important;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody form{margin:0;width:100%;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-formContent{margin:0 0 20px 0;width:100%;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow{margin:0 0 10px 0;width:100%;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow.ml-last-item{margin:0;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-fieldRow input{background-color:#ffffff!important;color:#333333!important;border-color:#cccccc;border-radius:4px!important;border-style:solid!important;border-width:1px!important;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:14px!important;height:auto;line-height:21px!important;margin:0;padding:10px 10px!important;width:100%!important;box-sizing:border-box!important;max-width:100%!important;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow{margin:0 0 20px 0;width:100%;float:left;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type="checkbox"]{box-sizing:border-box;padding:0;position:absolute;z-index:-1;opacity:0;margin-top:5px;margin-left:-1.5rem;overflow:visible;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description{color:#000000;display:block;font-family:'Open Sans',Arial,Helvetica,sans-serif;font-size:12px;text-align:left;margin-bottom:0;position:relative;vertical-align:top;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label{font-weight:normal;margin:0;padding:0;position:relative;display:block;min-height:24px;padding-left:24px;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow .label-description::before{position:absolute;top:0;left:0;display:block;width:16px;height:16px;pointer-events:none;content:"";background-color:#ffffff;border:#adb5bd solid 1px;border-radius:4px;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::after{position:absolute;top:0;left:0;width:16px;height:16px;content:"";background:no-repeat 50%/50% 50%;background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow input[type=checkbox]:checked~.label-description::before{border-color:#000000!important;background-color:#000000!important;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-checkboxRow label p{color:#000000!important;font-family:'Open Sans',Arial,Helvetica,sans-serif!important;font-size:12px!important;font-weight:normal!important;line-height:18px!important;padding:0!important;margin:0 5px 0 0!important;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit{margin:0 0 20px 0;float:left;width:100%;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button{background-color:#3e5028!important;border:none!important;border-radius:100px!important;box-shadow:none!important;color:#ffffff!important;cursor:pointer;font-family:'Open Sans',Arial,Helvetica,sans-serif!important;font-size:14px!important;font-weight:700!important;line-height:21px!important;height:auto;padding:14px!important;width:100%!important;box-sizing:border-box!important;}
-  #mlb2-44588124.ml-form-embedContainer .ml-form-embedWrapper .ml-form-embedBody .ml-form-embedSubmit button.loading{display:none;}
-  .ml-error input{border-color:red!important;}
-</style>
-
-<div id="mlb2-44588124" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-44588124">
-  <div class="ml-form-align-center">
-    <div class="ml-form-embedWrapper embedForm">
-      <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
-        <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/444393/forms/195064909899236919/subscribe" data-code="" method="post" target="_blank">
-          <div class="ml-form-formContent">
-            <div class="ml-form-fieldRow">
-              <div class="ml-field-group ml-field-name">
-                <input aria-label="name" type="text" class="form-control" name="fields[name]" placeholder="Prénom" autocomplete="given-name">
-              </div>
-            </div>
-            <div class="ml-form-fieldRow">
-              <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
-                <input aria-label="email" aria-required="true" type="email" class="form-control" name="fields[email]" placeholder="Email" autocomplete="email">
-              </div>
-            </div>
-            <div class="ml-form-fieldRow ml-last-item">
-              <div class="ml-field-group ml-field-phone ml-validate-required">
-                <input aria-label="phone" aria-required="true" type="text" class="form-control" name="fields[phone]" placeholder="Numéro de téléphone" autocomplete="tel">
-              </div>
-            </div>
-          </div>
-          <div class="ml-form-checkboxRow ml-validate-required">
-            <label class="checkbox">
-              <input type="checkbox">
-              <div class="label-description"><p>Je consens à recevoir des emails&nbsp;</p></div>
-            </label>
-          </div>
-          <input type="hidden" name="ml-submit" value="1">
-          <div class="ml-form-embedSubmit">
-            <button type="submit" class="primary">Rejoindre la masterclass</button>
-            <button disabled="disabled" style="display:none;" type="button" class="loading">
-              <div class="ml-form-embedSubmitLoad"></div><span class="sr-only">Loading...</span>
-            </button>
-          </div>
-          <input type="hidden" name="anticsrf" value="true">
-        </form>
-      </div>
-      <div class="ml-form-successBody row-success" style="display:none">
-        <div class="ml-form-successContent">
-          <h4>Merci&nbsp;!</h4>
-          <p>Ton inscription est bien enregistrée. À très vite pour la masterclass&nbsp;🌿</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-  function ml_webform_success_44588124(){var $=ml_jQuery||jQuery;$('.ml-subscribe-form-44588124 .row-success').show();$('.ml-subscribe-form-44588124 .row-form').hide();}
-</script>
-<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
-<script>fetch("https://assets.mailerlite.com/jsonp/444393/forms/195064909899236919/takel")</script>
-<!-- ==================== FIN FORMULAIRE MAILERLITE ==================== -->
     </div>
   </div>
 </section>
@@ -326,7 +314,7 @@ em{font-style:italic;color:var(--gd);}
 <!-- ================= FINAL CTA ================= -->
 <section class="section final">
   <div class="wrap">
-    <p class="kicker">Rendez-vous le 20 septembre</p>
+    <p class="kicker">Rendez-vous le dimanche 20 septembre</p>
     <h2 class="h2">Tes hormones méritent<br>enfin des réponses claires</h2>
     <a href="#inscription" class="btn">Je m'inscris gratuitement →</a>
   </div>
@@ -345,8 +333,7 @@ em{font-style:italic;color:var(--gd);}
 
 <script>
 /* ====== COUNTDOWN ======
-   Date/heure de la masterclass. Modifie ici si besoin.
-   Format ISO avec fuseau Paris (+02:00 en heure d'été). */
+   Date/heure de la masterclass : dimanche 20 septembre 2026, 20h00 (Paris). */
 const TARGET = new Date('2026-09-20T20:00:00+02:00');
 function pad(n){return String(n).padStart(2,'0');}
 function tick(){
