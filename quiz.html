@@ -157,6 +157,9 @@
   }
   .opt.selected .opt-dot { border-color: var(--sage-dark); background: var(--sage-dark); }
   .opt.selected .opt-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; }
+  .opt.multi .opt-dot { border-radius: 5px; }
+  .opt.multi.selected .opt-dot::after { width: 5px; height: 8px; border-radius: 0; background: transparent; border: solid white; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+  .q-hint { font-size: 12px; color: var(--text-muted); margin-top: -1.25rem; margin-bottom: 1.5rem; }
   .nav-row { display: flex; align-items: center; justify-content: space-between; }
   .btn-back { font-size: 13px; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 8px 0; font-family: 'DM Sans', sans-serif; }
   .btn-back:hover { color: var(--dark); }
@@ -332,6 +335,24 @@ const GROUP_IDS = {
 
 const questions = [
   {
+    cat:"Ton parcours",
+    text:"As-tu déjà reçu un ou plusieurs de ces diagnostics ?",
+    hint:"Coche tout ce qui te concerne. Aucun n'est nécessaire pour continuer.",
+    type:"multi",
+    noneIdx:7,
+    opts:["Endométriose","SOPK (ovaires polykystiques)","Adénomyose","Lipœdème","Burnout / épuisement","Péri-ménopause ou ménopause","Trouble de la thyroïde","Non, aucun diagnostic posé"],
+    diagScores:[
+      {E2high:3,prog_low:2},
+      {sopk:5},
+      {E2high:3,prog_low:1},
+      {E2high:2},
+      {cort_high:3,cort_low:2},
+      {E2low:5},
+      {hypo:5},
+      {}
+    ]
+  },
+  {
     cat:"Énergie",
     text:"Tu te réveilles fatiguée même après une nuit de sommeil complète ?",
     opts:["Jamais, je me réveille en forme","Parfois, selon les périodes","Souvent, je traîne le matin","Presque tous les matins, peu importe combien j'ai dormi"],
@@ -477,8 +498,16 @@ function show(id){
   window.scrollTo(0,0);
 }
 
+function isAnswered(qi){
+  const q = questions[qi];
+  if(q.type === 'multi') return Array.isArray(answers[qi]) && answers[qi].length > 0;
+  return answers[qi] !== undefined;
+}
+
 function renderQ(){
+  renderHintCleanup();
   const q = questions[cur];
+  const multi = q.type === 'multi';
   const pct = Math.round(((cur+1)/questions.length)*100);
   document.getElementById('prog').style.width = pct + '%';
   document.getElementById('prog-label').textContent = (cur+1) + ' / ' + questions.length;
@@ -486,17 +515,30 @@ function renderQ(){
   document.getElementById('q-text').textContent = q.text;
   const wrap = document.getElementById('q-opts');
   wrap.innerHTML = '';
+  if(q.hint){
+    const h = document.createElement('div');
+    h.className = 'q-hint';
+    h.textContent = q.hint;
+    wrap.parentNode.insertBefore(h, wrap);
+  }
+  const sel = multi ? (Array.isArray(answers[cur]) ? answers[cur] : []) : answers[cur];
   q.opts.forEach((o,i) => {
     const d = document.createElement('div');
-    d.className = 'opt' + (answers[cur]===i ? ' selected' : '');
+    const on = multi ? sel.includes(i) : sel === i;
+    d.className = 'opt' + (multi ? ' multi' : '') + (on ? ' selected' : '');
     d.innerHTML = '<div class="opt-dot"></div>' + o;
-    d.onclick = () => selectOpt(i);
+    d.onclick = () => multi ? toggleOpt(i) : selectOpt(i);
     wrap.appendChild(d);
   });
   const btn = document.getElementById('btn-next');
-  btn.className = 'btn-next' + (answers[cur]!==undefined ? ' ready' : '');
+  btn.className = 'btn-next' + (isAnswered(cur) ? ' ready' : '');
   btn.textContent = cur === questions.length-1 ? 'Voir mon résultat →' : 'Suivant →';
   document.getElementById('btn-back').style.visibility = cur === 0 ? 'hidden' : 'visible';
+}
+
+function renderHintCleanup(){
+  const h = document.querySelector('.q-hint');
+  if(h) h.remove();
 }
 
 function selectOpt(i){
@@ -505,8 +547,25 @@ function selectOpt(i){
   document.getElementById('btn-next').className = 'btn-next ready';
 }
 
+function toggleOpt(i){
+  const q = questions[cur];
+  let a = Array.isArray(answers[cur]) ? answers[cur].slice() : [];
+  const none = q.noneIdx;
+  if(i === none){
+    a = a.includes(none) ? [] : [none];
+  } else {
+    a = a.filter(x => x !== none);
+    if(a.includes(i)) a = a.filter(x => x !== i);
+    else a.push(i);
+  }
+  answers[cur] = a;
+  document.querySelectorAll('.opt').forEach((o,idx) => o.className = 'opt multi'+(a.includes(idx)?' selected':''));
+  document.getElementById('btn-next').className = 'btn-next' + (a.length ? ' ready' : '');
+}
+
 function nextQ(){
-  if(answers[cur]===undefined) return;
+  if(!isAnswered(cur)) return;
+  renderHintCleanup();
   if(cur < questions.length-1){ cur++; renderQ(); }
   else { showResult(); }
 }
@@ -518,6 +577,16 @@ function calcScores(){
   questions.forEach((q,qi) => {
     const ans = answers[qi];
     if(ans===undefined) return;
+    if(q.type === 'multi'){
+      if(Array.isArray(ans) && q.diagScores){
+        ans.forEach(idx => {
+          Object.entries(q.diagScores[idx] || {}).forEach(([k,v]) => {
+            if(scores[k]!==undefined) scores[k]+=v;
+          });
+        });
+      }
+      return;
+    }
     Object.entries(q.scores||{}).forEach(([k,arr]) => {
       if(scores[k]!==undefined) scores[k]+=(arr[ans]||0);
     });
@@ -539,7 +608,7 @@ function showResult(){
   const hasSecond = secondScore >= topScore * 0.6 && secondKey !== topKey;
 
   // Si le score max est trop bas ou trop dispersé -> profil équilibré
-  const totalPossible = questions.length * 3;
+  const totalPossible = questions.filter(q => q.type !== 'multi').length * 3;
   const scoreRatio = topScore / totalPossible;
   // Aussi équilibré si le top score est faible ET très proche du second (scores dispersés)
   const isDispersed = false;
@@ -579,9 +648,21 @@ function sendToMailerLite(profilKey, secondKey){
   const fields = { profil_hormonal: profilKey, tranche_age: userAge };
   if(secondKey) fields.profil_secondaire = secondKey;
 
-  // Recuperer l'age depuis la question 20 (index 19)
-  const ageOpts = ["Moins de 25 ans", "25 à 35 ans", "35 à 45 ans", "Plus de 45 ans"];
-  const ageValue = answers[19] !== undefined ? ageOpts[answers[19]] : null;
+  // Diagnostics deja poses (question a choix multiple en tete de quiz)
+  const diagQ = questions.find(q => q.type === 'multi');
+  const diagQi = questions.indexOf(diagQ);
+  let diagValue = null;
+  if(diagQ && Array.isArray(answers[diagQi]) && answers[diagQi].length){
+    const labels = answers[diagQi]
+      .filter(idx => idx !== diagQ.noneIdx)
+      .map(idx => diagQ.opts[idx]);
+    diagValue = labels.length ? labels.join(', ') : 'Aucun';
+  }
+  if(diagValue) fields.diagnostics = diagValue;
+
+  // Tranche d'age lisible
+  const ageLabels = { moins_25:"Moins de 25 ans", '25_35':"25 à 35 ans", '35_45':"35 à 45 ans", plus_45:"Plus de 45 ans" };
+  const ageValue = ageLabels[userAge] || null;
 
   const payload = {
     email: userEmail,
