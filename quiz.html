@@ -157,6 +157,9 @@
   }
   .opt.selected .opt-dot { border-color: var(--sage-dark); background: var(--sage-dark); }
   .opt.selected .opt-dot::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: white; }
+  .opt.multi .opt-dot { border-radius: 5px; }
+  .opt.multi.selected .opt-dot::after { width: 5px; height: 8px; border-radius: 0; background: transparent; border: solid white; border-width: 0 2px 2px 0; transform: translateY(-1px) rotate(45deg); }
+  .q-hint { font-size: 12px; color: var(--text-muted); margin-top: -1.25rem; margin-bottom: 1.5rem; }
   .nav-row { display: flex; align-items: center; justify-content: space-between; }
   .btn-back { font-size: 13px; color: var(--text-muted); background: none; border: none; cursor: pointer; padding: 8px 0; font-family: 'DM Sans', sans-serif; }
   .btn-back:hover { color: var(--dark); }
@@ -264,26 +267,35 @@
       </p>
     </div>
 
-    <div style="background:#161a12;border-radius:14px;padding:1.75rem 1.5rem;margin:1.25rem 0;text-align:center;">
-      <p style="font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:#c2cc9e;margin-bottom:0.5rem;font-family:DM Sans,sans-serif;">Plus de 200 femmes transformées</p>
-      <p style="font-family:Libre Baskerville,Georgia,serif;font-style:italic;font-size:22px;color:#fdfaf4;line-height:1.2;margin-bottom:0.75rem;">Healthy is the new sexy</p>
-      <p style="font-size:13px;color:rgba(253,250,244,0.7);line-height:1.7;margin-bottom:1.25rem;">Le programme le plus complet pour comprendre et rééquilibrer tes hormones naturellement. 6 semaines. À ton rythme. Avec un protocole adapté à ton profil exact.</p>
+    <div style="background:#161a12;border-radius:14px;padding:1.75rem 1.5rem;margin:1.25rem 0;text-align:center;overflow:hidden;">
+      <img src="visuel-masterclass.jpg" alt="Masterclass La science des Hormones avec Mary Delberghe — dimanche 20 septembre à 20h en direct" style="display:block;width:calc(100% + 3rem);max-width:none;margin:-1.75rem -1.5rem 1.5rem;height:auto;" />
+      <p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:#c2cc9e;margin-bottom:0.9rem;font-family:DM Sans,sans-serif;">Masterclass en ligne · 100% gratuite</p>
+      <p style="font-size:13px;color:rgba(253,250,244,0.7);line-height:1.7;margin-bottom:1.25rem;">Ton résultat te donne une piste. En direct avec Mary, tu passes à l'action : comprends ce qui dérègle vraiment tes hormones et repars avec ton premier plan concret, adapté à ton profil.</p>
 
       <div style="background:#1e2718;border-radius:10px;padding:1rem;margin-bottom:1.25rem;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-          <span style="font-size:12px;color:#c2cc9e;font-family:DM Sans,sans-serif;">Ce que tu vas apprendre</span>
+          <span style="font-size:12px;color:#c2cc9e;font-family:DM Sans,sans-serif;">Ce que tu vas apprendre en direct</span>
         </div>
         <p style="font-size:13px;color:rgba(253,250,244,0.75);line-height:1.8;margin:0;text-align:left;">
-          Comprendre les causes profondes de ton déséquilibre<br>
-          Savoir quoi manger, comment bouger, comment récupérer<br>
-          Des protocoles de compléments ciblés par problématique<br>
-          Reprendre le contrôle sur ton corps et ton énergie
+          Le vrai rôle de tes hormones — et pourquoi ça déraille<br>
+          Repérer ton déséquilibre à partir des signaux de ton corps<br>
+          Les 3 leviers naturels : assiette, rythme, gestion du stress<br>
+          Ton premier plan d'action, à mettre en place dès le lendemain
         </p>
       </div>
 
-      <a href="https://healthy-is-the-new-sexy.com" class="btn-cta" style="display:block;background:#c2cc9e;color:#161a12 !important;font-family:DM Sans,sans-serif;font-size:14px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:16px 36px;border-radius:100px;text-decoration:none;margin-bottom:10px;">Je veux rééquilibrer mes hormones</a>
+      <a href="masterclass-septembre.html" class="btn-cta" style="display:block;background:#c2cc9e;color:#161a12 !important;font-family:DM Sans,sans-serif;font-size:14px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:16px 36px;border-radius:100px;text-decoration:none;margin-bottom:10px;">Je réserve ma place gratuite →</a>
 
-      <p style="font-size:11px;color:rgba(253,250,244,0.4);margin:0;font-family:DM Sans,sans-serif;">500€ · ou 3×220€ · Accès illimité à vie</p>
+      <p style="font-size:11px;color:rgba(253,250,244,0.4);margin:0;font-family:DM Sans,sans-serif;">Places en direct limitées · Replay envoyé aux inscrites</p>
+    </div>
+
+    <div style="border:1px solid rgba(26,26,24,0.1);border-radius:12px;padding:1.5rem;margin:1.25rem 0;background:#faf8f3;">
+      <p style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:#8b9e7a;margin-bottom:0.6rem;font-family:DM Sans,sans-serif;">Et si tu veux aller plus loin</p>
+      <p style="font-size:14px;color:#3d4f28;line-height:1.75;margin:0 0 1rem;">
+        La masterclass te donne les clés pour comprendre. Le programme <em>Healthy is the new sexy</em>, lui, t'accompagne pas à pas pour rééquilibrer tes hormones sur la durée — avec un protocole adapté à ton profil exact. Pas besoin de te décider maintenant : viens d'abord à la masterclass, on en reparle en direct.
+      </p>
+      <a href="https://healthy-is-the-new-sexy.com" style="display:inline-block;font-size:13px;font-weight:500;letter-spacing:0.04em;color:#4a6340;text-decoration:none;border-bottom:1px solid rgba(74,99,64,0.4);padding-bottom:2px;font-family:DM Sans,sans-serif;">Réserver ta place dans le programme →</a>
+      <p style="font-size:11px;color:#8a9080;margin:0.85rem 0 0;line-height:1.6;font-family:DM Sans,sans-serif;font-style:italic;">Les sessions d'accompagnement sont ouvertes en nombre limité.</p>
     </div>
 
     <div style="border:1px solid rgba(194,204,158,0.4);border-radius:12px;padding:1.25rem 1.5rem;margin:1rem 0;">
@@ -322,6 +334,24 @@ const GROUP_IDS = {
 };
 
 const questions = [
+  {
+    cat:"Ton parcours",
+    text:"As-tu déjà reçu un ou plusieurs de ces diagnostics ?",
+    hint:"Coche tout ce qui te concerne. Aucun n'est nécessaire pour continuer.",
+    type:"multi",
+    noneIdx:7,
+    opts:["Endométriose","SOPK (ovaires polykystiques)","Adénomyose","Lipœdème","Burnout / épuisement","Péri-ménopause ou ménopause","Trouble de la thyroïde","Non, aucun diagnostic posé"],
+    diagScores:[
+      {E2high:3,prog_low:2},
+      {sopk:5},
+      {E2high:3,prog_low:1},
+      {E2high:2},
+      {cort_high:3,cort_low:2},
+      {E2low:5},
+      {hypo:5},
+      {}
+    ]
+  },
   {
     cat:"Énergie",
     text:"Tu te réveilles fatiguée même après une nuit de sommeil complète ?",
@@ -468,8 +498,16 @@ function show(id){
   window.scrollTo(0,0);
 }
 
+function isAnswered(qi){
+  const q = questions[qi];
+  if(q.type === 'multi') return Array.isArray(answers[qi]) && answers[qi].length > 0;
+  return answers[qi] !== undefined;
+}
+
 function renderQ(){
+  renderHintCleanup();
   const q = questions[cur];
+  const multi = q.type === 'multi';
   const pct = Math.round(((cur+1)/questions.length)*100);
   document.getElementById('prog').style.width = pct + '%';
   document.getElementById('prog-label').textContent = (cur+1) + ' / ' + questions.length;
@@ -477,17 +515,30 @@ function renderQ(){
   document.getElementById('q-text').textContent = q.text;
   const wrap = document.getElementById('q-opts');
   wrap.innerHTML = '';
+  if(q.hint){
+    const h = document.createElement('div');
+    h.className = 'q-hint';
+    h.textContent = q.hint;
+    wrap.parentNode.insertBefore(h, wrap);
+  }
+  const sel = multi ? (Array.isArray(answers[cur]) ? answers[cur] : []) : answers[cur];
   q.opts.forEach((o,i) => {
     const d = document.createElement('div');
-    d.className = 'opt' + (answers[cur]===i ? ' selected' : '');
+    const on = multi ? sel.includes(i) : sel === i;
+    d.className = 'opt' + (multi ? ' multi' : '') + (on ? ' selected' : '');
     d.innerHTML = '<div class="opt-dot"></div>' + o;
-    d.onclick = () => selectOpt(i);
+    d.onclick = () => multi ? toggleOpt(i) : selectOpt(i);
     wrap.appendChild(d);
   });
   const btn = document.getElementById('btn-next');
-  btn.className = 'btn-next' + (answers[cur]!==undefined ? ' ready' : '');
+  btn.className = 'btn-next' + (isAnswered(cur) ? ' ready' : '');
   btn.textContent = cur === questions.length-1 ? 'Voir mon résultat →' : 'Suivant →';
   document.getElementById('btn-back').style.visibility = cur === 0 ? 'hidden' : 'visible';
+}
+
+function renderHintCleanup(){
+  const h = document.querySelector('.q-hint');
+  if(h) h.remove();
 }
 
 function selectOpt(i){
@@ -496,8 +547,25 @@ function selectOpt(i){
   document.getElementById('btn-next').className = 'btn-next ready';
 }
 
+function toggleOpt(i){
+  const q = questions[cur];
+  let a = Array.isArray(answers[cur]) ? answers[cur].slice() : [];
+  const none = q.noneIdx;
+  if(i === none){
+    a = a.includes(none) ? [] : [none];
+  } else {
+    a = a.filter(x => x !== none);
+    if(a.includes(i)) a = a.filter(x => x !== i);
+    else a.push(i);
+  }
+  answers[cur] = a;
+  document.querySelectorAll('.opt').forEach((o,idx) => o.className = 'opt multi'+(a.includes(idx)?' selected':''));
+  document.getElementById('btn-next').className = 'btn-next' + (a.length ? ' ready' : '');
+}
+
 function nextQ(){
-  if(answers[cur]===undefined) return;
+  if(!isAnswered(cur)) return;
+  renderHintCleanup();
   if(cur < questions.length-1){ cur++; renderQ(); }
   else { showResult(); }
 }
@@ -509,6 +577,16 @@ function calcScores(){
   questions.forEach((q,qi) => {
     const ans = answers[qi];
     if(ans===undefined) return;
+    if(q.type === 'multi'){
+      if(Array.isArray(ans) && q.diagScores){
+        ans.forEach(idx => {
+          Object.entries(q.diagScores[idx] || {}).forEach(([k,v]) => {
+            if(scores[k]!==undefined) scores[k]+=v;
+          });
+        });
+      }
+      return;
+    }
     Object.entries(q.scores||{}).forEach(([k,arr]) => {
       if(scores[k]!==undefined) scores[k]+=(arr[ans]||0);
     });
@@ -530,7 +608,7 @@ function showResult(){
   const hasSecond = secondScore >= topScore * 0.6 && secondKey !== topKey;
 
   // Si le score max est trop bas ou trop dispersé -> profil équilibré
-  const totalPossible = questions.length * 3;
+  const totalPossible = questions.filter(q => q.type !== 'multi').length * 3;
   const scoreRatio = topScore / totalPossible;
   // Aussi équilibré si le top score est faible ET très proche du second (scores dispersés)
   const isDispersed = false;
@@ -570,9 +648,21 @@ function sendToMailerLite(profilKey, secondKey){
   const fields = { profil_hormonal: profilKey, tranche_age: userAge };
   if(secondKey) fields.profil_secondaire = secondKey;
 
-  // Recuperer l'age depuis la question 20 (index 19)
-  const ageOpts = ["Moins de 25 ans", "25 à 35 ans", "35 à 45 ans", "Plus de 45 ans"];
-  const ageValue = answers[19] !== undefined ? ageOpts[answers[19]] : null;
+  // Diagnostics deja poses (question a choix multiple en tete de quiz)
+  const diagQ = questions.find(q => q.type === 'multi');
+  const diagQi = questions.indexOf(diagQ);
+  let diagValue = null;
+  if(diagQ && Array.isArray(answers[diagQi]) && answers[diagQi].length){
+    const labels = answers[diagQi]
+      .filter(idx => idx !== diagQ.noneIdx)
+      .map(idx => diagQ.opts[idx]);
+    diagValue = labels.length ? labels.join(', ') : 'Aucun';
+  }
+  if(diagValue) fields.diagnostics = diagValue;
+
+  // Tranche d'age lisible
+  const ageLabels = { moins_25:"Moins de 25 ans", '25_35':"25 à 35 ans", '35_45':"35 à 45 ans", plus_45:"Plus de 45 ans" };
+  const ageValue = ageLabels[userAge] || null;
 
   const payload = {
     email: userEmail,
