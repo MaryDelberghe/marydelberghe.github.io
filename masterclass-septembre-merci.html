@@ -3,47 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>C'est noté ! — Masterclass Hormones | Mary Delberghe</title>
+<title>C'est noté ! La science des Hormones | Mary Delberghe</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-:root{--g:#c2cc9e;--gd:#7a8a5a;--gdk:#3d4f28;--cream:#faf9f6;--dark:#1a1a17;--mid:#6b6b60;--light:#e8e6df;--border:#e3e1d8;}
-body{font-family:'DM Sans',sans-serif;font-weight:300;color:var(--dark);background:var(--cream);line-height:1.65;min-height:100svh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;}
+:root{
+  --ivory:#fbf9f3;--ink:#24231f;--mid:#6f6d63;
+  --gold:#b8993f;--gold-soft:#e6d38f;--blue:#9db8cb;--blue-deep:#5b7d92;
+  --light:#efeadd;--border:#e7e1d3;
+}
+body{font-family:'Montserrat',sans-serif;font-weight:400;color:var(--ink);background:var(--ivory);line-height:1.7;min-height:100svh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;}
 a{text-decoration:none;color:inherit;}
-em{font-style:italic;color:var(--gd);}
-.main{flex:1;display:flex;align-items:center;justify-content:center;padding:3rem 1.25rem;}
+img{display:block;max-width:100%;}
+em{font-style:italic;color:var(--gold);}
+
+.banner{width:100%;max-width:1040px;margin:0 auto;}
+.banner img{width:100%;height:auto;display:block;}
+
+.main{flex:1;display:flex;align-items:center;justify-content:center;padding:2.75rem 1.25rem;}
 .card{max-width:520px;width:100%;text-align:center;}
 
-.checkmark{width:74px;height:74px;border-radius:50%;background:rgba(194,204,158,0.3);border:1px solid rgba(122,138,90,0.35);display:flex;align-items:center;justify-content:center;margin:0 auto 1.75rem;}
-.checkmark svg{width:34px;height:34px;stroke:var(--gdk);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.checkmark{width:74px;height:74px;border-radius:50%;background:rgba(230,211,143,0.35);border:1px solid rgba(184,153,63,0.4);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;}
+.checkmark svg{width:34px;height:34px;stroke:var(--gold);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 
-.eyebrow{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--gd);margin-bottom:1rem;}
-h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,6vw,44px);line-height:1.12;margin-bottom:1rem;}
-.lead{font-size:16px;color:var(--mid);max-width:400px;margin:0 auto 2rem;}
+.eyebrow{font-size:10px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;}
+h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(32px,6vw,46px);line-height:1.12;margin-bottom:1rem;}
+.lead{font-size:16px;font-weight:300;color:var(--mid);max-width:400px;margin:0 auto 2rem;}
 
-.event-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.5rem 1.5rem;margin:0 auto 1.75rem;max-width:400px;box-shadow:0 12px 32px rgba(61,79,40,0.07);}
-.event-label{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gd);margin-bottom:0.5rem;}
-.event-title{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:22px;margin-bottom:0.4rem;}
-.event-when{font-size:15px;color:var(--dark);}
+.event-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin:0 auto 1.75rem;max-width:400px;box-shadow:0 12px 32px rgba(36,35,31,0.06);}
+.event-label{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;}
+.event-title{font-family:'Playfair Display',serif;font-weight:600;font-size:22px;margin-bottom:0.4rem;}
+.event-when{font-size:15px;font-weight:300;color:var(--ink);}
 
-.btn{display:inline-block;background:var(--gdk);color:#fff;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:16px 34px;border-radius:100px;border:none;cursor:pointer;transition:transform 0.15s,box-shadow 0.2s,background 0.2s;}
-@media(hover:hover){.btn:hover{background:#324222;box-shadow:0 10px 26px rgba(61,79,40,0.28);transform:translateY(-1px);}}
+.btn{display:inline-block;background:var(--ink);color:#fff;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:16px 34px;border-radius:100px;border:none;cursor:pointer;transition:transform 0.15s,box-shadow 0.2s,background 0.2s;}
+@media(hover:hover){.btn:hover{background:#3a382f;box-shadow:0 10px 26px rgba(36,35,31,0.22);transform:translateY(-1px);}}
 .btn:active{transform:translateY(0);}
 .cal-options{display:flex;flex-wrap:wrap;justify-content:center;gap:0.5rem;margin-top:0.9rem;}
-.cal-link{font-size:12px;letter-spacing:0.04em;color:var(--gd);border:1px solid rgba(122,138,90,0.35);border-radius:100px;padding:8px 16px;transition:background 0.2s,border-color 0.2s;}
-@media(hover:hover){.cal-link:hover{background:rgba(194,204,158,0.2);border-color:var(--gd);}}
+.cal-link{font-size:12px;letter-spacing:0.04em;color:var(--gold);border:1px solid rgba(184,153,63,0.4);border-radius:100px;padding:8px 16px;transition:background 0.2s,border-color 0.2s;}
+@media(hover:hover){.cal-link:hover{background:rgba(230,211,143,0.2);border-color:var(--gold);}}
 
-.note{margin-top:2rem;font-size:14px;color:var(--mid);max-width:400px;margin-left:auto;margin-right:auto;}
-.note strong{color:var(--gdk);font-weight:500;}
+.note{margin-top:2rem;font-size:14px;font-weight:300;color:var(--mid);max-width:400px;margin-left:auto;margin-right:auto;}
+.note strong{color:var(--gold);font-weight:600;}
 
-.footer{text-align:center;padding:2rem 1.25rem;font-size:11px;letter-spacing:0.06em;color:#b0ad9f;}
-.footer a{color:var(--gd);}
+.footer{text-align:center;padding:2rem 1.25rem;font-size:11px;letter-spacing:0.06em;color:#b3ac9a;}
+.footer a{color:var(--gold);}
 </style>
 </head>
 <body>
+
+<!-- ================= BANNER (ton visuel) ================= -->
+<header class="banner">
+  <img src="hero-hormones.jpg" alt="La science des Hormones, Masterclass avec Mary Delberghe"
+       onerror="this.style.display='none'">
+</header>
 
 <div class="main">
   <div class="card">
@@ -53,13 +68,13 @@ h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,6
     </div>
 
     <p class="eyebrow">Inscription confirmée</p>
-    <h1>C'est noté !</h1>
+    <h1>C'est noté&nbsp;!</h1>
     <p class="lead">Ta place pour la masterclass est réservée. Ajoute vite le rendez-vous à ton agenda 👇</p>
 
     <div class="event-box">
       <div class="event-label">Masterclass gratuite</div>
-      <div class="event-title">Hormones &amp; santé de la femme</div>
-      <div class="event-when">Samedi 20 septembre · 20h00 (Paris)</div>
+      <div class="event-title">La science des Hormones</div>
+      <div class="event-when">Dimanche 20 septembre · 20h00 (Paris)</div>
     </div>
 
     <a href="#" id="gcal" class="btn" target="_blank" rel="noopener">Ajouter à mon agenda →</a>
@@ -67,7 +82,7 @@ h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,6
       <a href="#" id="ics" class="cal-link" download="masterclass-hormones.ics">Apple / Outlook (.ics)</a>
     </div>
 
-    <p class="note">📩 <strong>Le lien pour regarder arrive par email et par SMS</strong> avant le direct. Pense à vérifier tes spams — et à ajouter mon adresse à tes contacts.</p>
+    <p class="note">📩 <strong>Le lien pour regarder arrive par email</strong> avant le direct. Pense à vérifier tes spams, et à ajouter mon adresse à tes contacts.</p>
 
   </div>
 </div>
@@ -77,20 +92,18 @@ h1{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,6
 </footer>
 
 <script>
-/* ====== ÉVÉNEMENT — modifie ici si besoin ======
-   Date/heure de la masterclass (fuseau Paris, +02:00 en heure d'été)
-   et durée. Le bouton "Ajouter à mon agenda" est généré
-   automatiquement à partir de ces valeurs (Google Agenda + .ics). */
+/* ====== ÉVÉNEMENT, modifie ici si besoin ======
+   Dimanche 20 septembre 2026, 20h00 (Paris). Le bouton "Ajouter à mon agenda"
+   est généré automatiquement (Google Agenda + fichier .ics). */
 const EVENT = {
-  title: 'Masterclass — Hormones & santé de la femme',
-  description: "Masterclass gratuite avec Mary Delberghe. Le lien pour regarder t'arrive par email et par SMS avant le direct.",
-  location: 'En ligne',
+  title: 'Masterclass : La science des Hormones',
+  description: "Masterclass gratuite avec Mary Delberghe.\nLien pour regarder en direct : https://www.youtube.com/watch?v=AzpoZPPCzgU",
+  location: 'https://www.youtube.com/watch?v=AzpoZPPCzgU',
   start: '2026-09-20T20:00:00+02:00',
   durationMinutes: 90
 };
 
 function toUTC(str){
-  // Convertit en format UTC compact YYYYMMDDTHHMMSSZ
   return new Date(str).toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,'');
 }
 const startUTC = toUTC(EVENT.start);
@@ -113,7 +126,7 @@ const ics = [
   'DTSTART:' + startUTC,
   'DTEND:' + endUTC,
   'SUMMARY:' + EVENT.title,
-  'DESCRIPTION:' + EVENT.description.replace(/,/g,'\\,'),
+  'DESCRIPTION:' + EVENT.description.replace(/\\/g,'\\\\').replace(/,/g,'\\,').replace(/;/g,'\\;').replace(/\n/g,'\\n'),
   'LOCATION:' + EVENT.location,
   'END:VEVENT','END:VCALENDAR'
 ].join('\r\n');
