@@ -211,7 +211,7 @@
     <p class="hero-sub">En 3 minutes, découvre si tu souffres d'un dérèglement hormonal — et lequel. Résultat personnalisé envoyé dans ta boîte mail.</p>
     <div class="proof-row">
       <div class="proof-item"><div class="proof-dot"></div>3 minutes</div>
-      <div class="proof-item"><div class="proof-dot"></div>20 questions</div>
+      <div class="proof-item"><div class="proof-dot"></div>21 questions</div>
       <div class="proof-item"><div class="proof-dot"></div>8 profils analysés</div>
     </div>
     <div class="form-group">
@@ -334,6 +334,18 @@ const GROUP_IDS = {
 };
 
 const questions = [
+  {
+    cat:"Ton parcours",
+    text:"Utilises-tu une contraception hormonale ?",
+    hint:"La contraception hormonale masque une partie de ton cycle naturel : ça nous aide à mieux lire ton profil.",
+    contraception:true,
+    opts:["Pilule œstro-progestative (combinée)","Pilule progestative (micro-dosée)","Stérilet hormonal (DIU)","Implant, patch ou anneau","Stérilet au cuivre (non hormonal)","Aucune / méthode naturelle ou préservatif","Je suis ménopausée — plus de règles"],
+    scores:{
+      prog_low: [2,2,2,2,0,0,0],
+      testo_low:[1,1,1,1,0,0,0],
+      E2low:    [0,0,0,0,0,0,4]
+    }
+  },
   {
     cat:"Ton parcours",
     text:"As-tu déjà reçu un ou plusieurs de ces diagnostics ?",
@@ -600,6 +612,17 @@ function calcScores(){
   return scores;
 }
 
+function contraceptionNote(){
+  const q = questions.find(x => x.contraception);
+  const qi = questions.indexOf(q);
+  const a = q ? answers[qi] : undefined;
+  // Options 0 a 3 = contraception hormonale
+  if(a === undefined || a > 3) return '';
+  return '<div style="margin-top:14px;padding:12px 14px;background:#f0f3e8;border-radius:10px;font-size:12.5px;color:#3d4f28;line-height:1.65;">'
+    +'<strong>À garder en tête :</strong> ta contraception hormonale masque une partie de ton cycle naturel. Certains de tes symptômes peuvent être atténués — ton déséquilibre réel est parfois plus marqué que ce que le quiz détecte. On approfondit ça dans la masterclass.'
+    +'</div>';
+}
+
 function showResult(){
   const scores = calcScores();
   const sorted = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
@@ -608,7 +631,7 @@ function showResult(){
   const hasSecond = secondScore >= topScore * 0.6 && secondKey !== topKey;
 
   // Si le score max est trop bas ou trop dispersé -> profil équilibré
-  const totalPossible = questions.filter(q => q.type !== 'multi').length * 3;
+  const totalPossible = questions.filter(q => q.type !== 'multi' && !q.contraception).length * 3;
   const scoreRatio = topScore / totalPossible;
   // Aussi équilibré si le top score est faible ET très proche du second (scores dispersés)
   const isDispersed = false;
@@ -619,7 +642,7 @@ function showResult(){
       '<div class="profile-tag">Ton profil hormonal</div>'
       +'<div class="profile-name" style="color:#3d4f28;">Ton déséquilibre est plus difficile à identifier</div>'
       +'<div class="profile-symptoms">Si tu as fait ce quiz, c\'est sûrement que quelque chose ne va pas tout à fait. Ton déséquilibre est peut-être plus subtil ou multi-factoriel — ce qui le rend plus difficile à détecter avec un quiz. C\'est exactement pour ça que le programme existe : pour t\'aider à identifier et corriger ce que les bilans standards ne voient pas.</div>';
-    document.getElementById('profile-reveal').innerHTML += '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(26,26,24,0.08);font-size:12px;color:#8a9080;line-height:1.6;font-style:italic;">Ce quiz est un outil d\'orientation, pas un diagnostic médical. Seul un professionnel de santé peut confirmer ces pistes. Il est là pour t\'aider à mieux comprendre ton corps.</div>';
+    document.getElementById('profile-reveal').innerHTML += contraceptionNote() + '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(26,26,24,0.08);font-size:12px;color:#8a9080;line-height:1.6;font-style:italic;">Ce quiz est un outil d\'orientation, pas un diagnostic médical. Seul un professionnel de santé peut confirmer ces pistes. Il est là pour t\'aider à mieux comprendre ton corps.</div>';
   document.getElementById('email-confirm').innerHTML =
       'Tu vas recevoir un email personnalisé à <strong>'+userEmail+'</strong> avec des pistes pour aller plus loin. Pense à vérifier tes spams.';
     sendToMailerLite('equilibree', null);
@@ -634,7 +657,7 @@ function showResult(){
     +'<div class="profile-symptoms">'+p.symptoms+'</div>'
     +(hasSecond?'<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(26,26,24,0.08)"><div class="profile-tag">Profil secondaire</div><div style="font-family:Cormorant Garamond,serif;font-size:18px;font-weight:400;margin-bottom:4px">'+p2.name+'</div><div class="profile-symptoms">'+p2.symptoms+'</div></div>':'');
 
-  document.getElementById('profile-reveal').innerHTML += '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(26,26,24,0.08);font-size:12px;color:#8a9080;line-height:1.6;font-style:italic;">Ce quiz est un outil d\'orientation, pas un diagnostic médical. Seul un professionnel de santé peut confirmer ces pistes. Il est là pour t\'aider à mieux comprendre ton corps.</div>';
+  document.getElementById('profile-reveal').innerHTML += contraceptionNote() + '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(26,26,24,0.08);font-size:12px;color:#8a9080;line-height:1.6;font-style:italic;">Ce quiz est un outil d\'orientation, pas un diagnostic médical. Seul un professionnel de santé peut confirmer ces pistes. Il est là pour t\'aider à mieux comprendre ton corps.</div>';
   document.getElementById('email-confirm').innerHTML =
     'Ton profil <strong>'+p.name+'</strong> a bien été enregistré. Tu vas recevoir un email personnalisé à <strong>'+userEmail+'</strong>. Pense à vérifier tes spams.';
 
@@ -659,6 +682,13 @@ function sendToMailerLite(profilKey, secondKey){
     diagValue = labels.length ? labels.join(', ') : 'Aucun';
   }
   if(diagValue) fields.diagnostics = diagValue;
+
+  // Contraception (question d'orientation en tete de quiz)
+  const contraQ = questions.find(q => q.contraception);
+  const contraQi = questions.indexOf(contraQ);
+  if(contraQ && answers[contraQi] !== undefined){
+    fields.contraception = contraQ.opts[answers[contraQi]];
+  }
 
   // Tranche d'age lisible
   const ageLabels = { moins_25:"Moins de 25 ans", '25_35':"25 à 35 ans", '35_45':"35 à 45 ans", plus_45:"Plus de 45 ans" };
