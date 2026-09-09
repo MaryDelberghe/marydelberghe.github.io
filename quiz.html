@@ -339,6 +339,7 @@ const questions = [
     text:"Utilises-tu une contraception hormonale ?",
     hint:"La contraception hormonale masque une partie de ton cycle naturel : ça nous aide à mieux lire ton profil.",
     contraception:true,
+    menopauseIdx:6,
     opts:["Pilule œstro-progestative (combinée)","Pilule progestative (micro-dosée)","Stérilet hormonal (DIU)","Implant, patch ou anneau","Stérilet au cuivre (non hormonal)","Aucune / méthode naturelle ou préservatif","Je suis ménopausée — plus de règles"],
     scores:{
       prog_low: [2,2,2,2,0,0,0],
@@ -408,18 +409,21 @@ const questions = [
   },
   {
     cat:"Cycle menstruel",
+    skipIfMenopause:true,
     text:"Tes règles sont douloureuses, avec des crampes ou des douleurs intenses dans le bas-ventre ?",
     opts:["Non, indolores","Légèrement douloureuses","Douloureuses, je prends des antidouleurs","Très douloureuses, elles m'immobilisent"],
     scores:{prog_low:[0,2,4,6],E2high:[0,2,4,6]}
   },
   {
     cat:"Cycle menstruel",
+    skipIfMenopause:true,
     text:"Tu ressens des symptômes intenses 7 à 10 jours avant tes règles — irritabilité, gonflement, larmes, douleurs aux seins, envies de sucre, anxiété ?",
     opts:["Non, je ne remarque rien de particulier","Quelques symptômes légers","Oui, c'est notable et ça impacte mon quotidien","Oui, cette période est très difficile à vivre"],
     scores:{prog_low:[0,2,4,6],E2high:[0,0,2,4]}
   },
   {
     cat:"Cycle menstruel",
+    skipIfMenopause:true,
     text:"Tes cycles sont irréguliers — ils varient de plusieurs jours d'un mois à l'autre, que ce soit trop courts (moins de 24 jours) ou trop longs (plus de 35 jours) — et ce de façon répétée ?",
     opts:["Non, mes cycles sont réguliers et stables","Légères variations occasionnelles","Souvent irréguliers sur plusieurs mois de suite","Très irréguliers ou imprévisibles"],
     scores:{sopk:[0,3,6,8],hypo:[0,0,2,3],E2low:[0,0,2,3]}
@@ -516,13 +520,30 @@ function isAnswered(qi){
   return answers[qi] !== undefined;
 }
 
+function isMenopause(){
+  const q = questions.find(x => x.contraception);
+  const qi = questions.indexOf(q);
+  return !!q && answers[qi] === q.menopauseIdx;
+}
+function isSkipped(i){
+  return !!questions[i].skipIfMenopause && isMenopause();
+}
+function activeIndices(){
+  return questions.map((q,i) => i).filter(i => !isSkipped(i));
+}
+function nextActive(from){ let i = from + 1; while(i < questions.length && isSkipped(i)) i++; return i; }
+function prevActive(from){ let i = from - 1; while(i >= 0 && isSkipped(i)) i--; return i; }
+
 function renderQ(){
   renderHintCleanup();
   const q = questions[cur];
   const multi = q.type === 'multi';
-  const pct = Math.round(((cur+1)/questions.length)*100);
+  const active = activeIndices();
+  const pos = active.indexOf(cur) + 1;
+  const total = active.length;
+  const pct = Math.round((pos/total)*100);
   document.getElementById('prog').style.width = pct + '%';
-  document.getElementById('prog-label').textContent = (cur+1) + ' / ' + questions.length;
+  document.getElementById('prog-label').textContent = pos + ' / ' + total;
   document.getElementById('q-cat').textContent = q.cat;
   document.getElementById('q-text').textContent = q.text;
   const wrap = document.getElementById('q-opts');
@@ -544,8 +565,8 @@ function renderQ(){
   });
   const btn = document.getElementById('btn-next');
   btn.className = 'btn-next' + (isAnswered(cur) ? ' ready' : '');
-  btn.textContent = cur === questions.length-1 ? 'Voir mon résultat →' : 'Suivant →';
-  document.getElementById('btn-back').style.visibility = cur === 0 ? 'hidden' : 'visible';
+  btn.textContent = nextActive(cur) >= questions.length ? 'Voir mon résultat →' : 'Suivant →';
+  document.getElementById('btn-back').style.visibility = prevActive(cur) < 0 ? 'hidden' : 'visible';
 }
 
 function renderHintCleanup(){
@@ -578,10 +599,11 @@ function toggleOpt(i){
 function nextQ(){
   if(!isAnswered(cur)) return;
   renderHintCleanup();
-  if(cur < questions.length-1){ cur++; renderQ(); }
+  const ni = nextActive(cur);
+  if(ni < questions.length){ cur = ni; renderQ(); }
   else { showResult(); }
 }
-function prevQ(){ if(cur>0){ cur--; renderQ(); } }
+function prevQ(){ const pi = prevActive(cur); if(pi >= 0){ cur = pi; renderQ(); } }
 
 function calcScores(){
   const scores = {};
@@ -589,6 +611,7 @@ function calcScores(){
   questions.forEach((q,qi) => {
     const ans = answers[qi];
     if(ans===undefined) return;
+    if(isSkipped(qi)) return;
     if(q.type === 'multi'){
       if(Array.isArray(ans) && q.diagScores){
         ans.forEach(idx => {
@@ -631,7 +654,7 @@ function showResult(){
   const hasSecond = secondScore >= topScore * 0.6 && secondKey !== topKey;
 
   // Si le score max est trop bas ou trop dispersé -> profil équilibré
-  const totalPossible = questions.filter(q => q.type !== 'multi' && !q.contraception).length * 3;
+  const totalPossible = questions.filter(q => q.type !== 'multi' && !q.contraception && !(q.skipIfMenopause && isMenopause())).length * 3;
   const scoreRatio = topScore / totalPossible;
   // Aussi équilibré si le top score est faible ET très proche du second (scores dispersés)
   const isDispersed = false;
