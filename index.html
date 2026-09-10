@@ -297,6 +297,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content
 .pc-period{font-size:13px;margin-top:4px;margin-bottom:0.5rem;}
 .pc.feat .pc-period{color:rgba(255,255,255,0.45);}
 .pc.standard .pc-period{color:var(--mid);}
+.price-deadline{display:flex;align-items:center;gap:12px;max-width:560px;margin:-1.5rem auto 2.5rem;background:#fff3e0;border:1px solid rgba(184,92,0,0.25);border-radius:14px;padding:14px 20px;font-size:13.5px;line-height:1.6;color:#7a4a10;text-align:left;}
+.price-deadline strong{color:#b85c00;font-weight:600;}
+.price-deadline .pd-icon{font-size:22px;flex-shrink:0;}
+.pc-price-row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+.pc-price-old{font-family:'Anton',sans-serif;font-size:34px;line-height:1;color:rgba(255,255,255,0.4);text-decoration:line-through;text-decoration-thickness:2px;}
 .pc-save{display:inline-block;padding:5px 14px;border-radius:100px;font-size:11px;font-weight:500;margin-bottom:1.5rem;}
 .pc.feat .pc-save{background:rgba(194,204,158,0.2);color:var(--g);}
 .pc.standard .pc-save{background:#fff3e0;color:#b85c00;}
@@ -1114,11 +1119,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <p class="s-pre">Investis en toi</p>
   <h2 class="s-h">Combien ça t'a déjà coûté<br><em>de chercher seule ?</em></h2>
   <p class="pricing-intro">En énergie. En confiance. En temps. En argent. Maintenant tu as le choix. Continuer à chercher. Ou investir une fois, intelligemment, dans <strong>un programme qui traite la vraie cause.</strong></p>
+  <div class="price-deadline">
+    <span class="pd-icon">⏳</span>
+    <span><strong>Tarif de lancement&nbsp;: 500€ jusqu'au 28 septembre.</strong> Après cette date, le programme passe à <strong>600€</strong>.</span>
+  </div>
   <div class="pcards">
     <div class="pc feat">
       <div class="pc-badge">⭐ Meilleure valeur</div>
-      <div class="pc-price"><span class="pc-sup">€</span>500</div>
+      <div class="pc-price-row">
+        <div class="pc-price"><span class="pc-sup">€</span>500</div>
+        <div class="pc-price-old">600€</div>
+      </div>
       <p class="pc-period">TTC · paiement unique · accès à vie</p>
+      <span class="pc-save">⏳ Prix jusqu'au 28 septembre · puis 600€</span>
       <div style="background:#fff;border-radius:10px;padding:12px 18px;margin:0.6rem 0 0.9rem;display:flex;align-items:center;gap:12px;">
         <span style="font-size:20px;flex-shrink:0;">💡</span>
         <div>
