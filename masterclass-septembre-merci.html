@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>C'est noté ! — La science des Hormones | Mary Delberghe</title>
+<title>C'est noté ! La science des Hormones | Mary Delberghe</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -56,7 +56,7 @@ h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(32px,6vw
 
 <!-- ================= BANNER (ton visuel) ================= -->
 <header class="banner">
-  <img src="hero-hormones.jpg" alt="La science des Hormones — Masterclass avec Mary Delberghe"
+  <img src="hero-hormones.jpg" alt="La science des Hormones, Masterclass avec Mary Delberghe"
        onerror="this.style.display='none'">
 </header>
 
@@ -82,7 +82,7 @@ h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(32px,6vw
       <a href="#" id="ics" class="cal-link" download="masterclass-hormones.ics">Apple / Outlook (.ics)</a>
     </div>
 
-    <p class="note">📩 <strong>Le lien pour regarder arrive par email</strong> avant le direct. Pense à vérifier tes spams — et à ajouter mon adresse à tes contacts.</p>
+    <p class="note">📩 <strong>Le lien pour regarder arrive par email</strong> avant le direct. Pense à vérifier tes spams, et à ajouter mon adresse à tes contacts.</p>
 
   </div>
 </div>
@@ -92,13 +92,13 @@ h1{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(32px,6vw
 </footer>
 
 <script>
-/* ====== ÉVÉNEMENT — modifie ici si besoin ======
+/* ====== ÉVÉNEMENT, modifie ici si besoin ======
    Dimanche 20 septembre 2026, 20h00 (Paris). Le bouton "Ajouter à mon agenda"
    est généré automatiquement (Google Agenda + fichier .ics). */
 const EVENT = {
-  title: 'Masterclass — La science des Hormones',
-  description: "Masterclass gratuite avec Mary Delberghe. Le lien pour regarder t'arrive par email avant le direct.",
-  location: 'En ligne',
+  title: 'Masterclass : La science des Hormones',
+  description: "Masterclass gratuite avec Mary Delberghe.\nLien pour regarder en direct : https://www.youtube.com/watch?v=AzpoZPPCzgU",
+  location: 'https://www.youtube.com/watch?v=AzpoZPPCzgU',
   start: '2026-09-20T20:00:00+02:00',
   durationMinutes: 90
 };
@@ -126,7 +126,7 @@ const ics = [
   'DTSTART:' + startUTC,
   'DTEND:' + endUTC,
   'SUMMARY:' + EVENT.title,
-  'DESCRIPTION:' + EVENT.description.replace(/,/g,'\\,'),
+  'DESCRIPTION:' + EVENT.description.replace(/\\/g,'\\\\').replace(/,/g,'\\,').replace(/;/g,'\\;').replace(/\n/g,'\\n'),
   'LOCATION:' + EVENT.location,
   'END:VEVENT','END:VCALENDAR'
 ].join('\r\n');
